@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-<title>리틀어스 · Phaser 체험</title>
+<title>리틀어스 (그레이박스)</title>
 <style>
   :root { color-scheme: dark; --bg:#1b2a1e; --panel:#243a2a; --ink:#e9f0e4; --muted:#9db39a; --accent:#f2b134; }
   * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
@@ -12,6 +12,14 @@
   header { display:flex; align-items:center; justify-content:space-between; padding:calc(env(safe-area-inset-top) + 8px) 14px 8px; }
   header h1 { font-size:15px; font-weight:600; }
   header button { background:none; border:0; color:var(--ink); font-size:20px; padding:4px 8px; }
+  header select { font:12px system-ui; background:var(--panel); color:var(--ink); border:1px solid #345; border-radius:6px; padding:3px 6px; max-width:150px; }
+  .ov { position:fixed; inset:0; background:rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; padding:24px; z-index:20; }
+  .ov.show { display:flex; }
+  .res { background:var(--panel); border-radius:12px; padding:20px 18px; width:100%; max-width:320px; text-align:center; }
+  .res .em { font-size:36px; } .res h2 { font-size:17px; margin:6px 0 2px; } .res p { color:var(--muted); font-size:12px; }
+  .res table { width:100%; margin:12px 0; font-size:13px; border-collapse:collapse; } .res td { padding:4px 0; text-align:left; } .res td.num { text-align:right; color:var(--muted); }
+  .res .btns { display:flex; gap:8px; } .res .btns button { flex:1; padding:10px; border-radius:8px; border:0; font:600 14px system-ui; }
+  .res .pri { background:var(--accent); color:#1b2a1e; } .res .sec { background:#345; color:var(--ink); }
   #stage { flex:1; position:relative; min-height:0; }
   #stage canvas { position:absolute; inset:0; margin:auto; image-rendering:pixelated; }
   .dom-tab { position:absolute; inset:0; padding:16px; overflow:auto; display:none; }
@@ -26,11 +34,11 @@
   nav button .ic { font-size:20px; }
   nav button.on { color:var(--accent); }
 </style>
-  <script type="module" crossorigin src="./assets/index-DWdDepgQ.js"></script>
+  <script type="module" crossorigin src="./assets/index-ysmhjWTa.js"></script>
 </head>
 <body>
 <div id="app">
-  <header><h1 id="title">탐험</h1><button id="gear" aria-label="설정">⚙︎</button></header>
+  <header><h1 id="title">탐험</h1><div><select id="animalSel" aria-label="동물"></select><button id="gear" aria-label="설정">⚙︎</button></div></header>
   <div id="stage">
     <div class="dom-tab" id="tab-dex">
       <h2>도감 · 온대숲 2/12</h2>
@@ -44,6 +52,7 @@
       <div class="card"><div class="sil"></div><div><div class="name">우편함</div><div class="sub">편지 1통</div></div></div>
     </div>
   </div>
+  <div class="ov" id="resultOv"><div class="res"><div class="em" id="resEm"></div><h2 id="resTitle"></h2><p id="resSub"></p><table id="resTable"></table><div class="btns"><button class="sec" id="closeRes">닫기</button><button class="pri" id="againBtn">다시 탐험</button></div></div></div>
   <nav>
     <button data-tab="explore" class="on"><span class="ic">🧭</span>탐험</button>
     <button data-tab="dex"><span class="ic">📖</span>도감</button>
