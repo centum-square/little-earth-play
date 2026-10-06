@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<title>리틀어스 · Phaser 체험</title>
+<style>
+  :root { color-scheme: dark; --bg:#1b2a1e; --panel:#243a2a; --ink:#e9f0e4; --muted:#9db39a; --accent:#f2b134; }
+  * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; background:var(--bg); color:var(--ink); font-family:-apple-system,system-ui,sans-serif; overflow:hidden; }
+  #app { height:100dvh; display:flex; flex-direction:column; }
+  header { display:flex; align-items:center; justify-content:space-between; padding:calc(env(safe-area-inset-top) + 8px) 14px 8px; }
+  header h1 { font-size:15px; font-weight:600; }
+  header button { background:none; border:0; color:var(--ink); font-size:20px; padding:4px 8px; }
+  #stage { flex:1; position:relative; min-height:0; }
+  #stage canvas { position:absolute; inset:0; margin:auto; image-rendering:pixelated; }
+  .dom-tab { position:absolute; inset:0; padding:16px; overflow:auto; display:none; }
+  .dom-tab.on { display:block; }
+  .dom-tab h2 { font-size:17px; margin-bottom:12px; }
+  .card { background:var(--panel); border-radius:10px; padding:12px 14px; margin-bottom:8px; display:flex; gap:10px; align-items:center; }
+  .card .sil { width:36px; height:36px; border-radius:8px; background:#11190f; }
+  .card .name { font-weight:600; }
+  .card .sub { color:var(--muted); font-size:12px; }
+  nav { display:flex; border-top:1px solid #345; background:var(--panel); padding-bottom:env(safe-area-inset-bottom); }
+  nav button { flex:1; background:none; border:0; color:var(--muted); padding:10px 0 8px; font-size:12px; display:flex; flex-direction:column; align-items:center; gap:2px; }
+  nav button .ic { font-size:20px; }
+  nav button.on { color:var(--accent); }
+</style>
+  <script type="module" crossorigin src="./assets/index-DWdDepgQ.js"></script>
+</head>
+<body>
+<div id="app">
+  <header><h1 id="title">탐험</h1><button id="gear" aria-label="설정">⚙︎</button></header>
+  <div id="stage">
+    <div class="dom-tab" id="tab-dex">
+      <h2>도감 · 온대숲 2/12</h2>
+      <div class="card"><div class="sil"></div><div><div class="name">붉은여우</div><div class="sub">★★☆☆☆ · 2마리 · 좋아해요 🥩 쥐</div></div></div>
+      <div class="card"><div class="sil"></div><div><div class="name">다람쥐</div><div class="sub">★☆☆☆☆ · 1마리 · 좋아해요 🌰 도토리</div></div></div>
+      <div class="card"><div class="sil"></div><div><div class="name">???</div><div class="sub">물가 · 아직 못 만났어요</div></div></div>
+    </div>
+    <div class="dom-tab" id="tab-earth">
+      <h2>리틀어스</h2>
+      <div class="card"><div class="sil"></div><div><div class="name">온대숲 돔</div><div class="sub">친구 2 · 탭하면 돔 안으로 (Phaser 씬)</div></div></div>
+      <div class="card"><div class="sil"></div><div><div class="name">우편함</div><div class="sub">편지 1통</div></div></div>
+    </div>
+  </div>
+  <nav>
+    <button data-tab="explore" class="on"><span class="ic">🧭</span>탐험</button>
+    <button data-tab="dex"><span class="ic">📖</span>도감</button>
+    <button data-tab="earth"><span class="ic">🌍</span>리틀어스</button>
+  </nav>
+</div>
+</body>
+</html>

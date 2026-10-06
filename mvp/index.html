@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>먹이 블록 MVP</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F2F4F3;--panel:#FFFFFF;--panel-2:#E9EDEB;--ink:#1B1F1E;--muted:#697370;--line:#D5DBD8;
+  --accent:#1F8F63;--accent-soft:#DCF3E8;--like:#2E9E5B;--like-soft:#DFF4E6;--dislike:#D9483B;--dislike-soft:#FBE3E0;
+  --neutral:#8A94A6;--neutral-soft:#E6E9EF;--block:#C9B99A;--block-ink:#5A4E38;--flee:#D9483B;--warn:#C7861A;--aff:#1F8F63;
+  --ghost:rgba(31,143,99,.35);
+  --chest:#C7861A;--chest-soft:#FBEAC4;/* 📦 보물 상자 칸: 블록 색과 확실히 구분(사용자 2026-10-06) */
+  /* 판 셀 크기: 화면 폭에서 직접 계산(iOS Safari의 aspect-ratio+1fr 오계산 회피). 9셀 + 간격 8×3 + 박스 여백 2×3 */
+  --cell:calc((min(100vw - 32px, 400px) - 30px) / 9);--bgap:0px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#141817;--panel:#1D2321;--panel-2:#26302C;--ink:#E6ECE9;--muted:#98A39E;--line:#33403A;
+    --accent:#3FBF8A;--accent-soft:#1E3A2E;--like:#4CC57A;--like-soft:#1F3A2A;--dislike:#F06A5C;--dislike-soft:#4A2622;
+    --neutral:#9AA5B8;--neutral-soft:#2B3240;--block:#8A7A55;--block-ink:#F1E8D2;--flee:#F06A5C;--warn:#E0A040;--aff:#3FBF8A;
+    --ghost:rgba(63,191,138,.4);
+    --chest:#E0A040;--chest-soft:#4A3A1C;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#141817;--panel:#1D2321;--panel-2:#26302C;--ink:#E6ECE9;--muted:#98A39E;--line:#33403A;
+  --accent:#3FBF8A;--accent-soft:#1E3A2E;--like:#4CC57A;--like-soft:#1F3A2A;--dislike:#F06A5C;--dislike-soft:#4A2622;
+  --neutral:#9AA5B8;--neutral-soft:#2B3240;--block:#8A7A55;--block-ink:#F1E8D2;--flee:#F06A5C;--warn:#E0A040;--aff:#3FBF8A;
+  --ghost:rgba(63,191,138,.4);
+  --chest:#E0A040;--chest-soft:#4A3A1C;
+}
+*{box-sizing:border-box}
+html,body{overscroll-behavior:none}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",system-ui,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;word-break:keep-all}
+.wrap{max-width:440px;margin:0 auto;padding-block:6px 12px;padding-inline:16px;display:flex;flex-direction:column;gap:7px}
+h1{font-size:18px;margin:0;font-weight:700;letter-spacing:-0.01em}
+.sub{color:var(--muted);font-size:12px;margin:0}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}
+.status{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:center}
+.meet{display:grid;grid-template-columns:52px 1fr;gap:6px;align-items:start;padding:8px 12px 6px}
+.me{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--muted)}
+.me .em{font-size:34px;line-height:1}
+.track{position:relative;height:62px;display:flex;align-items:flex-start}
+/* 측정 없이 배치: 점선(flex-grow = 1-p) · 동물 묶음(자기 너비) · 오른쪽 여백(flex-grow = p) */
+.track .line{flex:1 1 0;min-width:0;margin-top:17px;margin-right:8px;border-top:2px dashed var(--line);transition:flex-grow .5s cubic-bezier(.2,.8,.2,1)}
+.track .spacer{flex:0 1 0;min-width:0;transition:flex-grow .5s cubic-bezier(.2,.8,.2,1)}
+.track .dist{position:absolute;left:0;bottom:0;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.track .dist b{color:var(--like)}
+/* 동물 + 경계 게이지가 한 묶음으로 트랙 위를 이동. left = 동물 이모지 중심 */
+.animal{position:relative;flex:0 0 auto;display:flex;align-items:flex-start;gap:6px;transition:opacity .4s,transform .5s}
+.animal .who{display:flex;flex-direction:column;align-items:center;gap:2px;width:34px}
+.animal .em{font-size:34px;line-height:1;display:inline-block;transition:transform .15s}
+.animal .em.eat{transform:scale(1.25)}
+.animal .em.bad{transform:translateX(6px) rotate(8deg)}
+.animal.fled{opacity:0;transform:translateX(16px)}
+.animal .nm{font-size:11px;color:var(--ink);font-weight:600;white-space:nowrap}
+.vgauge{display:flex;align-items:flex-start;gap:4px;padding-top:2px}
+.vpips{display:flex;flex-direction:column-reverse;gap:2px}
+.vpips i{width:14px;height:6px;border-radius:2px;background:var(--panel-2);border:1px solid var(--line)}
+.vpips i.on{background:var(--flee);border-color:var(--flee)}
+.vico{display:flex;flex-direction:column;gap:1px;font-size:12px;line-height:1.1}
+.scarenum{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums;text-align:center;width:14px}
+.pips{display:flex;gap:3px}
+.pips i{width:12px;height:8px;border-radius:3px;background:var(--panel-2);border:1px solid var(--line)}
+.pips i.on{background:var(--flee);border-color:var(--flee)}
+.board-wrap{display:flex;justify-content:center}
+.board{display:grid;grid-template-columns:repeat(3,var(--cell)) var(--bgap) repeat(3,var(--cell)) var(--bgap) repeat(3,var(--cell));grid-template-rows:repeat(3,var(--cell)) var(--bgap) repeat(3,var(--cell)) var(--bgap) repeat(3,var(--cell));gap:3px;touch-action:none;user-select:none;-webkit-user-select:none;position:relative}
+.cell{position:relative;width:var(--cell);height:var(--cell);border-radius:6px;background:var(--panel-2);display:flex;align-items:center;justify-content:center;font-size:calc(var(--cell) * .55);line-height:1;transition:background .12s,box-shadow .12s}
+.cell.alt{background:color-mix(in srgb,var(--panel-2) 93%,var(--ink) 7%)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cell.alt{background:color-mix(in srgb,var(--panel-2) 91%,var(--ink) 9%)}}
+.cell.bx-r,.cell.bx-b{margin:0}
+.cell.block{background:var(--block)}
+.cell.food.like{background:var(--like-soft);box-shadow:inset 0 0 0 2px var(--like)}
+.cell.food.neutral{background:var(--block)}
+.cell.food.neutral .ico{opacity:.55;filter:grayscale(.35)}
+.cell.food.dislike{background:var(--dislike-soft);box-shadow:inset 0 0 0 2px var(--dislike)}
+.cell .tag{position:absolute;right:2px;bottom:0;font-size:9px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.cell.food.like .tag{color:var(--like)}
+.cell.food.dislike .tag{color:var(--dislike)}
+.cell.rock{background:var(--line);font-size:calc(var(--cell) * .48)}
+.cell.special{background:var(--chest-soft);box-shadow:inset 0 0 0 2px var(--chest)}
+.cell.special .tag{color:var(--chest);font-size:10px}
+.cell.log .tag{color:var(--ink)}
+.cell.chain{background:var(--panel-2);box-shadow:inset 0 0 0 1px var(--line);opacity:.75;font-size:calc(var(--cell) * .4)}
+.cell.fithint{box-shadow:inset 0 0 0 2px var(--accent);background:var(--accent-soft)}
+.cell.fithint::after{content:'';position:absolute;inset:3px;border:2px dashed var(--accent);border-radius:4px}
+/* 멈춤 힌트(7초): 봇 추천 자리를 점선으로. 회전이 필요하면 현재 틀이 깜빡이고 라벨이 "↻ 탭해서 돌려요"로 */
+.cell.idlehint{box-shadow:inset 0 0 0 2px var(--accent);animation:idlepulse 1.2s ease-in-out infinite}
+.cell.idlehint::after{content:'';position:absolute;inset:3px;border:2px dashed var(--accent);border-radius:4px;opacity:.85}
+@keyframes idlepulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.14)}}
+.frame.c.cue{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);animation:idlepulse 1.2s ease-in-out infinite}
+.slot .lbl.cue{color:var(--accent);font-weight:700}
+.cell.ghost{background:var(--ghost)}
+.cell.ghost.bad{background:var(--dislike-soft)}
+.cell.will{box-shadow:inset 0 0 0 2px var(--accent);filter:brightness(1.08)}
+.cell.clearing{animation:pop .32s ease-out}
+@keyframes pop{0%{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--accent);transform:scale(1.08)}100%{transform:scale(1)}}
+.tray{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;padding-inline:10px}/* 현재 틀(92px)이 트레이 정중앙, 양옆 1fr = (321-92-12)/2 = 108.5px. 다음 틀 51px×2 + 간격 4 = 106px */
+.frame{display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:6px}
+.frame.c{width:92px;height:92px}/* 현재: 20px 칸 4개 + 간격 6 = 86 + 여백 3 */
+.frame.n{width:51px;height:51px}/* 다음: 11px 칸 4개 + 간격 3 = 47 + 여백 2 */
+.nxtrow{display:flex;gap:4px;align-items:center}
+.slot{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:130px;padding-top:22px}
+.slot .lbl{position:absolute;top:4px;left:0;right:0;text-align:center;font-size:11px;color:var(--muted)}
+/* 정보 칸(사용자 2026-10-06): 라벨 "보유 코인"(다음·현재와 같은 스타일) · 값 · 아이템 2×2(다음 칸과 같은 106px 폭). Combo 표시는 토스트 로그에만 */
+.slot.info{align-items:stretch;justify-content:flex-start;gap:6px;font-size:12px;color:var(--muted);line-height:1.5;font-variant-numeric:tabular-nums}
+.slot.info .coins{text-align:center;line-height:1.2}/* 라벨 22 + 값 19 + 6 + 38×2 + 4 = 127 ≤ 130 (1.5면 132로 2px 넘침, 실측 2026-10-06) */
+.slot.info .coins b{font-size:16px;color:var(--ink)}
+.piece{display:grid;gap:2px;touch-action:none;user-select:none;-webkit-user-select:none}
+.piece .pc{width:var(--pc,26px);height:var(--pc,26px);border-radius:4px;background:var(--block);display:flex;align-items:center;justify-content:center;font-size:15px;position:relative}
+.piece .pc.food.like{background:var(--like-soft);box-shadow:inset 0 0 0 2px var(--like)}
+.piece .pc.food.neutral{background:var(--block)}
+.piece .pc.food.neutral .ico{opacity:.55;filter:grayscale(.35)}
+.piece .pc.food.dislike{background:var(--dislike-soft);box-shadow:inset 0 0 0 2px var(--dislike)}
+.piece .pc.none{background:transparent}
+.piece.current{cursor:grab}
+.piece.next{opacity:.75;--pc:11px;gap:1px}
+.piece.next .pc{font-size:9px;border-radius:2px}
+#float{position:fixed;left:0;top:0;pointer-events:none;z-index:50;display:none;opacity:.92}
+#float .pc{--pc:var(--fpc)}
+.rot{border:1px solid var(--line);background:var(--panel-2);color:var(--ink);border-radius:8px;padding:8px 10px;font-size:13px;cursor:pointer}
+.items{display:grid;grid-template-columns:51px 51px;gap:4px;width:106px;margin:0 auto}/* 다음 칸(51 + 4 + 51 = 106px)과 같은 폭·같은 열 */
+.items button{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:3px 2px;min-height:38px;font-size:11px;line-height:1.15;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;white-space:nowrap}
+.items button .ic{font-size:14px;line-height:1.1}
+.items button b{font-variant-numeric:tabular-nums;color:var(--accent)}
+.items button:disabled{opacity:.4;cursor:default}
+.items button.on{border-color:var(--accent);background:var(--accent-soft)}
+.board.pick .cell{cursor:pointer}
+.hint{font-size:12px;color:var(--ink);text-align:center;background:var(--accent-soft);border-radius:8px;padding:5px 10px;line-height:1.4}
+.hint:empty{display:none}
+.toast{font-size:12px;color:var(--muted);min-height:20px;line-height:1.45;padding:6px 10px;border-radius:8px;background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column;gap:2px}
+.toast:empty{display:none}
+#dev[hidden]{display:none}
+.devbar{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.gear{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:8px;padding:6px 10px;font-size:13px;cursor:pointer}
+.log{font-size:12px;color:var(--muted);min-height:36px;display:flex;flex-direction:column;gap:2px}
+.log b{color:var(--ink)}
+.log .aff{color:var(--like)}
+.log .bad{color:var(--dislike)}
+.toast b{color:var(--ink)}
+.toast .aff{color:var(--like)}
+.toast .bad{color:var(--dislike)}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+button.pri{background:var(--ink);color:var(--bg);border:0;border-radius:8px;padding:9px 14px;font-size:14px;font-weight:600;cursor:pointer}
+button.sec{background:var(--panel-2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 14px;font-size:14px;cursor:pointer}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}
+.overlay.show{display:flex}
+.card{background:var(--panel);border-radius:12px;padding:20px;max-width:360px;width:100%;display:flex;flex-direction:column;gap:10px}
+.card h2{margin:0;font-size:22px}
+.card .big{font-size:44px;text-align:center;line-height:1}
+.card table{width:100%;border-collapse:collapse;font-size:13px}
+.card td{padding:4px 0;border-bottom:1px solid var(--line)}
+.card td.num{text-align:right;font-variant-numeric:tabular-nums}
+details{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:0 12px}
+summary{cursor:pointer;padding:10px 0;font-weight:600;font-size:13px}
+.tune{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;padding-bottom:12px}
+.tune label{display:flex;flex-direction:column;gap:2px;font-size:11px;color:var(--muted)}
+.tune input,.tune select{font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel-2);color:var(--ink);width:100%}
+.seg{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:10px}
+.seg button{border:1px solid var(--line);background:var(--panel-2);color:var(--ink);border-radius:8px;padding:6px 10px;font-size:13px;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.stats table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px}
+.stats td,.stats th{padding:4px 2px;border-bottom:1px solid var(--line);text-align:left}
+.stats td.num,.stats th.num{text-align:right;font-variant-numeric:tabular-nums}
+.rules{font-size:12px;color:var(--muted);padding-bottom:12px;line-height:1.6}
+.rules b{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><h1>먹이 블록 MVP</h1><p class="sub" id="ver">v1.0-base.9 · 다음 블록 왼→오 컨베이어 · 정보 칸 정리</p></div>
+
+  <div class="panel meet">
+    <div class="me"><span class="em">🧑‍🌾</span><span>나</span></div>
+    <div class="track">
+      <div class="line" id="trackLine"></div>
+      <div class="animal" id="animalMove">
+        <div class="who"><span class="em" id="animalEm">🐰</span><span class="nm" id="animalName">토끼</span></div>
+        <div class="vgauge"><div><span class="vpips" id="scarePips"></span><div class="scarenum" id="scareNum">0/0</div></div><span class="vico" id="scareE"></span></div>
+      </div>
+      <div class="spacer" id="trackSpacer"></div>
+      <div class="dist" id="distLbl"></div>
+    </div>
+  </div>
+
+  <div class="board-wrap"><div class="board" id="board"></div></div>
+
+  <div class="panel tray">
+    <div class="slot"><div class="lbl">다음</div><div class="nxtrow" id="nxt"></div></div>
+    <div class="slot"><div class="lbl" id="curLbl">현재</div><div class="frame c" id="curFrame"><div class="piece current" id="cur"></div></div></div>
+    <div class="slot info"><div class="lbl">보유 코인</div><div class="coins"><b id="coinNum">0</b></div><div class="items" id="items" aria-label="아이템"></div></div>
+  </div>
+  <div class="hint" id="hint"></div>
+
+  <div class="toast" id="log"></div>
+
+  <div class="devbar"><button class="pri" id="newBtn">새 판</button><button class="gear" id="devBtn" title="튜닝·규칙·기록">⚙</button></div>
+
+  <div id="dev" hidden>
+  <div class="btns" style="margin-bottom:10px"><button class="sec" id="statsBtn">누적 기록</button></div>
+  <details>
+    <summary>동물 · 튜닝</summary>
+    <div class="seg" id="animalSeg"></div>
+    <div class="tune" id="tune"></div>
+    <div class="btns" style="padding-bottom:12px"><button class="sec" id="applyBtn">적용하고 새 판</button><button class="sec" id="resetBtn">기본값</button></div>
+  </details>
+
+  <details>
+    <summary>이야기 · 규칙</summary>
+    <div class="rules">
+      <b>이야기</b> 21xx년, 사람이 땅을 함부로 쓴 탓에 숲은 줄고 강은 탁해졌어요. 평생 동물을 돌본 할아버지는 모든 기후를 품은 작은 지구 <b>리틀어스</b>를 지었지만 첫 동물을 데려오기 전에 떠나셨어요. 열쇠를 물려받은 내가 병든 땅을 돌며 동물과 친구가 되어 함께 돌아와요.<br><br>
+      <b>놓기</b> 블록을 판에 끌어다 놓아요. 탭하면 돌아가요. 가로줄·세로줄·3x3을 채우면 깨져요.<br>
+      <b>먹이</b> 깨진 줄 안의 먹이를 동물이 먹어요. 좋아하는 먹이를 N개 먹이면 친구, 싫어하는 것이 든 줄을 M번 깨면 도망가요. N·M은 판마다 달라요(위쪽에 표시).<br>
+      <b>📦 보물 상자</b> 든 줄을 깰 때마다 자물쇠가 하나 풀려요. 절반이면 코인, 다 풀면 판 위 블록이 전부 좋아하는 먹이로.<br>
+      <b>한 방</b> Triple(3줄)부터 경계 -1, 3 Combo부터 이을 때마다 경계 -1, Quad(4줄)면 판 전체 클리어.<br>
+      <b>코인·아이템</b> 친구가 되면 코인을 받아요(빨리, 경계 적게일수록 더). 🧩 맞춤 블록 100 · 행·열·3x3 지우기 각 50. 턴을 안 써요.
+    </div>
+  </details>
+  </div>
+</div>
+
+<div class="piece" id="float"></div>
+
+<div class="overlay" id="resultOv"><div class="card">
+  <div class="big" id="resEm">🎉</div>
+  <h2 id="resTitle">친구가 됐어요!</h2>
+  <p class="sub" id="resSub"></p>
+  <table id="resTable"></table>
+  <div class="btns"><button class="pri" id="againBtn">한 판 더</button><button class="sec" id="closeRes">닫기</button></div>
+</div></div>
+
+<div class="overlay" id="statsOv"><div class="card stats">
+  <h2>누적 기록</h2>
+  <table id="statsTable"></table>
+  <div class="btns"><button class="sec" id="closeStats">닫기</button><button class="sec" id="clearStats">기록 초기화</button></div>
+</div></div>
+
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+// 타일 사전(v1.0-base.6, 12종 확정): 실제 먹이 10종 + 경계 요소 13종(천적·날씨·싫어하는 것). 이름+이모지만, 분류 없음.
+// 이모지가 겹치는 항목(잣/도토리 🌰, 곡식/갈대 🌾, 수리/매 🦅, 눈/얼음 ❄️, 올빼미/수리부엉이 🦉)이 있어도 한 판에는 한 동물의 좋아함 1종 + 경계 1~2종만 나오므로 충돌하지 않는다.
+const FOODS={
+  // 좋아하는 먹이
+  mouse:{n:'쥐',e:'🐭'},grass:{n:'풀',e:'🌿'},acorn:{n:'도토리',e:'🌰'},pine_nut:{n:'잣',e:'🌰'},earthworm:{n:'지렁이',e:'🪱'},grain:{n:'곡식',e:'🌾'},reed:{n:'갈대',e:'🌾'},fish:{n:'물고기',e:'🐟'},larva:{n:'애벌레',e:'🐛'},honey:{n:'꿀',e:'🍯'},
+  // 경계 요소(싫어하는 것)
+  wolf:{n:'늑대',e:'🐺'},eagle:{n:'수리',e:'🦅'},fox:{n:'여우',e:'🦊'},hawk:{n:'매',e:'🦅'},snake:{n:'뱀',e:'🐍'},owl:{n:'올빼미',e:'🦉'},leopard_cat:{n:'삵',e:'🐱'},dog:{n:'개',e:'🐕'},snow:{n:'눈',e:'❄️'},ice:{n:'얼음',e:'❄️'},sun:{n:'햇빛',e:'☀️'},thunder:{n:'천둥',e:'⛈️'},eagle_owl:{n:'수리부엉이',e:'🦉'},
+};
+const FOOD_IDS=Object.keys(FOODS);
+// 희귀도별 기본 수치(한 곳에만 둔다). likeMin~Max: 친구가 되는 데 필요한 개수 범위 · scareMin~Max: 경계가 차서 도망가기까지 횟수 범위 · chestLocks: 보물 상자 자물쇠 수
+const RARITY_PRESET={
+  '흔함':{attach:.25,extra:.2,scareShare:.3,likeMin:12,likeMax:16,scareMin:4,scareMax:5,chestLocks:4,startFill:14,startFoods:3},
+  '보통':{attach:.35,extra:.25,scareShare:.35,likeMin:16,likeMax:20,scareMin:3,scareMax:4,chestLocks:5,startFill:18,startFoods:4},
+  '희귀':{attach:.4,extra:.3,scareShare:.4,likeMin:20,likeMax:24,scareMin:3,scareMax:3,chestLocks:6,startFill:22,startFoods:5},
+};
+// 동물 정의 헬퍼: likes 좋아하는 먹이(1종) · scares 경계 요소(1~2종, 실제 천적·날씨) · override 개체별 수치 · note 아직 MVP에 없는 고유 능력(5단계)
+function mkAnimal(id,n,e,rarity,likes,scares,override={},note){
+  const a={id,n,e,rarity,likes,scares,preset:{...RARITY_PRESET[rarity],pool:'basic',rocks:0,logs:0,chains:0,steal:0,...override}};
+  if(note)a.note=note;return a;
+}
+// 온대숲 첫 묶음 12종(사용자 확정 2026-10-06). 첫 번째 = 기본 동물(간판 붉은여우)
+const ANIMALS=[
+  mkAnimal('red_fox','붉은여우','🦊','흔함',['mouse'],['wolf','eagle']),
+  mkAnimal('korean_hare','멧토끼','🐰','흔함',['grass'],['fox','hawk']),
+  mkAnimal('chipmunk','다람쥐','🐿️','흔함',['acorn'],['snake','hawk']),
+  mkAnimal('red_squirrel','청설모','🐿️','흔함',['pine_nut'],['owl','leopard_cat']),
+  mkAnimal('hedgehog','고슴도치','🦔','흔함',['earthworm'],['owl','sun']),
+  mkAnimal('magpie','까치','🐦‍⬛','흔함',['grain'],['hawk','eagle_owl']),
+  mkAnimal('roe_deer','노루','🦌','보통',['grass'],['wolf','dog'],{},'겁먹기 6 (5단계)'),
+  mkAnimal('water_deer','고라니','🦌','보통',['reed'],['dog','snow']),
+  mkAnimal('otter','수달','🦦','보통',['fish'],['ice','eagle'],{likeMin:20,likeMax:24,attach:.45}),// 대식가
+  mkAnimal('woodpecker','오색딱따구리','🐦','보통',['larva'],['snake','leopard_cat']),
+  mkAnimal('black_bear','반달가슴곰','🐻','희귀',['honey'],['wolf','thunder'],{},'파헤치기 4 (5단계)'),
+  mkAnimal('eagle_owl','수리부엉이','🦉','희귀',['mouse'],['sun','thunder'],{steal:6,pool:'wide'}),
+];
+// 블록: [r,c] 목록. 백 셔플.
+const SHAPES={
+  I4:[[0,0],[0,1],[0,2],[0,3]], O:[[0,0],[0,1],[1,0],[1,1]], T:[[0,0],[0,1],[0,2],[1,1]],
+  L:[[0,0],[1,0],[2,0],[2,1]], J:[[0,1],[1,1],[2,1],[2,0]], S:[[0,1],[0,2],[1,0],[1,1]], Z:[[0,0],[0,1],[1,1],[1,2]],
+  I3:[[0,0],[0,1],[0,2]], L3:[[0,0],[1,0],[1,1]], I2:[[0,0],[0,1]], I1:[[0,0]],
+  // 넓은 풀: 붙어 있지 않은 모양(대각 2 · 대각 3 · 꺾임 빈 L = L4에서 꺾이는 칸을 비움)
+  D2:[[0,0],[1,1]], D3:[[0,0],[1,1],[2,2]], LG:[[0,0],[1,0],[2,1]],
+};
+const POOLS={
+  basic:['I4','O','T','L','J','S','Z','I3','L3','I2','I1'],
+  tetro:['I4','O','T','L','J','S','Z'],
+  wide:['I4','O','T','L','J','S','Z','I3','L3','I2','I1','D2','D3','LG'],
+};
+const ITEMS=[['sweepR','↔','행 삭제','priceSweep'],['sweepC','↕','열 삭제','priceSweep'],['sweepB','▦','3x3 삭제','priceSweep'],['fit','🧩','맞춤 블록','priceFit']];
+const SWEEP_TYPE={sweepR:'r',sweepC:'c',sweepB:'b'};
+const DEFAULTS={attach:.25,extra:.2,scareShare:.3,likeMin:12,likeMax:16,scareMin:4,scareMax:5,chestLocks:5,chestMidCoinMin:10,chestMidCoinMax:30,chestMidFrac:.33,preview:2,idleHint1:7,idleHint2:12,pool:'basic',firstSafe:4,rocks:0,logs:0,chains:0,startFill:0,startFoods:0,steal:0,priceFit:100,priceSweep:50,startCoins:300};
+const TUNE=[
+  ['attach','먹이 부착률 (블록당, 0~1)','number',.05],['extra','추가 먹이 확률 (0~1)','number',.05],['scareShare','먹이 중 싫어하는 것 비율 (0~1)','number',.05],
+  ['likeMin','친구 되는 개수 최소','number',1],['likeMax','친구 되는 개수 최대','number',1],['scareMin','경계 한도 최소 (차면 도망)','number',1],['scareMax','경계 한도 최대 (차면 도망)','number',1],
+  ['preview','미리보기 수','number',1],['idleHint1','멈춤 힌트 1단계 초 (회전 어포던스, 0=끔)','number',1],['idleHint2','멈춤 힌트 2단계 초 (자리 점선, 0=끔)','number',1],['pool','블록 풀','select',{basic:'기본 (1~4칸 11종)',wide:'기본 + 대각선 3종',tetro:'4칸만 (테트리스 7종)'}],
+  ['priceFit','🧩 맞춤 블록 가격 (코인)','number',5],['priceSweep','지우기 3종 가격 (행·열·3x3 각각)','number',5],['startCoins','시작 코인 (MVP 테스트용, 기록 초기화 시)','number',10],
+  ['chestLocks','📦 보물 상자 자물쇠 수 (동물별, 판에 항상 1개)','number',1],['chestMidCoinMin','📦 절반 보상 코인 최소','number',5],['chestMidCoinMax','📦 절반 보상 코인 최대','number',5],['chestMidFrac','📦 절반에 좋아하는 먹이로 바뀌는 비율 (0~1)','number',.05],
+  ['startFill','시작 채움 칸 수 (거의 완성된 줄로)','number',2],['startFoods','시작 먹이 수 (채운 칸 중)','number',1],
+  ['rocks','🪨 바위 (기믹, 시작 시)','number',1],['logs','🪵 통나무 (기믹, 2층)','number',1],['chains','⛓️ 덩굴 사슬 (기믹, 못 놓는 빈칸)','number',1],
+  ['steal','훔치기 주기 (행동 기믹, 턴, 0=끔)','number',1],
+  ['seed','시드 (재현용, 보통 비워 둠)','text',null],
+];
+let params={...DEFAULTS},animal=ANIMALS[0],stats=loadStats(),S=null,seedStr='',SIM=false;
+// 코인 지갑: 친구가 될 때 보상으로 벌고 아이템으로 쓴다. 판을 넘어 유지.
+let wallet=(()=>{try{const v=localStorage.getItem('block-coins');return v==null?DEFAULTS.startCoins:+v;}catch(e){return DEFAULTS.startCoins;}})();
+function saveWallet(){try{localStorage.setItem('block-coins',wallet);}catch(e){}}
+let devOn=(()=>{try{return localStorage.getItem('block-dev')==='1'||location.hash==='#dev';}catch(e){return false;}})();
+function applyDev(){$('dev').hidden=!devOn;$('devBtn').classList.toggle('on',devOn);}
+const ONB_GAMES=1;// 온보딩 글 힌트를 보여 주는 판 수(사용자 2026-10-06: 처음 하는 한 판만. 튜토리얼은 별도)
+let onbPlays=(()=>{try{return +localStorage.getItem('block-onb')||0;}catch(e){return 0;}})();
+function josa(w,a,b){const c=w.charCodeAt(w.length-1);return w+((c>=44032&&c<=55203&&(c-44032)%28>0)?a:b);}
+
+// ---------- RNG ----------
+function rng(seed){let h=1779033703^seed.length;for(let i=0;i<seed.length;i++){h=Math.imul(h^seed.charCodeAt(i),3432918353);h=h<<13|h>>>19;}let a=h>>>0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+
+// ---------- 모양 ----------
+function norm(cells){const mr=Math.min(...cells.map(c=>c[0])),mc=Math.min(...cells.map(c=>c[1]));return cells.map(([r,c])=>[r-mr,c-mc]);}
+function rotCells(cells){const mr=Math.max(...cells.map(c=>c[0]));return norm(cells.map(([r,c])=>[c,mr-r]));}
+function dims(cells){return {h:Math.max(...cells.map(c=>c[0]))+1,w:Math.max(...cells.map(c=>c[1]))+1};}
+
+// ---------- 게임 ----------
+function newGame(seed){
+  seedStr=seed||String(Date.now()%100000);
+  const R=rng(seedStr+'|'+animal.id);
+  const ri=(a,b)=>{a=a|0;b=Math.max(a,b|0);return a+Math.floor(R()*(b-a+1));};
+  S={board:Array(81).fill(null),R,bag:[],cur:null,next:[],blocks:0,like:0,scare:0,needLike:ri(params.likeMin,params.likeMax),needScare:ri(params.scareMin,params.scareMax),over:null,tiers:{1:0,2:0,3:0,4:0},combo:0,maxCombo:0,lastDis:0,log:[],hintStage:0,firstClearAt:null,firstMultiAt:null,special:{done:0,mid:0,coins:0,carry:null},// special = 📦 보물 상자(내부 식별자는 유지). done 열림 횟수 · mid 절반 보상 횟수 · coins 절반 보상으로 찾은 코인
+     act:params.steal>0?{n:params.steal,left:params.steal}:null,
+     used:{fit:0,sweepR:0,sweepC:0,sweepB:0},spent:0,earned:0};
+  pick=null;
+  placeRocks();
+  spawnSpecial();
+  for(let i=0;i<params.preview;i++)S.next.push(drawPiece());
+  S.cur=drawPiece();
+  if(!SIM){onbPlays++;try{localStorage.setItem('block-onb',onbPlays);}catch(e){}}
+  armIdle();
+  logMsg(`${animal.e} ${josa(animal.n,'을','를')} 만났다 (${animal.rarity}). ${likeE()} <b>${S.needLike}개</b> 먹이면 친구 · ${scareE()} 든 줄을 <b>${S.needScare}번</b> 깨면 도망${S.act?` · ${S.act.n}턴마다 훔치기`:''} · 시드 ${seedStr}`);
+  render();
+}
+// 바위: 시작부터 채워진 칸. 서로 붙지 않게 흩뿌린다(읽기 쉽게).
+// 시작 장애물 3종(v0.10, 상한 먹이는 사용자 기각): 바위(1회에 깨짐) · 통나무(2층, 줄이 깨질 때마다 한 층) · 덩굴 사슬(놓을 수 없는 빈칸, 옆 칸이 깨지면 풀림)
+const OBSTACLES=[['rocks',()=>({rock:true,food:null,ttl:null,fresh:false})],['logs',()=>({log:2,food:null,ttl:null,fresh:false})],['chains',()=>({chain:true,food:null,ttl:null,fresh:false})]];
+// 시작 판(v0.11): 빈 판 대신 "거의 완성된 줄" 몇 개를 미리 채운다(첫 수부터 Double을 노릴 수 있게).
+// 1) 행·열을 골라 5~7칸까지 채움(완성은 절대 안 시킴) 2) 채운 칸 일부를 장애물·먹이로 바꿈 3) 덩굴 사슬은 채운 칸 옆 빈칸에
+function placeRocks(){
+  const R=S.R,pick=arr=>arr[Math.floor(R()*arr.length)];
+  const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  const target=Math.min(60,params.startFill|0);
+  let filled=0,guard=0;
+  while(filled<target&&guard++<80){
+    const t=R()<0.5?'r':'c',li=Math.floor(R()*9),line=LINE_CELLS[t][li];
+    const want=5+Math.floor(R()*3);// 5~7칸
+    const have=line.filter(i=>S.board[i]).length;if(have>=want)continue;
+    const empties=shuffle(line.filter(i=>!S.board[i]));
+    for(const i of empties.slice(0,Math.min(want-have,target-filled))){S.board[i]={food:null,ttl:null,fresh:false};filled++;}
+  }
+  // 우연히 완성된 줄은 한 칸 비운다
+  let comp;while((comp=completedGroups(S.board)).length){S.board[pick(comp[0])]=null;}
+  const plain=()=>shuffle(S.board.map((cl,i)=>cl&&!cl.rock&&!cl.log&&!cl.chain&&!cl.food?i:-1).filter(i=>i>=0));
+  // 장애물: 채운 칸을 바꿔 넣는다(채운 칸이 모자라면 빈칸에)
+  [['rocks',()=>({rock:true,food:null,ttl:null,fresh:false})],['logs',()=>({log:2,food:null,ttl:null,fresh:false})]].forEach(([k,make])=>{
+    let n=params[k]|0;const cand=plain();
+    while(n>0&&cand.length){S.board[cand.pop()]=make();n--;}
+    let guard2=0;while(n>0&&guard2++<300){const i=Math.floor(R()*81);if(S.board[i])continue;S.board[i]=make();n--;}
+  });
+  // 덩굴 사슬: 채운 칸과 이웃한 빈칸(줄의 구멍)에
+  let chains=params.chains|0,guard3=0;
+  while(chains>0&&guard3++<400){
+    const i=Math.floor(R()*81);if(S.board[i])continue;const r=Math.floor(i/9),c=i%9;
+    const nearFilled=[[r-1,c],[r+1,c],[r,c-1],[r,c+1]].some(([rr,cc])=>rr>=0&&rr<9&&cc>=0&&cc<9&&isFilled(S.board[rr*9+cc]));
+    if(!nearFilled&&guard3<200)continue;
+    S.board[i]={chain:true,food:null,ttl:null,fresh:false};chains--;
+  }
+  // 먹이: 채운 칸 일부에(startFoods개). 좋아함 위주, 경계 요소는 최대 1개(첫 딜레마)
+  let foods=params.startFoods|0;const cand=plain();let dis=0;
+  while(foods>0&&cand.length){const i=cand.pop();let kind;const x=R();
+    if(dis<1&&x<params.scareShare){kind='dislike';dis++;}else kind='like';
+    const pool=kind==='like'?animal.likes:animal.scares;
+    S.board[i]={food:pick(pool),ttl:null,fresh:false};foods--;}
+}
+// 📦 보물 상자(v1.0-base.6, 사용자 결정 2026-10-06. 구 ⭐ 스페셜의 겹 → 자물쇠): 자물쇠가 chestLocks개인 타일 하나. 그 줄이 깨질 때마다 자물쇠가 하나 풀리고 타일은 남는다(통나무처럼).
+// 마지막 자물쇠가 풀리면 상자가 열려 판 위 모든 블록(장애물 제외)이 좋아하는 먹이로. 판에 항상 1개: 시작 시 1개, 열리고 나면 판 위 보통 블록에 새로 하나(사용자 결정 2026-09-28). 안 상함.
+// 내부 식별자(cl.special · S.special)는 CSS·봇 공용이라 그대로 둔다.
+function spawnSpecial(){if(S.board.some(cl=>cl&&cl.special))return false;const cand=[];S.board.forEach((cl,i)=>{if(cl&&!cl.rock&&!cl.log&&!cl.chain&&!cl.special&&!cl.food)cand.push(i);});if(!cand.length)return false;const i=cand[Math.floor(S.R()*cand.length)];const cl=S.board[i];cl.food=null;cl.ttl=null;
+  const c=S.special.carry;if(c){cl.special=c.left;cl.midDone=c.midDone;S.special.carry=null;}else cl.special=params.chestLocks|0||1;return true;}
+// 상자 이동(v0.17 확정): 자물쇠가 하나 풀린 상자는 같은 턴에 다른 빈 블록으로 옮겨 간다(자리가 없으면 다음 턴)
+function respawnCarry(){if(!S.special.carry)return false;return spawnSpecial();}
+function specialPayoff(ev,times){
+  const like=animal.likes[0];let n=0,sc=0;
+  S.board.forEach(cl=>{if(!cl||cl.rock||cl.log||cl.chain||cl.special)return;if(cl.food&&foodKind(cl.food)==='dislike')sc++;cl.food=like;cl.ttl=null;n++;});
+  S.special.done+=times;
+  ev.push(`<b>📦 보물 상자를 열었다!</b> 판 위 블록 ${n}개가 전부 ${FOODS[like].e}(으)로 바뀌었다${sc?` (경계 ${sc}개 포함)`:''}`);
+}
+// 절반 보상(v1.0-base.6, 사용자 결정 2026-10-06 봇 비교 뒤): 자물쇠 절반이 풀리면 코인 [chestMidCoinMin, chestMidCoinMax]를 찾고(지갑·S.earned), 동시에 판 위 좋아함 아닌 먹이의 chestMidFrac(1/3)이 좋아하는 먹이로 바뀐다. 코인만으로 바꿨을 때 봇 성공률이 전 등급 25%p 떨어져 변환을 유지했다.
+function specialMid(ev){
+  const total=params.chestLocks|0;if(total<3)return;const midLeft=total-Math.floor(total/2);
+  S.board.forEach(cl=>{if(!cl||!cl.special||cl.midDone||cl.special!==midLeft)return;cl.midDone=true;
+    const lo=Math.min(params.chestMidCoinMin|0,params.chestMidCoinMax|0),hi=Math.max(params.chestMidCoinMin|0,params.chestMidCoinMax|0);
+    const coins=lo+Math.floor(S.R()*(hi-lo+1));
+    S.special.mid++;S.special.coins+=coins;S.earned+=coins;wallet+=coins;saveWallet();
+    const like=animal.likes[0];const cand=[];S.board.forEach((c,i)=>{if(c&&!c.rock&&!c.log&&!c.chain&&!c.special&&(!c.food||foodKind(c.food)!=='like'))cand.push(i);});
+    for(let i=cand.length-1;i>0;i--){const j=Math.floor(S.R()*(i+1));[cand[i],cand[j]]=[cand[j],cand[i]];}
+    const n=Math.ceil(cand.length*(+params.chestMidFrac||0));for(let k=0;k<n;k++){const c=S.board[cand[k]];c.food=like;c.ttl=null;}
+    ev.push(`<b>📦 자물쇠 절반이 풀려 코인 +${coins}</b>를 찾았다${n?` · 판 위 먹이 ${n}개가 ${FOODS[like].e}(으)로 바뀌었다`:''}`);});
+}
+function specialLeft(){let m=null;S.board.forEach(cl=>{if(cl&&cl.special&&(m==null||cl.special<m))m=cl.special;});return m;}
+// 줄이 깨질 때 칸 하나 처리: 통나무는 한 층만, 나머지는 제거. 반환 = 실제로 비워졌는지
+function breakCell(i){const cl=S.board[i];if(!cl)return false;if(cl.log>1){cl.log--;return false;}if(cl.special>1){S.special.carry={left:cl.special-1,midDone:!!cl.midDone};S.board[i]=null;return true;}S.board[i]=null;return true;}
+// 깨진 칸 옆의 덩굴 사슬을 푼다
+function freeChains(cleared){let n=0;const set=new Set(cleared);S.board.forEach((cl,i)=>{if(!cl||!cl.chain)return;const r=Math.floor(i/9),c=i%9;if([[r-1,c],[r+1,c],[r,c-1],[r,c+1]].some(([rr,cc])=>rr>=0&&rr<9&&cc>=0&&cc<9&&set.has(rr*9+cc))){S.board[i]=null;n++;}});return n;}
+function drawPiece(){
+  if(!S.bag.length){
+    S.bag=[...POOLS[params.pool]];
+    for(let i=S.bag.length-1;i>0;i--){const j=Math.floor(S.R()*(i+1));[S.bag[i],S.bag[j]]=[S.bag[j],S.bag[i]];}
+  }
+  const key=S.bag.pop();let cells=SHAPES[key].map(c=>[...c]);
+  const rots=Math.floor(S.R()*4);for(let i=0;i<rots;i++)cells=rotCells(cells);
+  const foods={};// 셀 인덱스 → 먹이
+  const idx=S.blocks+S.next.length;// 몇 번째 블록으로 나오는지(대략)
+  if(S.R()<params.attach){
+    const order=cells.map((_,i)=>i);for(let i=order.length-1;i>0;i--){const j=Math.floor(S.R()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+    let n=1;while(n<Math.min(3,cells.length)&&S.R()<params.extra)n++;
+    for(let k=0;k<n;k++)foods[order[k]]=drawFood(idx);
+  }
+  return {key,cells,foods};
+}
+function drawFood(idx){
+  // 좋아함 아니면 경계 요소. 첫 firstSafe블록엔 경계 없음, 경계 3연속 금지.
+  const canDis=idx>=params.firstSafe&&S.lastDis<2;
+  const kind=(canDis&&S.R()<params.scareShare)?'dislike':'like';
+  if(kind==='dislike')S.lastDis++;else S.lastDis=0;
+  const pool=kind==='like'?animal.likes:animal.scares;
+  return pool[Math.floor(S.R()*pool.length)];
+}
+const likeE=()=>animal.likes.map(f=>FOODS[f].e).join('');
+const scareE=()=>animal.scares.map(f=>FOODS[f].e).join('');
+// 내부 분류명은 'dislike'를 유지(CSS·봇 공용). 뜻은 "경계 요소".
+function foodKind(f){return animal.likes.includes(f)?'like':animal.scares.includes(f)?'dislike':'neutral';}
+const isFilled=cl=>!!cl&&!cl.chain;// 덩굴 사슬은 줄 완성에 빈칸으로 취급
+function canPlace(cells,r0,c0){return cells.every(([r,c])=>{const rr=r0+r,cc=c0+c;return rr>=0&&rr<9&&cc>=0&&cc<9&&!S.board[rr*9+cc];});}
+function anyFit(piece){let cells=piece.cells;for(let k=0;k<4;k++){for(let r=0;r<9;r++)for(let c=0;c<9;c++)if(canPlace(cells,r,c))return true;cells=rotCells(cells);}return false;}
+const LINE_CELLS=(()=>{const r=[],c=[],b=[];for(let k=0;k<9;k++){r.push(Array.from({length:9},(_,i)=>k*9+i));c.push(Array.from({length:9},(_,i)=>i*9+k));const br=Math.floor(k/3)*3,bc=(k%3)*3;const g=[];for(let i=0;i<3;i++)for(let j=0;j<3;j++)g.push((br+i)*9+bc+j);b.push(g);}return {r,c,b};})();
+function completedGroups(board){
+  const groups=[];
+  for(let r=0;r<9;r++){const g=[];for(let c=0;c<9;c++)g.push(r*9+c);if(g.every(i=>isFilled(board[i])))groups.push(g);}
+  for(let c=0;c<9;c++){const g=[];for(let r=0;r<9;r++)g.push(r*9+c);if(g.every(i=>isFilled(board[i])))groups.push(g);}
+  for(let br=0;br<3;br++)for(let bc=0;bc<3;bc++){const g=[];for(let r=0;r<3;r++)for(let c=0;c<3;c++)g.push((br*3+r)*9+bc*3+c);if(g.every(i=>isFilled(board[i])))groups.push(g);}
+  return groups;
+}
+// ---------- 멈춤 힌트(사용자 2026-10-06, 두 단계) ----------
+// 1단계(idleHint1초): 봇(patient, 잡음 0)이 고른 자리가 지금 방향으로 안 들어가면(k>0) 현재 틀만 깜빡이고 라벨 "↻ 탭해서 돌려요". 들어가면 아무것도 안 보임.
+// 2단계(idleHint2초): 그 자리를 보드에 점선으로. 회전이 아직 필요하면 어포던스도 같이. 회전하면 즉시 다시 계산(단계 유지), 놓으면 사라지고 타이머 재시작.
+let idleT1=null,idleT2=null,idleHint=null;
+function clearIdle(){clearTimeout(idleT1);clearTimeout(idleT2);idleT1=idleT2=null;idleHint=null;}
+function armIdle(){clearIdle();if(SIM||!S||S.over)return;const s1=+params.idleHint1||0,s2=+params.idleHint2||0;if(s1>0)idleT1=setTimeout(()=>showIdleHint(1),s1*1000);if(s2>0)idleT2=setTimeout(()=>showIdleHint(2),s2*1000);}
+function showIdleHint(stage){
+  if(SIM||!S||S.over||pick||drag||!S.cur)return;
+  // 봇 계산이 판의 시드 난수를 소모하지 않게 R을 잠시 상수로(동점 흔들림도 없앰)
+  const bp=BOT_POLICY,bn=BOT_NOISE,R=S.R;BOT_POLICY='patient';BOT_NOISE=0;S.R=()=>0.5;let m=null;try{m=botMove();}finally{BOT_POLICY=bp;BOT_NOISE=bn;S.R=R;}
+  if(!m)return;let cells=S.cur.cells;for(let i=0;i<m.k;i++)cells=rotCells(cells);
+  const target=cells.map(([r,c])=>(m.r+r)*9+m.c+c).sort((a,b)=>a-b).join(',');
+  // 대칭 블록(I·O·S·Z)은 180° 돌려도 같은 모양이라 k가 2로 나올 수 있다 → 같은 칸 집합을 만드는 최소 회전 수로 정규화(안 그러면 헛 회전 어포던스)
+  let k=m.k,cc=S.cur.cells;for(let kk=0;kk<4;kk++){if(cc.map(([r,c])=>(m.r+r)*9+m.c+c).sort((a,b)=>a-b).join(',')===target){k=kk;break;}cc=rotCells(cc);}
+  idleHint={stage:Math.max(stage,idleHint?idleHint.stage:0),k,cells:target.split(',').map(Number)};render();
+}
+function rotateCur(){if(S.over)return;S.cur.cells=rotCells(S.cur.cells);if(S.cur.fit)S.cur.rotated=true;if(idleHint){const st=idleHint.stage;idleHint=null;showIdleHint(st);}render();}
+function place(r0,c0){
+  if(S.over)return false;const p=S.cur;if(!canPlace(p.cells,r0,c0))return false;
+  const placed=[];
+  p.cells.forEach(([r,c],i)=>{const idx=(r0+r)*9+c0+c;const f=p.foods[i]||null;S.board[idx]={food:f,ttl:null,fresh:true};placed.push(idx);});
+  S.blocks++;S.fitHint=null;clearIdle();
+  const ev=[];
+  const groups=completedGroups(S.board);
+  const n=groups.length;
+  let clearing=[];
+  if(n){
+    const set=new Set();groups.forEach(g=>g.forEach(i=>set.add(i)));clearing=[...set];
+    const tier=Math.min(n,4);S.tiers[tier]++;
+    if(S.firstClearAt==null)S.firstClearAt=S.blocks;if(n>=2&&S.firstMultiAt==null)S.firstMultiAt=S.blocks;
+    const c=countCells(clearing);
+    S.like+=c.likeN;S.scare+=c.disN;
+    ev.push(`<b>${tierLabel(n)}</b> ${n}줄${c.eaten.length?' · '+c.eaten.join(''):''}${c.rockN?` · 바위 ${c.rockN}`:''}${c.logHit?` · 통나무 ${c.logHit} 한 층`:''}${c.likeN?` → <span class="aff">좋아함 +${c.likeN} (${S.like}/${S.needLike})</span>`:''}${c.disN?` · <span class="bad">경계 +${c.disN} (${S.scare}/${S.needScare})</span>`:''}`);
+    clearing.forEach(i=>breakCell(i));
+    const moved=respawnCarry();
+    specialMid(ev);
+    if(c.spN&&!c.spDone){const left=specialLeft();ev.push(moved?`📦 보물 상자 자물쇠가 하나 풀렸다 · 다른 자리로 옮겨 감${left==null?'':' · '+left+'번 더'}`:`📦 보물 상자 자물쇠가 하나 풀렸다 · ${left}번 더`);}
+    const freed=freeChains(clearing);if(freed)ev.push(`덩굴 사슬 ${freed}개가 풀렸다`);
+    // 멀티 클리어 효과: Triple 이상 → 경계 -1. Quad(4줄) 이상 → 판 전체 클리어(남은 좋아함은 먹은 것으로)
+    if(tier===4){let cnt=0;S.board.forEach((cl,i)=>{if(cl){if(cl.food&&foodKind(cl.food)==='like')cnt++;S.board[i]=null;}});S.like+=cnt;ev.push(`<b>${tierLabel(n)}!</b> 판 전체 클리어 · 남은 ${likeE()} ${cnt}개도 먹음 (${S.like}/${S.needLike})`);}
+    if(tier>=3&&S.scare>0){S.scare--;ev.push(`${tierLabel(n)} 효과: <span class="aff">경계 -1 (${S.scare}/${S.needScare})</span>`);}
+    if(c.spDone)specialPayoff(ev,c.spDone);
+    animalReact(c.disN&&!c.likeN?'bad':'eat');
+    S.combo++;if(S.combo>S.maxCombo)S.maxCombo=S.combo;
+    if(S.combo>=3&&S.scare>0){S.scare--;ev.push(`<b>${S.combo} Combo</b> → 동물이 신나서 <span class="aff">경계 -1 (${S.scare}/${S.needScare})</span>`);}
+    else if(S.combo>=2)ev.push(`<b>${S.combo} Combo</b>`);
+  }else{S.combo=0;}
+  S.board.forEach(cl=>{if(cl)cl.fresh=false;});
+  if(spawnSpecial())ev.push('📦 새 보물 상자가 나타났다');
+  // 훔치기(행동 기믹): N턴 카운트다운, 0이 되면 판 위 좋아하는 먹이 하나를 빈 블록으로. Double 이상이면 한 턴 미룸(design-03 C).
+  if(S.act){
+    if(n>=2){S.act.left=Math.min(S.act.n,S.act.left+1);ev.push(`${tierLabel(n)}에 놀라 훔치기가 한 턴 미뤄졌다`);}
+    S.act.left--;
+    if(S.act.left<=0){
+      const likes=[];S.board.forEach((cl,i)=>{if(cl&&cl.food&&foodKind(cl.food)==='like')likes.push(i);});
+      if(likes.length){const i=likes[Math.floor(S.R()*likes.length)];const f=S.board[i].food;S.board[i].food=null;S.stolen=(S.stolen||0)+1;ev.push(`<span class="bad">${animal.e} ${josa(animal.n,'이','가')} 판 위의 ${FOODS[f].e} 하나를 훔쳐 갔다</span>`);}
+      else ev.push(`${josa(animal.n,'이','가')} 훔칠 먹이를 못 찾았다`);
+      S.act.left=S.act.n;
+    }
+  }
+  if(!ev.length)ev.push(`${p.key} 블록을 놓았다`);
+  ev.forEach(logMsg);
+  if(S.like>=S.needLike){finish('win',`${likeE()} ${S.needLike}개를 먹이고 마음을 열었다`);}
+  else if(S.scare>=S.needScare){finish('lose',`경계 ${S.needScare}번, 도망갔다`);}
+  else{
+    S.cur=S.next.shift();S.next.push(drawPiece());
+    if(!anyFit(S.cur))finish('lose','현재 블록이 어느 회전으로도 들어갈 자리가 없다');
+  }
+  render(clearing);armIdle();
+  return true;
+}
+// 깨지는 칸들의 집계: 좋아함 개수 · 경계 개수 · 바위 · 통나무 · 📦 보물 상자(spN 걸린 수 · spDone 마지막 자물쇠까지 풀린 수)
+function countCells(cells){
+  const c={likeN:0,disN:0,rockN:0,logHit:0,spN:0,spDone:0,eaten:[]};
+  cells.forEach(i=>{const cl=S.board[i];if(!cl)return;if(cl.rock)c.rockN++;if(cl.log>1)c.logHit++;
+    if(cl.special){c.spN++;c.eaten.push('📦');if(cl.special===1)c.spDone++;}// 상자 자물쇠는 좋아함 개수에 안 세고 열림 보상으로만
+    if(cl.food){c.eaten.push(FOODS[cl.food].e);if(foodKind(cl.food)==='like')c.likeN++;else c.disN++;}});
+  return c;
+}
+// 멀티 클리어 표기(사용자 결정 2026-10-06): 1 한 줄 · 2 Double · 3 Triple · 4 Quad · 5 Penta · 6 Hexa · 7+ Unbelievable. 효과는 그대로(3+ 경계 -1, 4+ 판 전체 클리어)
+function tierLabel(n){return n>=7?'Unbelievable':{1:'한 줄',2:'Double',3:'Triple',4:'Quad',5:'Penta',6:'Hexa'}[n];}
+
+// ---------- 아이템 ----------
+// 6칸 이하, 변 또는 대각으로 이어진 모양 전부(고정 폴리킹 1+4+20+110+638+3832 = 4,605종, v1.0-base.5 사용자 요청: 5칸·변 연결 91종 → 6칸·대각 포함). 맞춤 블록 탐색용. conn4 = 변으로만 이어진 모양(끌기 쉬워 동점이면 우선)
+const POLY=(()=>{const seen=new Set(['0,0']),out=[{cells:[[0,0]],conn4:true}];let frontier=[[[0,0]]];
+  const N8=[[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[-1,1],[1,-1],[1,1]];
+  const isConn4=sh=>{const seenC=new Set([0]),st=[0];while(st.length){const i=st.pop();sh.forEach((q,j)=>{if(seenC.has(j))return;if(Math.abs(q[0]-sh[i][0])+Math.abs(q[1]-sh[i][1])===1){seenC.add(j);st.push(j);}});}return seenC.size===sh.length;};
+  for(let size=2;size<=6;size++){const next=[];frontier.forEach(sh=>{sh.forEach(([r,c])=>{N8.forEach(([dr,dc])=>{const nr=r+dr,nc=c+dc;
+    if(sh.some(([a,b])=>a===nr&&b===nc))return;const ns=norm([...sh,[nr,nc]]).sort((x,y)=>x[0]-y[0]||x[1]-y[1]);const key=ns.map(x=>x.join(',')).join(';');
+    if(seen.has(key))return;seen.add(key);next.push(ns);out.push({cells:ns,conn4:isConn4(ns)});});});});frontier=next;}
+  return out;})();
+// 자리 하나에 블록을 놓았을 때 완성되는 줄: 새 칸이 걸친 행·열·박스만 검사(전수 탐색용 빠른 판정)
+function groupsAfter(board,placedIdx){
+  const lines=new Set();placedIdx.forEach(i=>{const r=Math.floor(i/9),c=i%9;lines.add('r'+r);lines.add('c'+c);lines.add('b'+(Math.floor(r/3)*3+Math.floor(c/3)));});
+  const out=[];lines.forEach(L=>{const g=LINE_CELLS[L[0]][+L.slice(1)];if(g.every(i=>isFilled(board[i])))out.push(g);});return out;
+}
+// 지금 판에서 가장 많은 칸을 깨는 모양·자리. 없으면 null.
+function bestFitPiece(){
+  let best=null;const b=S.board.slice();
+  POLY.forEach(({cells,conn4})=>{const {h,w}=dims(cells);for(let r=0;r<=9-h;r++)for(let c=0;c<=9-w;c++){
+    const idx=[];let ok=true;for(const [rr,cc] of cells){const i=(r+rr)*9+c+cc;if(S.board[i]){ok=false;break;}idx.push(i);}if(!ok)continue;
+    idx.forEach(i=>b[i]={});const groups=groupsAfter(b,idx);idx.forEach(i=>b[i]=null);
+    if(!groups.length)continue;const set=new Set();groups.forEach(g=>g.forEach(i=>set.add(i)));
+    const sc=set.size*1000+groups.length*20-cells.length*2+(conn4?1:0);// 깨는 칸 수 > 줄 수 > 작은 모양 > 변으로 이어진 모양
+    if(!best||sc>best.sc)best={sc,cells,r,c,n:groups.length,cleared:set.size,set};}});
+  if(!best)return null;
+  const cells=best.cells.map(x=>[...x]);
+  // 좋아하는 먹이 1개: 설계된 자리에 놓으면 바로 먹히는 칸에 붙인다
+  let fi=cells.findIndex(([rr,cc])=>best.set.has((best.r+rr)*9+best.c+cc));if(fi<0)fi=0;
+  const foods={};foods[fi]=animal.likes[0];
+  const hint=cells.map(([rr,cc])=>(best.r+rr)*9+best.c+cc);
+  return {key:'맞춤',cells,foods,fit:true,n:best.n,cleared:best.cleared,hint};
+}
+let pick=null;// 빗자루 선택 상태 {type:'r'|'c'|'b', line:number|null}
+function priceOf(k){return params[ITEMS.find(x=>x[0]===k)[3]]|0;}
+function pay(k){const p=priceOf(k);wallet-=p;S.spent+=p;S.used[k]++;saveWallet();}
+function useItem(k){
+  if(!S||S.over||wallet<priceOf(k))return false;
+  if(k==='fit'){
+    const p=bestFitPiece();if(!p){logMsg('🧩 지금은 어떤 모양으로도 깰 줄이 없다 (코인 안 씀)');render();return false;}
+    S.cur=p;S.fitHint=p.hint;pay(k);armIdle();logMsg(`🧩 <b>맞춤 블록</b> -${priceOf(k)}코인: 점선 자리에 놓으면 ${p.n}줄 · ${p.cleared}칸. ${FOODS[animal.likes[0]].e} 하나 덤`);render();return true;
+  }
+  if(SWEEP_TYPE[k]){pick={type:SWEEP_TYPE[k],item:k,line:null};render();return true;}
+  return false;
+}
+function lineOfCell(i,type){const r=Math.floor(i/9),c=i%9;return type==='r'?r:type==='c'?c:Math.floor(r/3)*3+Math.floor(c/3);}
+function doSweep(){
+  if(!pick||pick.line==null||S.over)return false;
+  const cells=LINE_CELLS[pick.type][pick.line].filter(i=>isFilled(S.board[i]));
+  if(!cells.length){logMsg('빈 줄이다 (코인 안 씀). 다른 칸을 탭하거나 취소');render();return false;}
+  const c=countCells(cells);
+  S.like+=c.likeN;S.scare+=c.disN;
+  cells.forEach(i=>breakCell(i));freeChains(cells);respawnCarry();
+  {const spEv=[];specialMid(spEv);if(c.spDone)specialPayoff(spEv,c.spDone);spEv.forEach(logMsg);}
+  const item=pick.item;pay(item);
+  const tname={r:'행',c:'열',b:'박스'}[pick.type];pick=null;
+  logMsg(`<b>${tname} 지우기</b> -${priceOf(item)}코인 · ${cells.length}칸${c.eaten.length?' · '+c.eaten.join(''):''}${c.likeN?` → <span class="aff">좋아함 +${c.likeN} (${S.like}/${S.needLike})</span>`:''}${c.disN?` · <span class="bad">경계 +${c.disN} (${S.scare}/${S.needScare})</span>`:''}`);
+  animalReact(c.disN&&!c.likeN?'bad':'eat');
+  if(S.like>=S.needLike)finish('win',`${likeE()} ${S.needLike}개를 먹이고 마음을 열었다`);
+  else if(S.scare>=S.needScare)finish('lose',`경계 ${S.needScare}번, 도망갔다`);
+  render(cells);armIdle();return true;
+}
+function renderItems(){
+  const el=$('items');if(!S)return;
+  // 아이콘 + 가격만(이름은 title과 선택 중 힌트 줄에). 선택 중인 지우기 버튼은 켜진 상태, 다시 탭하면 취소
+  el.innerHTML=ITEMS.map(([k,e,n])=>`<button data-item="${k}" title="${n}" class="${pick&&pick.item===k?'on':''}" ${(wallet<priceOf(k)&&!(pick&&pick.item===k))||S.over?'disabled':''}><span class="ic">${e}</span><b>${priceOf(k)}</b></button>`).join('');
+}
+$('items').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const k=b.dataset.item;if(!k)return;
+  if(pick&&pick.item===k){pick=null;render();return;}
+  if(pick){pick=null;}
+  useItem(k);
+});
+// 빗자루: 블록 놓듯이 칸 하나를 탭하면 그 줄이 바로 깨진다(사용자 결정 2026-09-27, 확인 단계 없음)
+function onCellTap(i){if(!pick)return;pick.line=lineOfCell(i,pick.type);doSweep();}
+function finish(result,why){
+  S.over={result,why};clearIdle();
+  if(SIM)return;
+  const st=stats[animal.id]||(stats[animal.id]={plays:0,wins:0,best:null,blocksSum:0});
+  st.plays++;if(result==='win'){st.wins++;st.blocksSum+=S.blocks;if(st.best==null||S.blocks<st.best)st.best=S.blocks;const r=coinReward().coins;S.earned+=r;wallet+=r;saveWallet();}// S.earned에는 📦 절반 보상 코인이 이미 들어 있을 수 있다
+  const g=stats._tiers||(stats._tiers={1:0,2:0,3:0,4:0});for(const k in S.tiers)g[k]=(g[k]||0)+S.tiers[k];if(!stats._maxCombo||S.maxCombo>stats._maxCombo)stats._maxCombo=S.maxCombo;
+  const it=stats._items||(stats._items={});for(const k in S.used)it[k]=(it[k]||0)+S.used[k];
+  saveStats();
+  setTimeout(()=>showResult(why),result==='lose'?650:350);
+}
+function coinReward(){const speed=Math.max(0,(30-S.blocks))*2,safe=Math.round((1-S.scare/Math.max(1,S.needScare))*30);return {speed,safe,coins:50+speed+safe};}
+function showResult(why){
+  const win=S.over.result==='win';
+  $('resEm').textContent=win?'🧑‍🌾'+animal.e:'💨';$('resTitle').textContent=win?`${josa(animal.n,'과','와')} 친구가 됐어요!`:`${josa(animal.n,'이','가')} 도망갔어요`;$('resSub').textContent=why;
+  const cr=coinReward();
+  const rows=[[`${likeE()} 먹인 수`,`${S.like} / ${S.needLike}`],[`${scareE()} 경계`,`${S.scare} / ${S.needScare}`],['쓴 블록',S.blocks]];
+  if(S.earned)rows.push(['코인 +'+S.earned,`잔액 ${wallet}`]);else rows.push(['코인',`잔액 ${wallet}`]);
+  if(devOn){rows.push(['📦 보물 상자',`열림 ${S.special.done}회 · 찾은 코인 ${S.special.coins}`],['한 줄 / Double / Triple / Quad+',`${S.tiers[1]} / ${S.tiers[2]} / ${S.tiers[3]} / ${S.tiers[4]}`],['최대 Combo',S.maxCombo]);
+    if(S.spent)rows.push(['쓴 아이템',`행 ${S.used.sweepR} · 열 ${S.used.sweepC} · 3x3 ${S.used.sweepB} · 맞춤 ${S.used.fit} (-${S.spent}코인)`]);
+    if(S.stolen)rows.push(['훔쳐 간 먹이',S.stolen]);
+    if(win)rows.push(['코인 내역',`기본 50 + 빨리 잡기 ${cr.speed} + 안전 ${cr.safe}${S.special.coins?` + 📦 ${S.special.coins}`:''}`]);}
+  $('resTable').innerHTML=rows.map(([k,v])=>`<tr><td>${k}</td><td class="num">${v}</td></tr>`).join('');
+  $('resultOv').classList.add('show');
+}
+function animalReact(kind){const em=$('animalEm');em.classList.remove('eat','bad');void em.offsetWidth;em.classList.add(kind);setTimeout(()=>em.classList.remove(kind),300);}
+function logMsg(html){S.log.unshift(html);S.log=S.log.slice(0,6);}
+
+// ---------- 렌더 ----------
+const boardEl=$('board');const cellEls=[];
+const isAlt=i=>((Math.floor(Math.floor(i/9)/3)+Math.floor((i%9)/3))%2===1);
+(function buildBoard(){for(let i=0;i<81;i++){const d=document.createElement('div');d.className='cell';const r=Math.floor(i/9),c=i%9;if(c%3===2&&c<8)d.classList.add('bx-r');if(r%3===2&&r<8)d.classList.add('bx-b');if(isAlt(i))d.classList.add('alt');d.style.gridColumn=String(c+Math.floor(c/3)+1);d.style.gridRow=String(r+Math.floor(r/3)+1);d.addEventListener('click',()=>onCellTap(i));boardEl.appendChild(d);cellEls.push(d);}})();
+// 온보딩 힌트: 첫 ONB_GAMES판 동안 진행 단계에 맞춰 한 줄씩. 단계는 되돌아가지 않는다.
+function hintText(){
+  if(pick&&!S.over)return `지울 ${{r:'가로줄',c:'세로줄',b:'3x3 박스'}[pick.type]}의 칸을 탭하세요. 취소는 버튼을 다시 탭`;
+  if(onbPlays>ONB_GAMES||S.over)return '';
+  const cleared=S.tiers[1]+S.tiers[2]+S.tiers[3]+S.tiers[4];
+  let stage=0;
+  if(S.blocks>0)stage=1;
+  if(cleared>0)stage=2;
+  S.hintStage=Math.max(S.hintStage,stage);
+  return [
+    '블록을 탭하면 돌아가요. 끌어다 놓으세요. 📦가 든 줄을 깨면 자물쇠가 풀려요.',
+    '가로줄·세로줄·3x3 칸을 가득 채우면 깨지고, 그 안의 먹이를 동물이 먹어요.',
+    `${josa(animal.n,'은','는')} ${likeE()}를 좋아해요. ${S.needLike}개 먹이면 친구가 돼요. ${scareE()}가 든 줄을 ${S.needScare}번 깨면 도망가요.`,
+  ][S.hintStage];
+}
+function render(clearing){
+  if(SIM)return;
+  $('animalEm').textContent=animal.e;$('animalName').textContent=animal.n;
+  // 거리 = 친밀: 좋아함을 먹일수록 동물이 왼쪽(나)으로 다가온다. 오른쪽 끝 88% → 나 옆 14%
+  $('distLbl').innerHTML=`${likeE()} <b>${S.like}</b> / ${S.needLike}${S.act?` · 훔치기 ${S.act.left}턴 뒤`:''}`;
+  $('scareE').innerHTML=animal.scares.map(f=>`<span>${FOODS[f].e}</span>`).join('');$('scarePips').innerHTML=Array.from({length:S.needScare},(_,i)=>`<i class="${i<S.scare?'on':''}"></i>`).join('');$('scareNum').textContent=`${S.scare}/${S.needScare}`;
+  // 위치는 게이지 내용을 채운 뒤에 잰다(첫 렌더에서 게이지 없이 재면 묶음이 오른쪽으로 튀어나감)
+  {// 시작(0개)엔 묶음의 오른쪽 끝이 트랙 오른쪽 끝 = 패널 안쪽 여백이 나와 대칭. 다 먹이면 동물이 나 옆까지.
+   const p=Math.min(1,S.like/Math.max(1,S.needLike));const mv=$('animalMove');
+   $('trackLine').style.flexGrow=String(1-p);$('trackSpacer').style.flexGrow=String(p);
+   const fled=!!(S.over&&S.over.result==='lose'&&S.scare>=S.needScare);mv.classList.toggle('fled',fled);}
+  $('hint').textContent=hintText();
+  // 정보 칸은 코인 + Combo만(사용자 2026-10-06: 📦 남은 자물쇠는 보드 칸에 있어 중복, 블록 수는 결과 카드에만)
+  for(let i=0;i<81;i++){const d=cellEls[i],cl=S.board[i];d.className='cell'+(i%9%3===2&&i%9<8?' bx-r':'')+(Math.floor(i/9)%3===2&&Math.floor(i/9)<8?' bx-b':'')+(isAlt(i)&&!cl?' alt':'');d.innerHTML='';
+    if(cl){if(cl.chain){d.classList.add('chain');d.textContent='⛓️';}else{d.classList.add('block');if(cl.rock){d.classList.add('rock');d.textContent='🪨';}else if(cl.log){d.classList.add('rock','log');d.innerHTML=`🪵<span class="tag">${cl.log}</span>`;}else if(cl.special){d.classList.add('special');d.innerHTML=`📦<span class="tag">${cl.special}</span>`;}else if(cl.food){d.classList.add('food',foodKind(cl.food));d.innerHTML=`<span class="ico">${FOODS[cl.food].e}</span>`;}}}
+    if(S.fitHint&&S.cur&&S.cur.fit&&!S.cur.rotated&&S.fitHint.includes(i))d.classList.add('fithint');
+    if(idleHint&&idleHint.stage>=2&&!S.over&&idleHint.cells.includes(i))d.classList.add('idlehint');
+    if(clearing&&clearing.includes(i)){d.classList.add('clearing');}
+  }
+  boardEl.classList.toggle('pick',!!pick);renderItems();$('coinNum').textContent=wallet;
+  {const cue=!!(idleHint&&idleHint.k>0&&!S.over);$('curFrame').classList.toggle('cue',cue);$('curLbl').classList.toggle('cue',cue);$('curLbl').textContent=cue?'↻ 탭해서 돌려요':'현재';}
+  {// 현재 틀(92px) 안 86px에 맞춰 축소(기본 20px, 맞춤 블록 6칸이면 12px)
+   const {h,w}=S.cur?dims(S.cur.cells):{h:1,w:1};const inner=86;
+   renderPiece($('cur'),S.cur,Math.max(12,Math.min(20,Math.floor((inner-(h-1)*2)/h),Math.floor((inner-(w-1)*2)/w))));}
+  // 다음: 미리보기 수만큼 고정 틀(51px). 블록이 없어도 틀은 남아 레이아웃이 안 흔들린다(안개 기믹이 가리면 빈 틀)
+  // 순서는 컨베이어(사용자 2026-10-06): 새 블록은 왼쪽 틀에 나타나 오른쪽으로 흘러 "현재"로 간다 → 현재 옆(오른쪽) 틀 = S.next[0]
+  {const n=Math.max(params.preview|0,S.next.length);$('nxt').innerHTML='';for(let i=0;i<n;i++){const f=document.createElement('div');f.className='frame n';const p=S.next[n-1-i];if(p){const w=document.createElement('div');w.className='piece next';renderPiece(w,p,11);f.appendChild(w);}$('nxt').appendChild(f);}}
+  $('log').innerHTML=S.log.slice(0,devOn?6:2).map(l=>`<div>${l}</div>`).join('');
+}
+function renderPiece(el,p,size){
+  el.innerHTML='';if(!p){return;}const {h,w}=dims(p.cells);el.style.setProperty('--pc',size+'px');el.style.gridTemplateColumns=`repeat(${w},${size}px)`;
+  const map=new Map();p.cells.forEach(([r,c],i)=>map.set(r*10+c,i));
+  for(let r=0;r<h;r++)for(let c=0;c<w;c++){const d=document.createElement('div');d.className='pc';const i=map.get(r*10+c);if(i==null)d.classList.add('none');else{d.dataset.i=i;const f=p.foods[i];if(f){d.classList.add('food',foodKind(f));d.innerHTML=`<span class="ico">${FOODS[f].e}</span>`;}}el.appendChild(d);}
+}
+
+// ---------- 드래그 ----------
+const floatEl=$('float');let drag=null;
+function boardMetrics(){const a=cellEls[0].getBoundingClientRect(),b=cellEls[10].getBoundingClientRect();
+  const colsX=[],rowsY=[];for(let k=0;k<9;k++){const rc=cellEls[k].getBoundingClientRect();colsX.push(rc.left+rc.width/2);const rr=cellEls[k*9].getBoundingClientRect();rowsY.push(rr.top+rr.height/2);}
+  return {left:a.left,top:a.top,pitchX:b.left-a.left,pitchY:b.top-a.top,size:a.width,colsX,rowsY};}
+// 좌표 → 가장 가까운 칸 중심의 인덱스(반 칸 + 여백 바깥이면 -1)
+function nearestIdx(v,centers,size){let best=-1,bd=Infinity;centers.forEach((c,i)=>{const d=Math.abs(v-c);if(d<bd){bd=d;best=i;}});return bd<=size*0.75?best:-1;}
+$('cur').addEventListener('pointerdown',e=>{
+  if(S.over||!S.cur)return;e.preventDefault();
+  const t=e.target.closest('.pc');let gi=t&&t.dataset.i!=null?+t.dataset.i:0;
+  const m=boardMetrics();const p=S.cur;const [gr,gc]=p.cells[gi];
+  const lift=e.pointerType==='touch'?90:0;
+  drag={gi,gr,gc,lift,m,moved:false,startX:e.clientX,startY:e.clientY,ptr:e.pointerId};
+  floatEl.style.setProperty('--fpc',m.size+'px');floatEl.style.gap='3px';renderPiece(floatEl,p,m.size);
+  floatEl.style.display='grid';moveFloat(e.clientX,e.clientY);
+  $('cur').setPointerCapture(e.pointerId);
+});
+$('cur').addEventListener('pointermove',e=>{if(!drag)return;if(Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)>6)drag.moved=true;moveFloat(e.clientX,e.clientY);});
+function endDrag(e){if(!drag)return;const d=drag;drag=null;floatEl.style.display='none';clearGhost();
+  if(!d.moved){rotateCur();return;}
+  const o=originAt(e.clientX,e.clientY,d);if(o&&canPlace(S.cur.cells,o.r,o.c))place(o.r,o.c);}
+$('cur').addEventListener('pointerup',endDrag);$('cur').addEventListener('pointercancel',endDrag);
+function originAt(x,y,d){const m=d.m;const fx=x,fy=y-d.lift;const col=nearestIdx(fx,m.colsX,m.size),row=nearestIdx(fy,m.rowsY,m.size);if(row<0||col<0)return null;return {r:row-d.gr,c:col-d.gc};}
+function moveFloat(x,y){const d=drag;const m=d.m;const left=x-(d.gc+0.5)*(m.pitchX)-0+ (m.pitchX-m.size)/2,top=y-d.lift-(d.gr+0.5)*m.pitchY+(m.pitchY-m.size)/2;
+  floatEl.style.transform=`translate(${left}px,${top}px)`;
+  clearGhost();const o=originAt(x,y,d);if(!o)return;const ok=canPlace(S.cur.cells,o.r,o.c);
+  S.cur.cells.forEach(([r,c])=>{const rr=o.r+r,cc=o.c+c;if(rr>=0&&rr<9&&cc>=0&&cc<9){cellEls[rr*9+cc].classList.add('ghost');if(!ok)cellEls[rr*9+cc].classList.add('bad');}});
+  if(ok){const b=S.board.slice();S.cur.cells.forEach(([r,c])=>b[(o.r+r)*9+o.c+c]={});completedGroups(b).forEach(g=>g.forEach(i=>cellEls[i].classList.add('will')));}
+}
+function clearGhost(){cellEls.forEach(d=>d.classList.remove('ghost','bad','will'));}
+
+// ---------- 통계 ----------
+function loadStats(){try{return JSON.parse(localStorage.getItem('block-stats')||'{}');}catch(e){return {};}}
+function saveStats(){try{localStorage.setItem('block-stats',JSON.stringify(stats));}catch(e){}}
+function showStats(){
+  const rows=ANIMALS.map(a=>{const s=stats[a.id];if(!s)return '';const wr=s.plays?Math.round(s.wins/s.plays*100):0;const avg=s.wins?(s.blocksSum/s.wins).toFixed(1):'-';return `<tr><td>${a.e} ${a.n}</td><td class="num">${s.plays}</td><td class="num">${wr}%</td><td class="num">${avg}</td><td class="num">${s.best??'-'}</td></tr>`;}).join('');
+  const t=stats._tiers||{1:0,2:0,3:0,4:0};
+  $('statsTable').innerHTML=`<tr><th>동물</th><th class="num">판</th><th class="num">친구 된 비율</th><th class="num">평균 블록</th><th class="num">최소</th></tr>${rows||'<tr><td colspan=5>아직 기록 없음</td></tr>'}<tr><th colspan=5 style="padding-top:10px">멀티 클리어 누적</th></tr><tr><td>한 줄</td><td class="num" colspan=4>${t[1]||0}</td></tr><tr><td>Double</td><td class="num" colspan=4>${t[2]||0}</td></tr><tr><td>Triple</td><td class="num" colspan=4>${t[3]||0}</td></tr><tr><td>Quad 이상 (4줄+)</td><td class="num" colspan=4>${t[4]||0}</td></tr><tr><td>최대 Combo</td><td class="num" colspan=4>${stats._maxCombo||0}</td></tr><tr><td>아이템 맞춤 · 행 · 열 · 3x3</td><td class="num" colspan=4>${(stats._items||{}).fit||0} · ${(stats._items||{}).sweepR||0} · ${(stats._items||{}).sweepC||0} · ${(stats._items||{}).sweepB||0}</td></tr><tr><td>코인 잔액</td><td class="num" colspan=4>${wallet}</td></tr>`;
+  $('statsOv').classList.add('show');
+}
+$('statsBtn').addEventListener('click',showStats);$('closeStats').addEventListener('click',()=>$('statsOv').classList.remove('show'));
+$('clearStats').addEventListener('click',()=>{if(confirm(`누적 기록을 지울까요? (온보딩 힌트가 다시 나오고 코인은 ${params.startCoins}으로)`)){stats={};saveStats();onbPlays=0;try{localStorage.setItem('block-onb',0);}catch(e){}wallet=params.startCoins|0;saveWallet();showStats();render();}});
+
+// ---------- 튜닝 UI ----------
+function buildAnimalSeg(){const seg=$('animalSeg');seg.innerHTML='';ANIMALS.forEach(a=>{const b=document.createElement('button');b.textContent=`${a.e} ${a.n} · ${a.rarity}`;if(a.note)b.title=a.note;b.className=a.id===animal.id?'on':'';b.addEventListener('click',()=>{animal=a;params={...params,...a.preset};buildAnimalSeg();buildTuning();newGame();});seg.appendChild(b);});}
+function buildTuning(){const t=$('tune');t.innerHTML='';TUNE.forEach(([k,label,type,step])=>{const l=document.createElement('label');l.textContent=label;let inp;
+  if(type==='select'){inp=document.createElement('select');Object.entries(step).forEach(([v,n])=>{const o=document.createElement('option');o.value=v;o.textContent=n;if(params[k]===v)o.selected=true;inp.appendChild(o);});}
+  else{inp=document.createElement('input');inp.type=type;if(step)inp.step=step;inp.value=k==='seed'?seedStr:params[k];}
+  inp.dataset.k=k;l.appendChild(inp);t.appendChild(l);});}
+function readTuning(){let seed='';$('tune').querySelectorAll('[data-k]').forEach(inp=>{const k=inp.dataset.k;if(k==='seed'){seed=inp.value.trim();return;}params[k]=inp.tagName==='SELECT'?inp.value:parseFloat(inp.value);});return seed;}
+$('applyBtn').addEventListener('click',()=>{const seed=readTuning();newGame(seed||undefined);});
+$('resetBtn').addEventListener('click',()=>{params={...DEFAULTS,...animal.preset};buildTuning();newGame();});
+$('newBtn').addEventListener('click',()=>{readTuning();newGame();});
+$('devBtn').addEventListener('click',()=>{devOn=!devOn;try{localStorage.setItem('block-dev',devOn?'1':'0');}catch(e){}applyDev();});
+$('againBtn').addEventListener('click',()=>{$('resultOv').classList.remove('show');newGame();});
+$('closeRes').addEventListener('click',()=>$('resultOv').classList.remove('show'));
+
+// ---------- 봇 시뮬 (디버그 훅 전용, 화면·기록에 안 남음) ----------
+// 회전 탐욕 봇: 4회전 × 81자리 전부 평가. 점수 = 이번 턴 친밀도 이득 - 싫어함 페널티 + 촘촘히 놓기 - 구멍 만들기 + 좋아함을 완성 임박 줄에 두기.
+function lineFill(b,r,c){let row=0,col=0,box=0;for(let k=0;k<9;k++){if(b[r*9+k])row++;if(b[k*9+c])col++;}const br=Math.floor(r/3)*3,bc=Math.floor(c/3)*3;for(let i=0;i<3;i++)for(let j=0;j<3;j++)if(b[(br+i)*9+bc+j])box++;return Math.max(row,col,box);}
+// 정책: greedy = 깰 수 있으면 깬다(상한선). patient = 좋아함 없는 한 줄 클리어는 아끼고 완성 임박 줄을 쌓는다(사용자 실플레이 분포 85/11/1에 가깝게).
+let BOT_POLICY='patient';
+function scoreMove(cells,foods,r0,c0){
+  const b=S.board.slice();const placed=[];
+  cells.forEach(([r,c],i)=>{const idx=(r0+r)*9+c0+c;b[idx]={food:foods[i]||null};placed.push(idx);});
+  let sc=0;
+  const empty=b.filter(x=>!x).length;
+  const groups=completedGroups(b);const n=groups.length;
+  if(n){const set=new Set();groups.forEach(g=>g.forEach(i=>set.add(i)));let gain=n,dis=0,likeN=0;
+    set.forEach(i=>{const f=b[i].food;if(!f)return;if(foodKind(f)==='like'){gain+=10;likeN++;}else dis++;});
+    set.forEach(i=>{if(b[i]&&b[i].special){gain+=4;}});
+    let v=gain+(S.combo>=2?6:0)+set.size*0.15+(n>=3?8:0);
+    if(BOT_POLICY!=='greedy'&&n===1&&!likeN&&empty>30)v*=0.25;// 여유 있을 땐 먹이 없는 한 줄 클리어를 아낀다
+    sc+=v;
+    sc-=dis*(S.scare+dis>=S.needScare?100:25);
+  }
+  if(BOT_POLICY!=='greedy'){// 완성 임박 줄(7~8칸) 쌓기 보너스
+    const lines=new Set();placed.forEach(i=>{const r=Math.floor(i/9),c=i%9;lines.add('r'+r);lines.add('c'+c);lines.add('b'+(Math.floor(r/3)*3+Math.floor(c/3)));});
+    lines.forEach(L=>{let f=0;const t=L[0],k=+L.slice(1);for(let i=0;i<9;i++){const idx=t==='r'?k*9+i:t==='c'?i*9+k:(Math.floor(k/3)*3+Math.floor(i/3))*9+(k%3)*3+i%3;if(b[idx])f++;}if(f===7||f===8)sc+=1.2;});
+  }
+  let adj=0,holes=0;const seen=new Set();
+  placed.forEach(i=>{const r=Math.floor(i/9),c=i%9;[[r-1,c],[r+1,c],[r,c-1],[r,c+1]].forEach(([rr,cc])=>{
+    if(rr<0||rr>8||cc<0||cc>8||b[rr*9+cc]){adj++;return;}
+    const j=rr*9+cc;if(seen.has(j))return;seen.add(j);
+    if([[rr-1,cc],[rr+1,cc],[rr,cc-1],[rr,cc+1]].every(([a,d])=>a<0||a>8||d<0||d>8||b[a*9+d]))holes++;
+  });});
+  sc+=adj*0.3-holes*2;
+  cells.forEach(([r,c],i)=>{const f=foods[i];if(!f)return;const k=foodKind(f),m=lineFill(b,r0+r,c0+c);if(k==='like')sc+=m*0.4;else if(k==='dislike')sc-=m*0.4;});
+  // casual = 사람처럼 어설프게: 큰 이득(좋아함 클리어)은 잡지만 자잘한 자리 선택은 흔들린다
+  return sc+(BOT_POLICY==='casual'?S.R()*BOT_NOISE:S.R()*0.01);
+}
+let BOT_NOISE=10;
+function botMove(){
+  const p=S.cur;let best=null,cells=p.cells;
+  for(let k=0;k<4;k++){
+    for(let r=0;r<9;r++)for(let c=0;c<9;c++){if(!canPlace(cells,r,c))continue;const sc=scoreMove(cells,p.foods,r,c);if(!best||sc>best.sc)best={sc,k,r,c};}
+    cells=rotCells(cells);
+  }
+  return best;
+}
+// __block.sim({games:80, animal:'red_fox', policy:'casual', noise:20, set:{startFill:14}}) → 분포 요약. 끝나면 원래 판을 복원한다.
+function sim(opts={}){
+  const games=opts.games||40;
+  const saveS=S,saveP={...params},saveA=animal,saveSeed=seedStr,saveW=wallet;wallet=1e9;// 봇은 코인 무제한(사용 규칙으로만 제한)
+  if(opts.animal){animal=ANIMALS.find(a=>a.id===opts.animal)||animal;params={...DEFAULTS,...animal.preset};}
+  if(opts.set)params={...params,...opts.set};
+  BOT_POLICY=opts.policy||'patient';if(opts.noise!=null)BOT_NOISE=opts.noise;
+  SIM=true;
+  const out={games,wins:0,blocks:0,blocksWin:0,flee:0,tiers:{1:0,2:0,3:0,4:0},stolen:0,maxCombo:{},gamesWithTriple:0,firstMulti:0,firstMultiN:0,startFilled:0,lose:{flee:0,fit:0},
+    itemUse:{fit:0,fresh:0,sweep:0},itemFill:{fit:0,fresh:0,sweep:0},fitLines:{}};
+  try{
+    for(let g=0;g<games;g++){
+      newGame(`bot${opts.seed||''}${g}`);out.startFilled+=S.board.filter(Boolean).length;
+      let guard=0;
+      while(!S.over&&guard++<600){
+        if(opts.items!==false)botItems(out);
+        if(S.over)break;
+        const m=botMove();if(!m){finish('lose','봇: 자리 없음');break;}for(let i=0;i<m.k;i++)S.cur.cells=rotCells(S.cur.cells);place(m.r,m.c);}
+      const win=S.over&&S.over.result==='win';
+      if(win){out.wins++;out.blocksWin+=S.blocks;}else if(S.over&&/도망/.test(S.over.why))out.lose.flee++;else out.lose.fit++;
+      out.blocks+=S.blocks;out.flee+=S.scare;out.stolen+=S.stolen||0;out.chestOpen=(out.chestOpen||0)+S.special.done;out.chestMid=(out.chestMid||0)+S.special.mid;out.chestCoins=(out.chestCoins||0)+S.special.coins;if(S.firstMultiAt!=null){out.firstMulti+=S.firstMultiAt;out.firstMultiN++;}
+      for(const k in S.tiers)out.tiers[k]+=S.tiers[k];
+      if(S.tiers[3]+S.tiers[4]>0)out.gamesWithTriple++;
+      out.maxCombo[S.maxCombo]=(out.maxCombo[S.maxCombo]||0)+1;
+    }
+  }finally{SIM=false;S=saveS;params=saveP;animal=saveA;seedStr=saveSeed;wallet=saveW;if(S)render();}
+  const tot=out.tiers[1]+out.tiers[2]+out.tiers[3]+out.tiers[4];
+  out.summary={animal:opts.animal||saveA.id,policy:BOT_POLICY,set:opts.set||{},winRate:Math.round(out.wins/games*100)+'%',avgBlocks:(out.blocks/games).toFixed(1),avgBlocksWin:out.wins?(out.blocksWin/out.wins).toFixed(1):'-',avgFlee:(out.flee/games).toFixed(2),
+    tierPct:tot?[1,2,3,4].map(k=>Math.round(out.tiers[k]/tot*100)+'%').join(' / '):'-',triplePlusPerGame:((out.tiers[3]+out.tiers[4])/games).toFixed(2),gamesWithTriple:Math.round(out.gamesWithTriple/games*100)+'%',
+    chestOpenPerGame:((out.chestOpen||0)/games).toFixed(2),chestMidPerGame:((out.chestMid||0)/games).toFixed(2),chestCoinsPerGame:((out.chestCoins||0)/games).toFixed(1),firstMultiAvg:out.firstMultiN?(out.firstMulti/out.firstMultiN).toFixed(1):'-',gamesWithMulti:Math.round(out.firstMultiN/games*100)+'%',startFilled:(out.startFilled/games).toFixed(1),stolenPerGame:(out.stolen/games).toFixed(2),lose:out.lose,
+    itemUsePct:Object.fromEntries(Object.entries(out.itemUse).map(([k,v])=>[k,Math.round(v/games*100)+'%'])),itemFillAvg:Object.fromEntries(Object.entries(out.itemFill).map(([k,v])=>[k,out.itemUse[k]?(v/out.itemUse[k]).toFixed(0):'-'])),fitLines:out.fitLines};
+  return out;
+}
+// 봇의 아이템 사용 규칙(단순, 판당 각 1회): 맞춤 = 판 40칸 이상 차고 현재 블록으로 못 깰 때 · 빗자루 = 50칸 이상 차고 못 깰 때, 싫어함 없는 가장 찬 줄
+function botItems(out){
+  const filled=S.board.filter(Boolean).length;
+  if(!S.used.fit&&filled>=40&&maxClears(S.cur)===0){if(useItem('fit')){out.itemUse.fit++;out.itemFill.fit+=filled;out.fitLines[S.cur.n]=(out.fitLines[S.cur.n]||0)+1;}}
+  if(!(S.used.sweepR+S.used.sweepC+S.used.sweepB)&&filled>=50&&maxClears(S.cur)===0){
+    let best=null;['r','c','b'].forEach(t=>LINE_CELLS[t].forEach((g,li)=>{const f=g.filter(i=>S.board[i]);if(g.some(i=>S.board[i]&&S.board[i].food&&foodKind(S.board[i].food)==='dislike'))return;if(f.length>=6&&(!best||f.length>best.f))best={t,li,f:f.length};}));
+    if(best){const item={r:'sweepR',c:'sweepC',b:'sweepB'}[best.t];pick={type:best.t,item,line:best.li};if(doSweep()){out.itemUse.sweep++;out.itemFill.sweep+=filled;}else pick=null;}
+  }
+}
+// 이 블록으로 지금 판에서 낼 수 있는 최대 동시 클리어 수(모든 회전·자리)
+function maxClears(piece){let best=0,cells=piece.cells;for(let k=0;k<4;k++){for(let r=0;r<9;r++)for(let c=0;c<9;c++){if(!canPlace(cells,r,c))continue;const b=S.board.slice();cells.forEach(([rr,cc])=>b[(r+rr)*9+c+cc]={});const n=completedGroups(b).length;if(n>best)best=n;}cells=rotCells(cells);}return best;}
+
+window.__block={get:()=>S,get params(){return params;},animal:()=>animal,place,rotateCur,canPlace,completedGroups,FOODS,newGame,sim,botMove,useItem,doSweep,bestFitPiece,POLY,set:(st)=>{S=st;render();}};
+params={...DEFAULTS,...animal.preset};buildAnimalSeg();buildTuning();applyDev();newGame();
+</script>
+</body>
+</html>
