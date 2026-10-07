@@ -65,7 +65,7 @@
   .sheet { background:var(--panel); border-radius:14px; padding:20px 18px; width:100%; max-width:340px; }
   .letter { background:#f7f6f2; color:#1f1d1a; border-radius:10px; padding:16px 18px 20px; width:100%; max-width:340px; line-height:1.8; font-size:14.5px; box-shadow:0 10px 30px rgba(0,0,0,.4); }
   .letter .hdr { border-bottom:1px solid #d9d4c8; padding-bottom:10px; margin-bottom:12px; font-size:12.5px; color:#3a3733; } .letter .hdr .k { display:inline-block; width:62px; color:#8a857a; } .letter .hdr div:last-child { font-weight:600; color:#1f1d1a; }
-  .letter .sign { text-align:right; margin-top:18px; } .letter .gap { height:10px; } .letter .ps { color:#6b5f48; font-size:12px; margin-top:12px; border-top:1px dashed #cdbfa0; padding-top:8px; }
+  .letter .sign { margin-top:18px; } .letter .gap { height:10px; } .letter .ps { color:#6b5f48; font-size:12px; margin-top:12px; border-top:1px dashed #cdbfa0; padding-top:8px; } .letter .ps div + div { margin-top:6px; }
   .letter .tapc { text-align:center; color:#8a7d64; font-size:11px; margin-top:14px; }
   .bubble { position:fixed; left:16px; right:16px; bottom:calc(env(safe-area-inset-bottom) + 80px); background:#fff; color:#1b2a1e; border-radius:12px; padding:14px 16px; font-size:14px; line-height:1.5; z-index:25; display:none; box-shadow:0 8px 24px rgba(0,0,0,.35); }
   .blocker { position:fixed; inset:0; z-index:23; display:none; } .blocker.show { display:block; }
@@ -91,7 +91,7 @@
   .dome { position:relative; height:260px; background:radial-gradient(ellipse at 50% 100%, #35533c, #243a2a 70%); border-radius:120px 120px 12px 12px; margin:8px 0 12px; overflow:hidden; border:1px solid var(--line); }
   .dome.off { filter:grayscale(1) brightness(.5); }
   /* 탭 화면(탐험·리틀어스·도감) 공통: 헤더 없음, 맨 위 떠 있는 줄 = 왼쪽 코인·랭크 알약 / 오른쪽 📧·⚙︎ (44×44, 가장자리 12, 간격 12) */
-  #app.tabMode header { display:none; }
+  #app.tabMode header, #app.playMode header { display:none; }
   #app.tabMode .scr:not(.canvas) { padding-top:calc(env(safe-area-inset-top) + 64px); }
   .scr.canvas { z-index:1; } #s8 { padding:0; }
   #hud { position:absolute; inset:0; pointer-events:none; z-index:3; display:none; } #app.tabMode #hud { display:block; } #hud > * { pointer-events:auto; }
@@ -113,6 +113,9 @@
   #s3 .trail .ic { font-size:44px; } #s3 .trail .nm { font-size:15px; margin-top:4px; } #s3 .trail .ht { font-size:12px; }
   #s3 .walk { height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding-bottom:80px; } #s3 .walk .em { font-size:56px; }
   header h1 small { font-size:12px; font-weight:400; margin-left:6px; }
+  /* S4 만남: 내용을 아래 버튼 줄(바닥 20 + 높이 45) 위 공간의 세로 가운데로 */
+  #s4 .meet { min-height:100%; display:flex; flex-direction:column; justify-content:center; padding-top:0; padding-bottom:calc(env(safe-area-inset-bottom) + 80px); }
+  .floatEnd { position:absolute; top:calc(env(safe-area-inset-top) + 8px); right:12px; background:none; border:0; z-index:2; }
   .endBtn { font-size:13px !important; color:var(--muted); height:44px; padding:0 4px !important; margin-right:-4px; }
   /* S1 탐험 준비 상자(구 S2): 보너스 한 줄 · 간식 칩 44 · 파트너 자리 */
   #s1 .prep { background:var(--panel); border-radius:14px; padding:12px; margin-bottom:10px; }
@@ -127,7 +130,7 @@
   .modal .mb { overflow:auto; padding:14px 16px 18px; }
   .err { color:var(--bad); font-size:12px; min-height:16px; }
 </style>
-  <script type="module" crossorigin src="./assets/index-CMdaRu7Q.js"></script>
+  <script type="module" crossorigin src="./assets/index-CB5DYFJ4.js"></script>
 </head>
 <body>
 <div id="app">
