@@ -55,7 +55,7 @@
   nav button .ic { font-size:20px; } nav button.on { color:var(--accent); }
   /* 인트로 */
   #s0 { padding:0; display:none; flex-direction:column; } #s0.on { display:flex; }
-  #s0 .cut { flex:1; display:flex; align-items:flex-end; padding:24px 20px 40px; font-size:17px; line-height:1.6; }
+  #s0 .cut { flex:1; display:flex; align-items:flex-end; padding:24px 20px 40px; font-size:17px; line-height:1.6; word-break:keep-all; } /* 한국어는 어절 단위 줄바꿈 */
   #s0 .top { position:absolute; top:10px; right:12px; display:flex; gap:8px; align-items:center; }
   #s0 .dots { position:absolute; top:16px; left:16px; color:var(--muted); font-size:12px; }
   #s0 .skip { background:rgba(0,0,0,.35); border:0; border-radius:999px; padding:6px 12px; font-size:12px; color:#fff; }
@@ -115,6 +115,11 @@
   header h1 small { font-size:12px; font-weight:400; margin-left:6px; }
   /* S4 만남: 내용을 아래 버튼 줄(바닥 20 + 높이 45) 위 공간의 세로 가운데로 */
   #s4 .meet { min-height:100%; display:flex; flex-direction:column; justify-content:center; padding-top:0; padding-bottom:calc(env(safe-area-inset-bottom) + 80px); }
+  #s4 .meet.tut { padding-bottom:calc(env(safe-area-inset-bottom) + 200px); } /* 튜토리얼은 혼잣말 글줄만큼 더 비움 */
+  #s4 .narr { position:absolute; left:20px; right:20px; bottom:calc(env(safe-area-inset-bottom) + 100px); font-size:17px; line-height:1.6; word-break:keep-all; } /* 인트로 컷 글과 같은 크기·자리 */
+  #s4 .dots { position:absolute; top:16px; left:16px; color:var(--muted); font-size:12px; }
+  /* S6 결과: 내용 세로 가운데, 버튼은 바닥 고정(만남과 같은 자리) */
+  #s6 .res { min-height:100%; display:flex; flex-direction:column; justify-content:center; padding-bottom:calc(env(safe-area-inset-bottom) + 80px); }
   .floatEnd { position:absolute; top:calc(env(safe-area-inset-top) + 8px); right:12px; background:none; border:0; z-index:2; }
   .endBtn { font-size:13px !important; color:var(--muted); height:44px; padding:0 4px !important; margin-right:-4px; }
   /* S1 탐험 준비 상자(구 S2): 보너스 한 줄 · 간식 칩 44 · 파트너 자리 */
@@ -130,7 +135,7 @@
   .modal .mb { overflow:auto; padding:14px 16px 18px; }
   .err { color:var(--bad); font-size:12px; min-height:16px; }
 </style>
-  <script type="module" crossorigin src="./assets/index-CB5DYFJ4.js"></script>
+  <script type="module" crossorigin src="./assets/index-BtmeqWzb.js"></script>
 </head>
 <body>
 <div id="app">
