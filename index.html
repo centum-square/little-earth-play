@@ -89,10 +89,17 @@
   .meet { text-align:center; padding-top:30px; padding-bottom:100px; } .meet .em { font-size:72px; transition:filter .4s; } .meet .em.sil { filter:brightness(0) opacity(.5); } .meet h3 { font-size:20px; margin-top:8px; } .meet .tags { margin:14px 0; display:flex; flex-direction:column; gap:6px; font-size:14px; }
   .dome { position:relative; height:260px; background:radial-gradient(ellipse at 50% 100%, #35533c, #243a2a 70%); border-radius:120px 120px 12px 12px; margin:8px 0 12px; overflow:hidden; border:1px solid var(--line); }
   .dome.off { filter:grayscale(1) brightness(.5); }
-  .domeTop { display:flex; gap:6px; flex-wrap:wrap; } .domeTop .chip { background:rgba(36,58,42,.9); } .domeTop button.chip { border:1px solid var(--line); }
+  /* S8 리틀어스 맵: 헤더 숨김, 맵 위 떠 있는 버튼(44×44, 가장자리 12, 세로 간격 12) */
+  #app.mapMode header { display:none; }
+  .scr.canvas { z-index:1; } #s8 { padding:0; }
+  .hud .pill { position:absolute; left:12px; top:calc(env(safe-area-inset-top) + 12px); height:36px; display:flex; align-items:center; gap:4px; padding:0 14px; border-radius:18px; background:rgba(20,32,23,.85); font-size:13px; color:var(--muted); } .hud .pill b { color:var(--ink); } .hud .pill .sep { margin:0 4px; }
+  .hud .fabs { position:absolute; right:12px; top:calc(env(safe-area-inset-top) + 8px); display:flex; flex-direction:column; gap:12px; }
+  .fab { position:relative; width:44px; height:44px; border-radius:22px; border:1px solid var(--line); background:rgba(20,32,23,.85); color:var(--ink); font-size:20px; display:flex; align-items:center; justify-content:center; }
+  .fab .dot { position:absolute; top:6px; right:6px; width:8px; height:8px; border-radius:4px; background:var(--accent); }
+  .hud .home { position:absolute; right:12px; bottom:12px; }
   .err { color:var(--bad); font-size:12px; min-height:16px; }
 </style>
-  <script type="module" crossorigin src="./assets/index-Du6-22-0.js"></script>
+  <script type="module" crossorigin src="./assets/index-Cx-qyzSB.js"></script>
 </head>
 <body>
 <div id="app">
