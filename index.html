@@ -89,10 +89,10 @@
   .meet { text-align:center; padding-top:30px; padding-bottom:100px; } .meet .em { font-size:72px; transition:filter .4s; } .meet .em.sil { filter:brightness(0) opacity(.5); } .meet h3 { font-size:20px; margin-top:8px; } .meet .tags { margin:14px 0; display:flex; flex-direction:column; gap:6px; font-size:14px; }
   .dome { position:relative; height:260px; background:radial-gradient(ellipse at 50% 100%, #35533c, #243a2a 70%); border-radius:120px 120px 12px 12px; margin:8px 0 12px; overflow:hidden; border:1px solid var(--line); }
   .dome.off { filter:grayscale(1) brightness(.5); }
-  .door { display:flex; gap:8px; } .door .card { flex:1; }
+  .domeTop { display:flex; gap:6px; flex-wrap:wrap; } .domeTop .chip { background:rgba(36,58,42,.9); } .domeTop button.chip { border:1px solid var(--line); }
   .err { color:var(--bad); font-size:12px; min-height:16px; }
 </style>
-  <script type="module" crossorigin src="./assets/index-BNiGzlRP.js"></script>
+  <script type="module" crossorigin src="./assets/index-Du6-22-0.js"></script>
 </head>
 <body>
 <div id="app">
@@ -107,12 +107,12 @@
     <div class="scr canvas" id="s5"></div>
     <div class="scr" id="s6"></div>
     <div class="scr" id="s7"></div>
-    <div class="scr" id="s8"></div>
+    <div class="scr canvas" id="s8"></div>
     <div class="scr" id="s10"></div>
   </div>
   <nav id="nav">
-    <button data-tab="s1"><span class="ic">🧭</span>탐험</button>
     <button data-tab="s8"><span class="ic">🌍</span>리틀어스</button>
+    <button data-tab="s1"><span class="ic">🧭</span>탐험</button>
     <button data-tab="s7"><span class="ic">📖</span>도감</button>
   </nav>
 </div>
