@@ -108,6 +108,12 @@
   #s1 .hero .btn { margin:0; height:44px; padding:0; } #s1 .hero > .muted { font-size:12px; }
   #s1 .fam { margin-top:18px; }
   #s1 .tiles { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; } #s1 .tile { aspect-ratio:1; border-radius:12px; background:var(--panel); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; font-size:12px; color:var(--muted); text-align:center; line-height:1.2; padding:4px; } #s1 .tile .em { font-size:24px; filter:grayscale(1) opacity(.6); }
+  /* S3 갈림길: 카드 3열(높이 220), 2장이면 가운데 · 걷기는 가운데 */
+  #s3 .trails { display:flex; justify-content:center; gap:8px; margin-top:8px; } #s3 .trail { flex:0 0 calc((100% - 16px) / 3); min-height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; }
+  #s3 .trail .ic { font-size:44px; } #s3 .trail .nm { font-size:15px; margin-top:4px; } #s3 .trail .ht { font-size:12px; }
+  #s3 .walk { height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding-bottom:80px; } #s3 .walk .em { font-size:56px; }
+  header h1 small { font-size:12px; font-weight:400; margin-left:6px; }
+  .endBtn { font-size:13px !important; color:var(--muted); height:44px; padding:0 4px !important; margin-right:-4px; }
   /* S2 탐험 준비: 간식 칩 44, 떠나기 버튼은 바닥 고정(.ctl) */
   #s2 .chips { gap:8px; margin:8px 0 0; } #s2 .chip { height:44px; padding:0 14px; display:inline-flex; align-items:center; font-size:13px; color:var(--ink); } #s2 .chip.buy { border:1px dashed var(--line); background:none; color:var(--accent); } /* 잠긴 ??? 카드도 열린 카드와 같은 높이 */
   #modalOv { z-index:19; }
@@ -117,7 +123,7 @@
   .modal .mb { overflow:auto; padding:14px 16px 18px; }
   .err { color:var(--bad); font-size:12px; min-height:16px; }
 </style>
-  <script type="module" crossorigin src="./assets/index-CTZgis24.js"></script>
+  <script type="module" crossorigin src="./assets/index-D6BCSBzQ.js"></script>
 </head>
 <body>
 <div id="app">
