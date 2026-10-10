@@ -45,8 +45,8 @@
   .chips { display:flex; gap:6px; flex-wrap:wrap; margin:6px 0; }
   .chip { background:var(--panel2); border-radius:999px; padding:4px 10px; font-size:12px; border:1px solid transparent; }
   .chip.on { border-color:var(--accent); color:var(--accent); }
-  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
-  .dexcard { background:var(--panel); border-radius:10px; padding:10px 6px; text-align:center; font-size:11px; }
+  .grid4 { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+  .dexcard { background:var(--panel); border-radius:10px; padding:10px 2px 8px; text-align:center; font-size:11px; cursor:pointer; min-width:0; } .dexcard .nm { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding:0 2px; } .dexcard.ghost { opacity:.35; }
   .dexcard .em { font-size:26px; } .dexcard .em.sil { filter:brightness(0) opacity(.45); }
   .dexcard .st { color:var(--accent); font-size:10px; }
   .dexcard.flash { animation: flash .5s 3; } @keyframes flash { 50% { box-shadow:0 0 0 3px var(--accent); } }
@@ -98,22 +98,14 @@
   #app.tabMode .scr:not(.canvas) { padding-top:calc(env(safe-area-inset-top) + 64px); }
   .scr.canvas { z-index:1; } #s8 { padding:0; }
   #hud { position:absolute; inset:0; pointer-events:none; z-index:3; display:none; } #app.tabMode #hud { display:block; } #hud > * { pointer-events:auto; }
-  #hud .pill { position:absolute; left:12px; top:calc(env(safe-area-inset-top) + 12px); height:36px; display:flex; align-items:center; gap:4px; padding:0 14px; border-radius:18px; background:rgba(20,32,23,.85); font-size:13px; color:var(--muted); } #hud .pill b { color:var(--ink); } #hud .pill .sep { margin:0 4px; } #hud .lvbtn { font:inherit; color:inherit; background:none; border:0; padding:6px 0; margin:-6px 0; cursor:pointer; } #hud .lvbtn b { color:var(--ink); }
+  #hud .pill { position:absolute; left:12px; top:calc(env(safe-area-inset-top) + 12px); height:36px; display:flex; align-items:center; gap:3px; padding:0 11px; border-radius:18px; background:rgba(20,32,23,.85); font-size:13px; color:var(--muted); } #hud .pill b { color:var(--ink); } #hud .pill .sep { margin:0 2px; } #hud .lvbtn { font:inherit; color:inherit; background:none; border:0; padding:6px 0; margin:-6px 0; cursor:pointer; } #hud .lvbtn b { color:var(--ink); }
   .lvx { height:18px; background:rgba(0,0,0,.3); border-radius:9px; position:relative; overflow:hidden; margin:6px 0 14px; } .lvx i { position:absolute; left:0; top:0; bottom:0; background:var(--acc,#e8632b); } .lvx span { position:relative; display:block; text-align:center; font-size:11px; line-height:18px; }
   .lvl { font-size:12px; color:var(--muted); margin:14px 0 6px; } .lvr { display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-bottom:1px solid rgba(255,255,255,.07); font-size:14px; } .lvr span:last-child { color:#f2b134; white-space:nowrap; } .lvr.lock { opacity:.55; } .lvr.lock span:last-child { color:var(--muted); }
   .lvnext { border:1px solid #e8632b; border-radius:10px; padding:10px 12px; display:flex; justify-content:space-between; gap:10px; font-size:14px; } .lvnext b { color:#e8632b; } .lvnext span:last-child { color:var(--muted); white-space:nowrap; } .lvall { display:block; margin:12px auto 0; background:none; border:0; color:var(--muted); font:inherit; font-size:13px; cursor:pointer; }
-  #hud .fabs { position:absolute; right:12px; top:calc(env(safe-area-inset-top) + 8px); display:flex; gap:12px; }
-  .fab { position:relative; width:44px; height:44px; border-radius:22px; border:1px solid var(--line); background:rgba(20,32,23,.85); color:var(--ink); font-size:20px; display:flex; align-items:center; justify-content:center; }
+  #hud .fabs { position:absolute; right:12px; top:calc(env(safe-area-inset-top) + 10px); display:flex; gap:4px; }
+  .fab { position:relative; width:40px; height:40px; border-radius:20px; border:1px solid var(--line); background:rgba(20,32,23,.85); color:var(--ink); font-size:18px; display:flex; align-items:center; justify-content:center; }
   .fab .dot { position:absolute; top:6px; right:6px; width:8px; height:8px; border-radius:4px; background:var(--accent); }
   /* 모달(설정·메일함): 제목 + 닫기 버튼, 본문만 스크롤. 시트(확인창)는 모달 위에 뜸 */
-  /* S1 탐험 탭 A안: 큰 카드(동물 12칸) + 다른 기후 4열 타일 */
-  #s1 .hero { background:#2c4a33; border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:10px; }
-  #s1 .hero .hrow { display:flex; justify-content:space-between; align-items:center; font-size:16px; } #s1 .hero .hrow .muted { font-size:12px; }
-  #s1 .slots { display:grid; grid-template-columns:repeat(6, 1fr); gap:6px; } #s1 .slot { height:48px; border-radius:10px; background:rgba(0,0,0,.18); display:flex; align-items:center; justify-content:center; font-size:26px; }
-  #s1 .slot.seen { opacity:.45; } #s1 .slot.unseen { filter:brightness(0) opacity(.45); }
-  #s1 .hero .btn { margin:0; height:44px; padding:0; } #s1 .hero > .muted { font-size:12px; }
-  #s1 .fam { margin-top:18px; }
-  #s1 .tiles { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; } #s1 .tile { aspect-ratio:1; border-radius:12px; background:var(--panel); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; font-size:12px; color:var(--muted); text-align:center; line-height:1.2; padding:4px; } #s1 .tile .em { font-size:24px; filter:grayscale(1) opacity(.6); }
   /* S3 갈림길: 헤더 없음, [안내 문장 · 카드 3열(높이 220, 2장이면 가운데) · 탐험 끝내기] 세로 가운데 */
   #s3 .fork { min-height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:16px; padding-bottom:24px; }
   #s3 .lead { font-size:15px; text-align:center; } #s3 .fork .endBtn { margin:0; }
@@ -132,18 +124,32 @@
   #s6 .res { min-height:100%; display:flex; flex-direction:column; justify-content:center; padding-bottom:calc(env(safe-area-inset-bottom) + 80px); }
   /* S4 만남(2026-10-08): 게임 정보 묶음(희귀도·만남 상태 / 필요한 먹이·조심할 경계) → 도감 정보(책 말투 단락, 수첩 종이) → 탐험 끝내기 */
   #s4 .game .muted { font-size:13px; } #s4 .need { font-size:13px; color:var(--muted); margin-top:4px; } #s4 .need b { color:var(--ink); font-weight:600; }
+  #sheetBox .dexd .hearts { color:var(--accent); font-size:13px; margin-top:2px; } #sheetBox .guide dl { display:grid; grid-template-columns:auto 1fr; gap:4px 10px; margin-top:10px; padding-top:10px; border-top:1px solid rgba(43,42,39,.15); font-size:12px; } #sheetBox .guide dt { color:#8a6d2b; } #sheetBox .guide dd { color:#2b2a27; }
   #sheetBox .dexd .guide { margin:12px 0 6px; } #sheetBox .dexd .guide p { font-size:13px; color:#2b2a27; }
   #s4 .guide, #sheetBox .guide { text-align:left; background:#f3ecd8; color:#2b2a27; border-radius:12px; padding:14px 16px 16px; margin:16px 0 8px; word-break:keep-all; }
   #s4 .guide .gh, #sheetBox .guide .gh { font-size:11px; color:#8a6d2b; margin-bottom:6px; letter-spacing:.02em; }
   #s4 .guide p, #sheetBox .guide p { font-size:14px; line-height:1.75; } /* 글꼴은 게임 공통(아트 단계에서 검토) */
   .floatEnd { position:absolute; top:calc(env(safe-area-inset-top) + 8px); right:12px; background:none; border:0; z-index:2; }
   .endBtn { background:none; border:0; font-size:13px !important; color:var(--muted); height:44px; padding:0 4px !important; margin-right:-4px; }
-  /* S1 탐험 준비 상자(구 S2): 보너스 한 줄 · 간식 칩 44 · 파트너 자리 */
-  #s1 .prep { background:var(--panel); border-radius:14px; padding:12px; margin-bottom:10px; }
-  #s1 .prow { display:flex; justify-content:space-between; align-items:center; font-size:14px; } #s1 .prow .muted { font-size:12px; }
-  #s1 .plabel { font-size:12px; color:var(--muted); margin-top:10px; }
-  #s1 .chips { gap:8px; margin:6px 0 0; } #s1 .chip { height:44px; padding:0 14px; display:inline-flex; align-items:center; font-size:13px; color:var(--ink); }
-  #s1 .chip.buy { border:1px dashed var(--line); background:none; color:var(--accent); } #s1 .chip.locked { color:var(--muted); opacity:.6; }
+  /* S1 탐험 탭(2026-10-10): 지역 카드 좌우 넘기기(scroll-snap), 가운데 카드만 크게 · 시작 버튼 안에 오늘의 보너스 · 아래 파트너 */
+  #s1 { padding-left:0; padding-right:0; display:none; flex-direction:column; } #s1.on { display:flex; }
+  .rtrack { flex:1; min-height:0; display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; padding:4px 11% 8px; scrollbar-width:none; align-items:center; } .rtrack::-webkit-scrollbar { display:none; }
+  .rcard { flex:0 0 78%; scroll-snap-align:center; background:var(--panel); border-radius:18px; padding:12px; display:flex; flex-direction:column; gap:10px; transform:scale(.9); opacity:.55; transition:transform .25s, opacity .25s; max-height:100%; }
+  .rcard.on { transform:none; opacity:1; }
+  .rimg { position:relative; aspect-ratio:4/3; border-radius:12px; background:radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--rc) 80%, #fff 20%), var(--rc)); display:flex; align-items:center; justify-content:center; font-size:72px; }
+  .rcard.locked .rimg span { filter:grayscale(1) opacity(.55); } .rimg .lock { position:absolute; right:10px; top:8px; font-size:20px; font-style:normal; }
+  .rbody h3 { font-size:20px; } .rbody p { font-size:13px; color:var(--muted); line-height:1.55; margin-top:4px; word-break:keep-all; }
+  .rcard .btn { margin:0; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:52px; padding:6px; } .rcard .btn small { font-size:11px; font-weight:500; opacity:.75; margin-top:1px; }
+  .btn.sec { background:var(--panel2); color:var(--ink); }
+  .partner { height:44px; border-radius:10px; border:1px solid var(--line); background:none; display:flex; align-items:center; justify-content:space-between; padding:0 14px; font-size:13px; } .partner span { color:var(--muted); } .partner.off { opacity:.7; }
+  .rdots { display:flex; justify-content:center; gap:6px; padding:4px 0 10px; } .rdots i { width:6px; height:6px; border-radius:3px; background:var(--line); cursor:pointer; } .rdots i.on { background:var(--accent); width:16px; }
+  /* 탐험 준비 시트 · 도감 힌트 */
+  .sh { font-size:17px; margin-bottom:10px; } .prow { display:flex; justify-content:space-between; align-items:center; font-size:14px; } .prow .muted { font-size:12px; }
+  .plabel { font-size:12px; color:var(--muted); margin-top:14px; } .muted.small { font-size:12px; margin-top:6px; }
+  .chips.big { gap:8px; } .chips.big .chip { height:44px; padding:0 14px; display:inline-flex; align-items:center; font-size:13px; color:var(--ink); }
+  .link { background:none; border:0; color:var(--accent); text-decoration:underline; font-size:12px; cursor:pointer; }
+  .res .em.sil { filter:brightness(0) opacity(.5); } .res.hint table { margin-bottom:4px; }
+  .card > b { margin-left:auto; } .chip.buyc { height:36px; padding:0 12px; white-space:nowrap; color:var(--ink); }
   #modalOv { z-index:19; }
   .card.mail .name { display:flex; align-items:center; gap:6px; } .card.mail.read .name { font-weight:400; color:var(--muted); } .card.mail .dot { width:7px; height:7px; border-radius:50%; background:var(--accent); flex:0 0 auto; }
   .modal { background:var(--panel); border-radius:14px; width:100%; max-width:360px; max-height:84dvh; display:flex; flex-direction:column; overflow:hidden; }
@@ -152,7 +158,7 @@
   .modal .mb { overflow:auto; padding:14px 16px 18px; }
   .err { color:var(--bad); font-size:12px; min-height:16px; }
 </style>
-  <script type="module" crossorigin src="./assets/index-q0o8ZB5P.js"></script>
+  <script type="module" crossorigin src="./assets/index-BNQIaJdC.js"></script>
 </head>
 <body>
 <div id="app">
