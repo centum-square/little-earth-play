@@ -71,7 +71,7 @@
   .letter .hdr { border-bottom:1px solid #d9d4c8; padding-bottom:10px; margin-bottom:12px; font-size:12.5px; color:#3a3733; } .letter .hdr .k { display:inline-block; width:62px; color:#8a857a; } .letter .hdr div:last-child { font-weight:600; color:#1f1d1a; }
   .letter .sign { margin-top:18px; } .letter .gap { height:10px; } .letter .ps { color:#6b5f48; font-size:12px; margin-top:12px; border-top:1px dashed #cdbfa0; padding-top:8px; } .letter .ps div + div { margin-top:6px; }
   .letter .tapc { text-align:center; color:#8a7d64; font-size:11px; margin-top:14px; }
-  .bubble { position:fixed; left:16px; right:16px; bottom:calc(env(safe-area-inset-bottom) + 80px); background:#fff; color:#1b2a1e; border-radius:12px; padding:14px 16px; font-size:14px; line-height:1.5; z-index:25; display:none; box-shadow:0 8px 24px rgba(0,0,0,.35); }
+  .bubble { position:fixed; left:16px; right:16px; bottom:calc(env(safe-area-inset-bottom) + 80px); background:#fff; color:#1b2a1e; border-radius:12px; padding:14px 16px; font-size:14px; line-height:1.5; word-break:keep-all; z-index:25; display:none; box-shadow:0 8px 24px rgba(0,0,0,.35); }
   .blocker { position:fixed; inset:0; z-index:23; display:none; } .blocker.show { display:block; }
   .letter .hdr .addr { color:#8a857a; font-size:11px; margin-left:4px; }
   .bubble.show { display:block; } .nextBtn { display:block; margin:10px 0 0 auto; padding:8px 18px; border:0; border-radius:8px; background:#2b2a27; color:#fff; font-size:13px; font-weight:600; } .nextBtn.wide { margin:14px 0 0; width:100%; padding:11px; }
@@ -105,7 +105,7 @@
   @keyframes flipOut { to { transform:perspective(600px) rotateY(90deg); } } @keyframes flipIn { from { transform:perspective(600px) rotateY(-90deg); } to { transform:perspective(600px) rotateY(0); } }
   @media (prefers-reduced-motion: reduce) { #s3 .trail.flip-out, #s3 .trail.flip-in { animation:none; } }
   .seg { display:flex; gap:6px; margin:4px 0 8px; } .seg button { flex:1; padding:7px 4px; border-radius:8px; border:1px solid var(--line); background:var(--panel2); color:var(--ink); font-size:13px; display:flex; flex-direction:column; align-items:center; gap:1px; } .seg button small { font-size:11px; color:var(--muted); } .seg button.on { border-color:var(--accent); color:var(--accent); } /* 상점 간식 등급 탭 */
-  .nblk { display:flex; flex-wrap:wrap; gap:12px; margin:10px 0 6px; } .nblk span { display:flex; flex-direction:column; align-items:center; gap:4px; font-size:12px; } .mini { display:inline-grid; gap:2px; } .mini b { width:9px; height:9px; border-radius:2px; background:transparent; outline:1px dashed var(--line); } .mini b.on { background:var(--accent); outline:none; } /* 새 블록 */
+  .nblk { display:grid; grid-template-columns:repeat(auto-fill, minmax(72px, 1fr)); gap:12px 8px; margin:12px 0 8px; } .nblk span { display:flex; flex-direction:column; align-items:center; gap:6px; font-size:12px; text-align:center; word-break:keep-all; } .nblk .mbox { height:46px; display:flex; align-items:center; justify-content:center; } .mini { display:inline-grid; gap:2px; } .mini b { width:10px; height:10px; border-radius:2px; background:transparent; } .mini b.on { background:var(--accent); } /* 새 블록: 같은 너비 칸에 모양(가운데)+이름, 빈자리는 안 그림(2026-10-11) */
   #s6 .rank .up { color:var(--accent); font-size:12px; margin-left:6px; }
   .picks { display:flex; flex-direction:column; gap:6px; max-height:52dvh; overflow:auto; } .pick { display:flex; align-items:center; gap:10px; text-align:left; padding:8px 10px; border-radius:10px; border:1px solid var(--line); background:var(--panel2); cursor:pointer; } .pick.on { border-color:var(--accent); } .pick .pe { font-size:26px; } .pick .pb { display:flex; flex-direction:column; font-size:13px; } .pick .hearts { color:var(--accent); font-size:11px; } .pick .muted { font-size:12px; }
   .btn.chase { width:auto; display:inline-flex; flex-direction:column; align-items:center; padding:8px 22px; margin:0 auto 8px; } .btn.chase small { font-size:11px; opacity:.75; }
@@ -199,7 +199,7 @@
   .modal .mb { overflow:auto; padding:14px 16px 18px; }
   .err { color:var(--bad); font-size:12px; min-height:16px; }
 </style>
-  <script type="module" crossorigin src="./assets/index-Bi_en8bC.js"></script>
+  <script type="module" crossorigin src="./assets/index-WKHZ7Kmj.js"></script>
 </head>
 <body>
 <div id="app">
