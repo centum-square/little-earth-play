@@ -7,7 +7,7 @@
 <!-- 글꼴(2026-10-17 1-5 의견): 기기 기본 한글 글꼴(아이폰 Apple SD 산돌고딕 Neo · 안드로이드 Noto Sans CJK KR · 윈도 맑은 고딕). 내려받는 글꼴 파일 없음 -->
 <style>
   /* 디자인 시스템 B "페인팅 톤"(2026-10-17, 아트 준비 1-4 결정. 전에는 "또렷한 픽셀" 10-14): 종이 바탕 · 갈색 선 · 살짝 둥근 모서리(요소 6 · 카드 8 · 시트 12, 알약·원 모양 없음) · 부드러운 아래 그림자 · 기기 기본 한글 글꼴(10-17 의견으로 Jua·고운돋움 대신). 변수 이름(--px11·--px14)은 코드 호환을 위해 그대로 */
-  :root { color-scheme: light; --bg:#f7ecd4; --panel:#fffaf0; --panel2:#f3dfb4; --ink:#3b2a1e; --muted:#8a6a4a; --accent:#e8763a; --good:#4f9a4a; --bad:#d9483b; --line:#7a5233; --coin:#e8a935; --grass:#5aa64a; --sh:0 3px 0 rgba(91,58,34,.4); --sh-p:0 1px 0 rgba(91,58,34,.4); --r-el:6px; --r-card:8px; --r-sheet:12px; --px11:-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Noto Sans CJK KR","Malgun Gothic",system-ui,sans-serif; --px14:-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Noto Sans CJK KR","Malgun Gothic",system-ui,sans-serif;
+  :root { color-scheme: light; --slot-tint:transparent; --bg:#f7ecd4; --panel:#fffaf0; --panel2:#f3dfb4; --ink:#3b2a1e; --muted:#8a6a4a; --accent:#e8763a; --good:#4f9a4a; --bad:#d9483b; --line:#7a5233; --coin:#e8a935; --grass:#5aa64a; --sh:0 3px 0 rgba(91,58,34,.4); --sh-p:0 1px 0 rgba(91,58,34,.4); --r-el:6px; --r-card:8px; --r-sheet:12px; --px11:-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Noto Sans CJK KR","Malgun Gothic",system-ui,sans-serif; --px14:-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Noto Sans CJK KR","Malgun Gothic",system-ui,sans-serif;
     --tex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .15 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E"); }
   * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
   html,body { height:100%; background:var(--bg); color:var(--ink); font-family:var(--px14); overflow:hidden; }
@@ -106,7 +106,7 @@
   #s0 .cut { padding-bottom:110px; }
   #s0 .cut.mid { align-items:center; justify-content:center; text-align:center; padding-bottom:0; } #s0 .cut.mid .emoji { top:28%; } .bubble small { display:block; color:#777; font-size:11px; margin-top:6px; } .bubble .who { display:block; font-size:11px; color:#8a6d2b; margin-bottom:4px; } .bubble.grandpa { background:#f3ecd8; }
   #s0 .cut .emoji { position:absolute; top:40%; left:50%; transform:translate(-50%,-50%); font-size:72px; opacity:.9; }
-  #s0 .letterIn { position:absolute; left:20px; right:20px; bottom:120px; background:#f7f6f2; color:#1f1d1a; border-radius:10px; padding:16px; font-size:14px; } #s0 .letterIn .lbl { color:#8a857a; font-size:12px; } #s0 .letterIn .row { display:flex; gap:8px; align-items:baseline; font-size:13px; margin-bottom:4px; } #s0 .letterIn .row .k { color:#8a857a; width:62px; flex-shrink:0; } #s0 .letterIn input { width:100%; margin-top:6px; padding:10px; font-size:16px; border:0; border-bottom:2px solid #3a3733; background:transparent; color:#1f1d1a; outline:none; } #s0 .letterIn .avatars button { background:#e6e3dc; } #s0 .letterIn .btn { background:#2b2a27; color:#fff; }
+  #s0 .letterIn { position:absolute; left:20px; right:20px; bottom:120px; background:#f7f6f2; color:#1f1d1a; border-radius:10px; padding:16px; font-size:14px; } #s0 .letterIn .lbl { color:#8a857a; font-size:12px; } #s0 .letterIn .row { display:flex; gap:8px; align-items:baseline; font-size:13px; margin-bottom:4px; } #s0 .letterIn .row .k { color:#8a857a; width:62px; flex-shrink:0; } #s0 .letterIn input { width:100%; margin-top:6px; padding:10px; font-size:16px; border:0; border-bottom:2px solid #3a3733; background:transparent; color:#1f1d1a; outline:none; } #s0 .letterIn .avatars button { background:#e6e3dc; } /* [메일 열기]도 다른 주 버튼처럼 주황(2026-10-22 B-D, 전: 검정) */
   .toast { position:fixed; left:50%; transform:translateX(-50%); bottom:calc(env(safe-area-inset-bottom) + 80px); background:rgba(0,0,0,.75); color:#fff; border-radius:999px; padding:8px 14px; font-size:13px; z-index:24; display:none; max-width:calc(100vw - 24px); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } /* 한 줄(2026-10-16 화면 검토 3-02) */
   .toast.show { display:block; }
   .res { text-align:center; } .res .em { font-size:40px; } .res h2 { font-size:18px; margin:8px 0 2px; } .res p { color:var(--muted); font-size:12px; }
@@ -163,7 +163,7 @@
   #s3 .fork { min-height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:16px; padding-bottom:24px; }
   #s3 .lead { font-size:15px; text-align:center; } #s3 .fork .endBtn { margin:0; }
   #s3 .trails { display:flex; justify-content:center; gap:8px; width:100%; } #s3 .trail { flex:0 0 calc((100% - 16px) / 3); min-height:220px; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding-top:40px; gap:6px; } /* 위에서부터 맞춰 카드끼리 아이콘·이름 줄이 같은 높이 */
-  #s3 .trail .ic { font-size:44px; } #s3 .trail .nm { font-size:15px; margin-top:4px; } #s3 .trail .ht { font-size:12px; word-break:keep-all; }
+  #s3 .trail .ic { font-size:44px; } #s3 .trail .nm { font-size:15px; margin-top:4px; word-break:keep-all; text-align:center; } /* "씨앗 섞인 배설물"이 "배설/물"로 끊기지 않게(2026-10-22) */ #s3 .trail .ht { font-size:12px; word-break:keep-all; }
   #s3 .walk { height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding-bottom:80px; } #s3 .walk .em { font-size:56px; }
   header h1 small { font-size:12px; font-weight:400; margin-left:6px; }
   /* S4 만남: 내용을 아래 버튼 줄(바닥 20 + 높이 45) 위 공간의 세로 가운데로 */
@@ -315,6 +315,11 @@
 
   /* ===== B 페인팅 톤 덮어쓰기(2026-10-17). 위 픽셀 덧입힘(10-14) 규칙보다 뒤에 둬서 선 색·모서리·그림자·글꼴을 바꾼다. 레이아웃은 그대로 ===== */
   html, body, .scr, .sheet, .modal, nav { background-color:var(--bg); background-image:var(--tex); }
+  /* 시간대 배경 톤(아트 준비 2-4, 2026-10-22): 화면 바탕에만 은은하게 덧칠. 카드·시트·모달은 그대로. 값 = content/slots.ts(show()가 --slot-tint를 바꿈) */
+  html, body, .scr:not(.canvas), nav { background-image:linear-gradient(var(--slot-tint),var(--slot-tint)), var(--tex); }
+  /* 그림 자리(아트 전 마무리 G): 아이콘 그림은 그 자리 글자 크기를 따라감 · 컷 그림은 칸을 채움 */
+  img.uiart { display:inline-block; vertical-align:-0.2em; object-fit:contain; -webkit-user-drag:none; user-select:none; } #s0 .pic .cutimg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; } .who img.uiart { margin-right:4px; vertical-align:-0.45em; border-radius:50%; }
+  .slotTag { display:inline-flex; align-items:center; gap:4px; margin:0; padding:4px 12px; background:var(--panel); border:2px solid var(--line); border-radius:var(--r-el); font-family:var(--px11); font-size:12px; color:var(--muted); } .slotTag b { color:var(--ink); }
   h1, h2, h3, h4, .sh, .nm, .name, .title, .rbody h3, .meet h3, .res h2, .fam, .dxh h2 { font-weight:700; }
   .card, .trail, .rcard, .dexcard, .item, .snk, .pick, #s4 .mrow, .partner, .pot, .btn, .chip, .seg button, .avatars button, .avs3 .av b, input.nick, .sheet, .modal, .letter, #s0 .letterIn, .bubble, #lvTip, .lvnext, .xp, .lvx, #s6 .xpbar, #s4 .guide, #sheetBox .guide, #sheetBox .guide .facts li, .rimg, .donate, .fab, #hud .pill, .dxb .cell, .dxb .row1, .dxh .pic, #s0 .txt, .ib, .nextBtn, .eff { border-color:var(--line); }
   .card, .trail, .rcard, .dexcard, .item, .snk, .pick, #s4 .mrow, .partner, .pot, input.nick, .eff, #s4 .guide, #sheetBox .guide, #sheetBox .guide .facts li, .dxb .cell, .dxb .row1, #s0 .txt, .lvnext, .letter, #s0 .letterIn, .rimg, #s0 .pic, .dxh .pic { border-radius:var(--r-card); }
@@ -328,6 +333,9 @@
   .toast { border-radius:var(--r-el); background:rgba(59,42,30,.92); color:#fffaf0; font-family:var(--px14); }
   #hud .pill { border-radius:var(--r-el); font-family:var(--px11); font-size:12px; padding:0 12px; }
   .fab { border-radius:var(--r-el); border-color:#6b4528; background-color:#c98d55; background-image:var(--tex), linear-gradient(#d9a066,#b77a45); } .fab .dot { border-radius:50%; border-color:#fffaf0; }
+  /* 폰 폭(400 이하)에서 시간대가 두 글자(새벽·저녁)면 HUD 알약이 버튼 밑으로 들어가 "Lv 20"이 잘리던 것(2026-10-22 B 점검): 버튼을 조금 작게, 알약 안쪽 여백을 줄임 */
+  .toast.up { bottom:calc(env(safe-area-inset-bottom) + 150px); } /* 탭 화면: 지역 카드 점·후원 버튼과 겹치지 않게 */
+  @media (max-width:400px) { #hud .fabs { gap:4px; } #hud .fabs .fab { width:36px; height:36px; } #hud .pill { padding:0 8px; height:36px; } }
   nav { margin:0 10px calc(env(safe-area-inset-bottom) + 10px); padding-bottom:0; border:2px solid var(--line); border-radius:var(--r-sheet); box-shadow:var(--sh); overflow:hidden; }
   nav button { font-family:var(--px11); font-size:12px; } nav button.on { background:var(--panel2); color:var(--ink); }
   .ico.em { display:inline-flex; align-items:center; justify-content:center; line-height:1; font-style:normal; vertical-align:middle; } nav .ico.em { font-size:22px; height:28px; }
@@ -369,7 +377,7 @@
   .donorMsg.on { opacity:1; transform:translate(-50%, 0); }
   .donorMsg p { margin:0; font-size:14px; line-height:1.55; } .donorMsg small { display:block; margin-top:4px; font-size:12px; color:var(--muted); text-align:right; }
 </style>
-  <script type="module" crossorigin src="./assets/index-C_Dtr6R_.js"></script>
+  <script type="module" crossorigin src="./assets/index-hyRrWNs8.js"></script>
 </head>
 <body>
 <div id="app">
