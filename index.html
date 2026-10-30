@@ -399,6 +399,13 @@
   #hubOv .room.locked { background:#231a13; background-image:none; cursor:pointer; } #hubOv .room.locked .wall { background:#1a130d; border-bottom-color:#120d09; }
   #hubOv .room.locked .lock { position:absolute; left:50%; top:58%; transform:translate(-50%,-50%); font-size:20px; opacity:.6; }
   #hubOv .room.plain { cursor:default; } #hubOv .room.tap:active { filter:brightness(1.08); }
+  #hubOv .npc { font-size:30px; animation:npcBob 2.4s ease-in-out infinite; } @keyframes npcBob { 50% { transform:translate(-50%,-56%); } } /* 할아버지 NPC(D2 3판) */
+  .model { display:flex; align-items:flex-end; justify-content:center; gap:6px; height:150px; padding:10px 8px 0; border-bottom:4px solid #6b4a32; background:linear-gradient(#f3ead6, #e7dcc2); border-radius:8px 8px 0 0; } /* 연구실 전망대 모형: 지역마다 기둥 */
+  .model .pil { position:relative; flex:1; max-width:30px; height:100%; display:flex; align-items:flex-end; }
+  .model .pil i { display:block; width:100%; background:#b9875a; border:2px solid #5a3a22; border-bottom:0; border-radius:3px 3px 0 0; }
+  .model .pil.cover i { background:repeating-linear-gradient(135deg, #d8cfc0 0 5px, #cbbfad 5px 10px); border-color:#a89a86; height:46% !important; }
+  .model { margin-bottom:28px; } .model .pil span { position:absolute; left:50%; bottom:-26px; transform:translateX(-50%); font-size:15px; } .model .pil.cover span { color:#8a7d6b; font-weight:700; font-size:13px; }
+  .labCap { text-align:center; font-size:13px; margin:10px 0 0; } .labSay { margin-top:12px; padding:10px 12px; border-radius:8px; background:#eef5e4; font-size:14px; line-height:1.55; } .labSay b { display:block; font-size:12px; margin-bottom:2px; }
   /* 후원 메시지(2026-10-17): 후원 받기를 누르면 잠깐 뜨고 코인은 HUD로 날아감 */
   .donorMsg { position:absolute; left:50%; bottom:16px; transform:translate(-50%, 8px); z-index:5; width:min(320px, calc(100% - 32px)); padding:12px 14px; background:var(--panel); color:var(--ink); border:2px solid var(--line); border-radius:var(--r-card); box-shadow:var(--sh); opacity:0; transition:opacity .25s, transform .25s; pointer-events:auto; word-break:keep-all; }
   .donorMsg.on { opacity:1; transform:translate(-50%, 0); }
@@ -409,7 +416,7 @@
   #s6 .lvnew { display:block; margin:8px auto 0; padding:6px 14px; font-size:13px; width:auto; }
   .lvnext.fresh { background:#fff4d6; } .lvnext.fresh span { color:var(--ink) !important; white-space:normal !important; font-weight:600; }
 </style>
-  <script type="module" crossorigin src="./assets/index-DMzlVIbt.js"></script>
+  <script type="module" crossorigin src="./assets/index-DfiRn52y.js"></script>
 </head>
 <body>
 <div id="app">
