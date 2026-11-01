@@ -51,6 +51,7 @@
   nav button .dot { position:absolute; top:5px; left:calc(50% + 10px); width:9px; height:9px; border-radius:50%; background:#e8402a; border:1.5px solid var(--panel); }
   .goal { cursor:pointer; } .goal.done { opacity:.6; } .goal.done .gi { font-size:16px; color:var(--good); } .gparts { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:6px; padding:6px 0 10px 38px; border-bottom:1px solid rgba(27,27,27,.1); } .gp { display:flex; flex-direction:column; align-items:center; gap:1px; opacity:.45; min-width:0; } .gp.on { opacity:1; } .gp i { font-style:normal; font-size:20px; line-height:1; } .gp small { font-size:10px; color:var(--ink); max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:center; } .gp small b { display:block; font-weight:400; color:#c0392b; font-size:9px; } /* 목표 구성(D4 2차) */ .goal { display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid rgba(27,27,27,.1); } .goal .gi { font-size:22px; width:28px; text-align:center; } .goal .gt { flex:1; min-width:0; } .goal .gt b { display:block; font-size:13.5px; } .goal .gt small { font-size:11px; color:var(--muted); }
   .goal .gbar { height:8px; border:1.5px solid var(--ink); background:var(--panel); margin:4px 0 1px; position:relative; } .goal .gbar i { position:absolute; inset:0 auto 0 0; background:var(--accent); } .goal .gc { font-size:12px; color:var(--muted); white-space:nowrap; } .goal .gget { flex:0 0 auto; width:auto; min-width:0; margin:0; padding:6px 10px; font-size:13px; white-space:nowrap; }
+  #s6 .rlinks { display:flex; flex-direction:column; align-items:center; gap:8px; margin-top:12px; } #s6 .rlinks .rgoal { margin-top:0; min-width:220px; } /* 새 효과 · 탐험 목표 = 같은 모양(11-01) */
   #s6 .rgoal { display:inline-block; font:inherit; font-size:13px; color:var(--ink); margin-top:12px; font-weight:600; padding:6px 12px; border:1px solid var(--line, #ccc); border-radius:6px; background:var(--panel); cursor:pointer; }
   .chip { background:var(--panel2); border-radius:999px; padding:4px 10px; font-size:12px; border:1px solid transparent; }
   .chip.on { border-color:var(--accent); color:var(--accent); }
@@ -400,6 +401,7 @@
   #hubOv .room.locked { background:#231a13; background-image:none; cursor:pointer; } #hubOv .room.locked .wall { background:#1a130d; border-bottom-color:#120d09; }
   #hubOv .room.locked .lock { position:absolute; left:50%; top:58%; transform:translate(-50%,-50%); font-size:20px; opacity:.6; }
   #hubOv .room.plain { cursor:default; } #hubOv .room.tap:active { filter:brightness(1.08); }
+  #hubOv .hubSay { position:absolute; width:62%; z-index:3; padding:8px 11px; border-radius:10px; background:#e7f3d2; color:#2b2418; border:2px solid #5a3218; font-size:13px; line-height:1.45; text-align:left; pointer-events:none; animation:hubSayIn .3s ease-out .25s both; } #hubOv .hubSay::after { content:''; position:absolute; left:var(--tail); top:100%; transform:translateX(-50%); border:7px solid transparent; border-top-color:#5a3218; } @keyframes hubSayIn { from { opacity:0; transform:translateY(6px); } } /* 들어올 때마다 할아버지 한마디(11-01) */
   #hubOv .npc { font-size:30px; animation:npcBob 2.4s ease-in-out infinite; } @keyframes npcBob { 50% { transform:translate(-50%,-56%); } } /* 할아버지 NPC(D2 3판) */
   .bpWrap { max-width:300px; margin:0 auto; } .bpWrap .bp { display:block; width:100%; height:auto; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,.25); } /* 연구실 전망대 설계도(청사진) */
   .labCap { text-align:center; font-size:13px; margin:10px 0 0; } .labSay { margin-top:12px; padding:10px 12px; border-radius:8px; background:#eef5e4; font-size:14px; line-height:1.55; } .labSay b { display:block; font-size:12px; margin-bottom:2px; }
@@ -413,7 +415,7 @@
   #s6 .lvnew { display:block; margin:8px auto 0; padding:6px 14px; font-size:13px; width:auto; }
   .lvnext.fresh { background:#fff4d6; } .lvnext.fresh span { color:var(--ink) !important; white-space:normal !important; font-weight:600; }
 </style>
-  <script type="module" crossorigin src="./assets/index-CysdHTV6.js"></script>
+  <script type="module" crossorigin src="./assets/index-evuukEQ4.js"></script>
 </head>
 <body>
 <div id="app">
