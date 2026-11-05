@@ -416,7 +416,7 @@
   .lvnext.fresh { background:#fff4d6; } .lvnext.fresh span { color:var(--ink) !important; white-space:normal !important; font-weight:600; }
   /* 탐험 지도(P10 2D 내려다보기, 2026-11-04 · 시안 prototype/explore-walk-2d.html): #s3 위 = 숲 지도(--mapH), 아래 = 숲 바닥색 칸에 안내 · 카드 · 버튼. 그림은 아트 전까지 코드로 그린 임시 픽셀 */
   #s3.mapped { padding:0; overflow:hidden; background:#22301f; }
-  .xmap { position:absolute; left:0; right:0; top:0; overflow:hidden; background:#1d3a24; }
+  .xmap { position:absolute; inset:0; z-index:0; overflow:hidden; background:#1d3a24; } /* 화면 전체 = 숲(11-05), 카드 칸은 그 위에 얹힘 */
   .xm-area { position:absolute; left:0; top:0; will-change:transform; }
   .xm-pix { position:absolute; left:0; top:0; display:block; image-rendering:pixelated; image-rendering:crisp-edges; }
   .xm-shadowL { transition:opacity .6s; }
@@ -438,7 +438,8 @@
   .xm-bang { position:absolute; z-index:7; font:900 18px/1 var(--px14); color:#2b1d16; background:#fff; border:3px solid #2b1d16; padding:3px 7px 2px; transform:translate(-50%,-100%) scale(0); transform-origin:50% 100%; pointer-events:none; }
   .xm-bang.pop { animation:xmBang .3s steps(3) forwards; } @keyframes xmBang { to { transform:translate(-50%,-100%) scale(1); } }
   #s3 .xm-slot { position:absolute; z-index:9; top:calc(env(safe-area-inset-top) + 10px); left:0; right:0; display:flex; justify-content:center; pointer-events:none; }
-  #s3 .exui { position:absolute; left:0; right:0; top:var(--mapH); bottom:0; padding:12px 14px calc(env(safe-area-inset-bottom) + 6px); display:flex; flex-direction:column; color:#f3ead2; }
+  #s3 .exui { position:absolute; z-index:1; left:0; right:0; top:calc(var(--mapH) - 44px); bottom:0; padding:50px 14px calc(env(safe-area-inset-bottom) + 6px); display:flex; flex-direction:column; color:#f3ead2; background:linear-gradient(to bottom, rgba(14,26,15,0), rgba(14,26,15,.6) 52px, rgba(14,26,15,.82) 120px); pointer-events:none; } #s3 .exui > * { pointer-events:auto; } /* 숲이 비치는 어둑한 띠 */
+  #s3 .exui :is(.lead, .clue, .muted) { text-shadow:0 1px 2px rgba(0,0,0,.6); }
   #s3 .exui .fork { min-height:0; flex:1; justify-content:flex-start; gap:10px; padding-bottom:0; }
   #s3 .exui .walk { height:auto; flex:1; justify-content:center; gap:10px; padding-bottom:20px; }
   #s3 .exui :is(.lead, .clue, .muted) { color:#f3ead2 !important; } #s3 .exui .lead { font-size:14px; font-weight:600; } #s3 .exui .walk .clue { font-size:14.5px; }
@@ -449,10 +450,11 @@
   #s3 .exui .trails.in .trail { animation:xmCardIn .4s cubic-bezier(.2,1.4,.4,1) both; } #s3 .exui .trails.in .trail:nth-child(2) { animation-delay:.08s; } #s3 .exui .trails.in .trail:nth-child(3) { animation-delay:.16s; } #s3 .exui .trails.in .trail:nth-child(4) { animation-delay:.24s; }
   @keyframes xmCardIn { from { opacity:0; transform:translateY(14px); } }
   #s3 .exui .trail.picked { transform:translateY(-6px) scale(1.04); transition:transform .25s; } #s3 .exui .trail.dim { opacity:.25; transform:scale(.95); transition:opacity .25s, transform .25s; }
-  .xbtns { display:contents; } #s3 .exui .xbtns { display:flex; justify-content:center; gap:20px; margin-top:auto; } #s3 .exui .endBtn { color:#e3d6b8; }
+  .xbtns { display:contents; } #s3 .exui .xbtns { display:flex; justify-content:center; margin-top:0; } #s3 .exui .endBtn { color:#e3d6b8; text-shadow:0 1px 2px rgba(0,0,0,.6); } /* 🔭 = 카드 바로 아래 가운데 */
+  #s3 .xm-end { position:absolute; z-index:9; top:calc(env(safe-area-inset-top) + 8px); right:10px; height:30px; padding:0 10px; background:rgba(20,32,20,.55); color:#f3ead2; border:2px solid rgba(243,234,210,.35); border-radius:var(--r-el); font-family:var(--px11); font-size:12px; } #s3 .xm-end[hidden] { display:none; } /* [탐험 끝내기] 오른쪽 위 */
   @media (prefers-reduced-motion: reduce) { .xm-fly, .xm-spark.on, .xm-animal.idle, #s3 .exui .trails.in .trail { animation:none; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-jgcRgWJt.js"></script>
+  <script type="module" crossorigin src="./assets/index-HQp5IEUm.js"></script>
 </head>
 <body>
 <div id="app">
