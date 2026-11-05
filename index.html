@@ -438,7 +438,7 @@
   .xm-bang { position:absolute; z-index:7; font:900 18px/1 var(--px14); color:#2b1d16; background:#fff; border:3px solid #2b1d16; padding:3px 7px 2px; transform:translate(-50%,-100%) scale(0); transform-origin:50% 100%; pointer-events:none; }
   .xm-bang.pop { animation:xmBang .3s steps(3) forwards; } @keyframes xmBang { to { transform:translate(-50%,-100%) scale(1); } }
   #s3 .xm-slot { position:absolute; z-index:9; top:calc(env(safe-area-inset-top) + 10px); left:0; right:0; display:flex; justify-content:center; pointer-events:none; }
-  #s3 .exui { position:absolute; z-index:1; left:0; right:0; top:calc(var(--mapH) - 44px); bottom:0; padding:50px 14px calc(env(safe-area-inset-bottom) + 6px); display:flex; flex-direction:column; color:#f3ead2; background:linear-gradient(to bottom, rgba(14,26,15,0), rgba(14,26,15,.6) 52px, rgba(14,26,15,.82) 120px); pointer-events:none; } #s3 .exui > * { pointer-events:auto; } /* 숲이 비치는 어둑한 띠 */
+  #s3 .exui { position:absolute; z-index:1; left:0; right:0; top:calc(var(--mapH) - 44px); bottom:0; padding:50px 14px calc(env(safe-area-inset-bottom) + 6px); display:flex; flex-direction:column; color:#f3ead2; background:linear-gradient(to bottom, rgba(14,26,15,0), rgba(14,26,15,.6) 52px, rgba(14,26,15,.82) 120px); pointer-events:none; } #s3 .exui > * { pointer-events:auto; } #s3 .exui:empty { background:none; } /* 숲 입구에서 걸어 들어올 땐(칸이 빔) 어둑한 띠 없이 숲 전체 */ /* 숲이 비치는 어둑한 띠 */
   #s3 .exui :is(.lead, .clue, .muted) { text-shadow:0 1px 2px rgba(0,0,0,.6); }
   #s3 .exui .fork { min-height:0; flex:1; justify-content:flex-start; gap:10px; padding-bottom:0; }
   #s3 .exui .walk { height:auto; flex:1; justify-content:center; gap:10px; padding-bottom:20px; }
@@ -454,7 +454,7 @@
   #s3 .xm-end { position:absolute; z-index:9; top:calc(env(safe-area-inset-top) + 8px); right:10px; height:30px; padding:0 10px; background:rgba(20,32,20,.55); color:#f3ead2; border:2px solid rgba(243,234,210,.35); border-radius:var(--r-el); font-family:var(--px11); font-size:12px; } #s3 .xm-end[hidden] { display:none; } /* [탐험 끝내기] 오른쪽 위 */
   @media (prefers-reduced-motion: reduce) { .xm-fly, .xm-spark.on, .xm-animal.idle, #s3 .exui .trails.in .trail { animation:none; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-HQp5IEUm.js"></script>
+  <script type="module" crossorigin src="./assets/index-BvApCQAQ.js"></script>
 </head>
 <body>
 <div id="app">
