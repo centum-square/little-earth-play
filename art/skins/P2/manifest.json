@@ -99,6 +99,46 @@
    "foam-7.png",
    "foam-8.png",
    "foam-9.png"
+  ],
+  "lm_old_trees": [
+   "lm-old_trees.png"
+  ],
+  "lm_bamboo": [
+   "lm-bamboo.png"
+  ],
+  "lm_meadow": [
+   "lm-meadow.png"
+  ],
+  "lm_deep_forest": [
+   "lm-deep_forest.png"
+  ],
+  "lm_rocks": [
+   "lm-rocks.png"
+  ],
+  "lm_thicket": [
+   "lm-thicket.png"
+  ],
+  "hero_front": [
+   "hero-front.png"
+  ],
+  "hero_back": [
+   "hero-back.png"
+  ],
+  "hero_left": [
+   "hero-left.png"
+  ],
+  "hero_right": [
+   "hero-right.png"
+  ],
+  "hero_walk": [
+   "hero-walk1.png",
+   "hero-walk2.png"
+  ],
+  "hero_scope": [
+   "hero-scope.png"
+  ],
+  "hero_map": [
+   "hero-map.png"
   ]
  },
  "ground": {
@@ -107,7 +147,7 @@
   "path": "g-path.png",
   "water": "g-water.png"
  },
- "hero": "hero.png",
+ "hero": "hero-front.png",
  "weights": {
   "tree": [
    3,
