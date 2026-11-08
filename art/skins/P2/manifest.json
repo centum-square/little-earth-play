@@ -385,6 +385,21 @@
   "pzi_wire": [
    "pzi-wire.png"
   ],
+  "ui_bar": [
+   "ui-bar.png"
+  ],
+  "ui_board": [
+   "ui-board.png"
+  ],
+  "ui_slot": [
+   "ui-slot.png"
+  ],
+  "ui_btn": [
+   "ui-btn.png"
+  ],
+  "ui_wbtn": [
+   "ui-wbtn.png"
+  ],
   "hero_front": [
    "hero-front.png"
   ],
