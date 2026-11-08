@@ -128,7 +128,10 @@
    "pz-block.png"
   ],
   "pz_cell": [
-   "pz-cell.png"
+   "pz-cell0.png",
+   "pz-cell1.png",
+   "pz-cell2.png",
+   "pz-cell3.png"
   ],
   "pz_bg": [
    "pz-bg.png"
