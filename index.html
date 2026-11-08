@@ -430,12 +430,12 @@
   .xm-animal.idle { animation:xmIdle .9s steps(2) infinite; } @keyframes xmIdle { 0% { transform:translate(-50%,-100%); } 100% { transform:translate(-50%,-104%) scale(1.03,.97); } }
   .xm-ashadow { position:absolute; z-index:1; border-radius:50%; background:rgba(10,25,12,.38); transform:translate(-50%,-50%); opacity:0; transition:opacity .2s; }
   .xm-hero { position:absolute; left:0; top:0; image-rendering:pixelated; background-repeat:no-repeat; will-change:transform; z-index:3; }
-  .xm-tint { position:absolute; inset:0; pointer-events:none; mix-blend-mode:multiply; transition:background-color .6s, opacity .6s; z-index:4; }
-  .xm-glow { position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen; transition:opacity .6s; z-index:4; }
-  .xm-dark { position:absolute; left:0; top:0; pointer-events:none; z-index:5; opacity:0; transition:opacity .6s; will-change:transform; }
-  .xm-fx { position:absolute; inset:0; pointer-events:none; z-index:6; }
+  .xm-tint { position:absolute; inset:0; pointer-events:none; mix-blend-mode:multiply; transition:background-color .6s, opacity .6s; z-index:5000; }
+  .xm-glow { position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen; transition:opacity .6s; z-index:5000; }
+  .xm-dark { position:absolute; left:0; top:0; pointer-events:none; z-index:5001; opacity:0; transition:opacity .6s; will-change:transform; }
+  .xm-fx { position:absolute; inset:0; pointer-events:none; z-index:5002; }
   .xm-fly { position:absolute; width:3px; height:3px; background:#fff3a8; box-shadow:0 0 6px 2px rgba(255,236,140,.6); animation:xmFly 5s ease-in-out infinite alternate; } @keyframes xmFly { 0% { transform:translate(0,0); opacity:.15; } 50% { opacity:1; } 100% { transform:translate(var(--fx),var(--fy)); opacity:.25; } }
-  .xm-bang { position:absolute; z-index:7; font:900 18px/1 var(--px14); color:#2b1d16; background:#fff; border:3px solid #2b1d16; padding:3px 7px 2px; transform:translate(-50%,-100%) scale(0); transform-origin:50% 100%; pointer-events:none; }
+  .xm-bang { position:absolute; z-index:5003; font:900 18px/1 var(--px14); color:#2b1d16; background:#fff; border:3px solid #2b1d16; padding:3px 7px 2px; transform:translate(-50%,-100%) scale(0); transform-origin:50% 100%; pointer-events:none; }
   .xm-bang.pop { animation:xmBang .3s steps(3) forwards; } @keyframes xmBang { to { transform:translate(-50%,-100%) scale(1); } }
   #s3 .xm-slot { position:absolute; z-index:9; top:calc(env(safe-area-inset-top) + 10px); left:0; right:0; display:flex; justify-content:center; pointer-events:none; }
   #s3 .exui { position:absolute; z-index:1; left:0; right:0; top:calc(var(--mapH) - 44px); bottom:0; padding:50px 14px calc(env(safe-area-inset-bottom) + 6px); display:flex; flex-direction:column; color:#f3ead2; background:linear-gradient(to bottom, rgba(14,26,15,0), rgba(14,26,15,.6) 52px, rgba(14,26,15,.82) 120px); pointer-events:none; } #s3 .exui > * { pointer-events:auto; } #s3 .exui:empty { background:none; } /* 숲 입구에서 걸어 들어올 땐(칸이 빔) 어둑한 띠 없이 숲 전체 */ /* 숲이 비치는 어둑한 띠 */
@@ -481,7 +481,7 @@
   #app.tabMode .scr:not(.canvas) { padding-bottom:calc(var(--navH) + 12px); } #app.tabMode #s1.scened { padding-bottom:var(--navH); }
   #app.tabMode .donate { bottom:calc(var(--navH) + 8px); }
 </style>
-  <script type="module" crossorigin src="./assets/index-BU1jx40a.js"></script>
+  <script type="module" crossorigin src="./assets/index-H_TYb2vU.js"></script>
 </head>
 <body>
 <div id="app">
