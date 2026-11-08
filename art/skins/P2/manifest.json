@@ -136,6 +136,255 @@
   "pz_bg": [
    "pz-bg.png"
   ],
+  "pzi_acorn": [
+   "pzi-acorn.png"
+  ],
+  "pzi_ant": [
+   "pzi-ant.png"
+  ],
+  "pzi_bamboo": [
+   "pzi-bamboo.png"
+  ],
+  "pzi_berry": [
+   "pzi-berry.png"
+  ],
+  "pzi_boar": [
+   "pzi-boar.png"
+  ],
+  "pzi_bug": [
+   "pzi-bug.png"
+  ],
+  "pzi_clover": [
+   "pzi-clover.png"
+  ],
+  "pzi_crayfish": [
+   "pzi-crayfish.png"
+  ],
+  "pzi_earthworm": [
+   "pzi-earthworm.png"
+  ],
+  "pzi_eucalyptus": [
+   "pzi-eucalyptus.png"
+  ],
+  "pzi_fern": [
+   "pzi-fern.png"
+  ],
+  "pzi_fish": [
+   "pzi-fish.png"
+  ],
+  "pzi_fly": [
+   "pzi-fly.png"
+  ],
+  "pzi_grain": [
+   "pzi-grain.png"
+  ],
+  "pzi_grass": [
+   "pzi-grass.png"
+  ],
+  "pzi_grasshopper": [
+   "pzi-grasshopper.png"
+  ],
+  "pzi_hazelnut": [
+   "pzi-hazelnut.png"
+  ],
+  "pzi_honey": [
+   "pzi-honey.png"
+  ],
+  "pzi_hornet": [
+   "pzi-hornet.png"
+  ],
+  "pzi_larva": [
+   "pzi-larva.png"
+  ],
+  "pzi_leaf": [
+   "pzi-leaf.png"
+  ],
+  "pzi_millipede": [
+   "pzi-millipede.png"
+  ],
+  "pzi_mouse": [
+   "pzi-mouse.png"
+  ],
+  "pzi_nectar": [
+   "pzi-nectar.png"
+  ],
+  "pzi_pine_nut": [
+   "pzi-pine_nut.png"
+  ],
+  "pzi_salmon": [
+   "pzi-salmon.png"
+  ],
+  "pzi_seed": [
+   "pzi-seed.png"
+  ],
+  "pzi_sprout": [
+   "pzi-sprout.png"
+  ],
+  "pzi_vole": [
+   "pzi-vole.png"
+  ],
+  "pzi_chain": [
+   "pzi-chain.png"
+  ],
+  "pzi_leafpile": [
+   "pzi-leafpile.png"
+  ],
+  "pzi_rock": [
+   "pzi-rock.png"
+  ],
+  "pzi_log": [
+   "pzi-log.png"
+  ],
+  "pzi_chest": [
+   "pzi-chest.png"
+  ],
+  "pzi_item:sweepR": [
+   "pzi-sweepR.png"
+  ],
+  "pzi_item:sweepC": [
+   "pzi-sweepC.png"
+  ],
+  "pzi_item:sweepB": [
+   "pzi-sweepB.png"
+  ],
+  "pzi_item:fit": [
+   "pzi-fit.png"
+  ],
+  "pzi_item:coin": [
+   "pzi-coin.png"
+  ],
+  "pzi_bear": [
+   "pzi-bear.png"
+  ],
+  "pzi_bullfrog": [
+   "pzi-bullfrog.png"
+  ],
+  "pzi_crow_bird": [
+   "pzi-crow_bird.png"
+  ],
+  "pzi_cuckoo": [
+   "pzi-cuckoo.png"
+  ],
+  "pzi_dog": [
+   "pzi-dog.png"
+  ],
+  "pzi_eagle": [
+   "pzi-eagle.png"
+  ],
+  "pzi_eagle_owl": [
+   "pzi-eagle_owl.png"
+  ],
+  "pzi_fox": [
+   "pzi-fox.png"
+  ],
+  "pzi_hawk": [
+   "pzi-hawk.png"
+  ],
+  "pzi_heron": [
+   "pzi-heron.png"
+  ],
+  "pzi_leopard": [
+   "pzi-leopard.png"
+  ],
+  "pzi_leopard_cat": [
+   "pzi-leopard_cat.png"
+  ],
+  "pzi_mantis": [
+   "pzi-mantis.png"
+  ],
+  "pzi_marten": [
+   "pzi-marten.png"
+  ],
+  "pzi_owl": [
+   "pzi-owl.png"
+  ],
+  "pzi_puma": [
+   "pzi-puma.png"
+  ],
+  "pzi_snake": [
+   "pzi-snake.png"
+  ],
+  "pzi_stray_cat": [
+   "pzi-stray_cat.png"
+  ],
+  "pzi_tiger": [
+   "pzi-tiger.png"
+  ],
+  "pzi_weasel": [
+   "pzi-weasel.png"
+  ],
+  "pzi_wolf": [
+   "pzi-wolf.png"
+  ],
+  "pzi_car": [
+   "pzi-car.png"
+  ],
+  "pzi_culling": [
+   "pzi-culling.png"
+  ],
+  "pzi_disease": [
+   "pzi-disease.png"
+  ],
+  "pzi_ditch": [
+   "pzi-ditch.png"
+  ],
+  "pzi_drought": [
+   "pzi-drought.png"
+  ],
+  "pzi_flood": [
+   "pzi-flood.png"
+  ],
+  "pzi_glass": [
+   "pzi-glass.png"
+  ],
+  "pzi_ice": [
+   "pzi-ice.png"
+  ],
+  "pzi_landfill": [
+   "pzi-landfill.png"
+  ],
+  "pzi_lean_year": [
+   "pzi-lean_year.png"
+  ],
+  "pzi_logging": [
+   "pzi-logging.png"
+  ],
+  "pzi_net": [
+   "pzi-net.png"
+  ],
+  "pzi_pesticide": [
+   "pzi-pesticide.png"
+  ],
+  "pzi_poaching": [
+   "pzi-poaching.png"
+  ],
+  "pzi_pollution": [
+   "pzi-pollution.png"
+  ],
+  "pzi_rain": [
+   "pzi-rain.png"
+  ],
+  "pzi_riverwork": [
+   "pzi-riverwork.png"
+  ],
+  "pzi_snow": [
+   "pzi-snow.png"
+  ],
+  "pzi_sun": [
+   "pzi-sun.png"
+  ],
+  "pzi_thunder": [
+   "pzi-thunder.png"
+  ],
+  "pzi_trap": [
+   "pzi-trap.png"
+  ],
+  "pzi_wildfire": [
+   "pzi-wildfire.png"
+  ],
+  "pzi_wire": [
+   "pzi-wire.png"
+  ],
   "hero_front": [
    "hero-front.png"
   ],
