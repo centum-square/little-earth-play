@@ -1,0 +1,120 @@
+{
+ "id": "P2",
+ "name": "픽셀",
+ "pixel": true,
+ "cell": 20,
+ "sprites": {
+  "tree": [
+   "tree-0.png",
+   "tree-1.png",
+   "tree-2.png",
+   "tree-3.png",
+   "tree-4.png"
+  ],
+  "pine": [
+   "pine-0.png",
+   "pine-1.png"
+  ],
+  "rock": [
+   "rock-0.png",
+   "rock-1.png",
+   "rock-2.png"
+  ],
+  "stump": [
+   "stump-0.png"
+  ],
+  "small": [
+   "small-0.png",
+   "small-1.png",
+   "small-2.png"
+  ],
+  "bush": [
+   "bush-0.png"
+  ],
+  "bridge": [
+   "bridge-0.png"
+  ],
+  "lily": [
+   "lily-0.png",
+   "lily-1.png",
+   "lily-2.png"
+  ],
+  "stone": [
+   "stone-0.png",
+   "stone-1.png",
+   "stone-2.png",
+   "stone-3.png",
+   "stone-4.png",
+   "stone-5.png",
+   "stone-6.png"
+  ],
+  "tuft": [
+   "tuft-0.png",
+   "tuft-1.png",
+   "tuft-2.png",
+   "tuft-3.png",
+   "tuft-4.png",
+   "tuft-5.png",
+   "tuft-6.png",
+   "tuft-7.png",
+   "tuft-8.png",
+   "tuft-9.png"
+  ],
+  "flower": [
+   "flower-0.png"
+  ],
+  "misc": [
+   "misc-0.png",
+   "misc-1.png",
+   "misc-2.png",
+   "misc-3.png",
+   "misc-4.png",
+   "misc-5.png"
+  ],
+  "pebble": [
+   "pebble-0.png",
+   "pebble-1.png",
+   "pebble-2.png",
+   "pebble-3.png",
+   "pebble-4.png"
+  ],
+  "bank": [
+   "bank-0.png",
+   "bank-1.png"
+  ],
+  "reed": [
+   "reed-0.png"
+  ],
+  "lotus": [
+   "lotus-0.png"
+  ],
+  "foam": [
+   "foam-0.png",
+   "foam-1.png",
+   "foam-2.png",
+   "foam-3.png",
+   "foam-4.png",
+   "foam-5.png",
+   "foam-6.png",
+   "foam-7.png",
+   "foam-8.png",
+   "foam-9.png"
+  ]
+ },
+ "ground": {
+  "grass": "g-grass.png",
+  "flower": "g-flower.png",
+  "path": "g-path.png",
+  "water": "g-water.png"
+ },
+ "hero": "hero.png",
+ "weights": {
+  "tree": [
+   3,
+   3,
+   3,
+   1,
+   1
+  ]
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "id": "I1",
+ "name": "그림책",
+ "pixel": false,
+ "cell": 64,
+ "sprites": {
+  "tree": [
+   "tree-0.webp",
+   "tree-1.webp",
+   "tree-2.webp",
+   "tree-3.webp",
+   "tree-4.webp"
+  ],
+  "pine": [
+   "pine-0.webp",
+   "pine-1.webp"
+  ],
+  "rock": [
+   "rock-0.webp",
+   "rock-1.webp",
+   "rock-2.webp"
+  ],
+  "stump": [
+   "stump-0.webp"
+  ],
+  "log": [
+   "log-0.webp"
+  ],
+  "small": [
+   "small-0.webp",
+   "small-1.webp",
+   "small-2.webp"
+  ],
+  "bush": [
+   "bush-0.webp"
+  ],
+  "lily": [
+   "lily-0.webp",
+   "lily-1.webp",
+   "lily-2.webp"
+  ],
+  "stone": [
+   "stone-0.webp",
+   "stone-1.webp",
+   "stone-2.webp",
+   "stone-3.webp",
+   "stone-4.webp",
+   "stone-5.webp",
+   "stone-6.webp",
+   "stone-7.webp",
+   "stone-8.webp",
+   "stone-9.webp"
+  ],
+  "bridge": [
+   "bridge-0.webp"
+  ],
+  "tuft": [
+   "tuft-0.webp",
+   "tuft-1.webp",
+   "tuft-2.webp",
+   "tuft-3.webp",
+   "tuft-4.webp",
+   "tuft-5.webp",
+   "tuft-6.webp",
+   "tuft-7.webp",
+   "tuft-8.webp",
+   "tuft-9.webp",
+   "tuft-10.webp",
+   "tuft-11.webp",
+   "tuft-12.webp",
+   "tuft-13.webp",
+   "tuft-14.webp",
+   "tuft-15.webp"
+  ],
+  "flower": [
+   "flower-0.webp",
+   "flower-1.webp",
+   "flower-2.webp",
+   "flower-3.webp",
+   "flower-4.webp",
+   "flower-5.webp"
+  ],
+  "misc": [
+   "misc-0.webp",
+   "misc-1.webp",
+   "misc-2.webp",
+   "misc-3.webp",
+   "misc-4.webp",
+   "misc-5.webp",
+   "misc-6.webp",
+   "misc-7.webp",
+   "misc-8.webp",
+   "misc-9.webp",
+   "misc-10.webp",
+   "misc-11.webp",
+   "misc-12.webp"
+  ],
+  "pebble": [
+   "pebble-0.webp",
+   "pebble-1.webp",
+   "pebble-2.webp",
+   "pebble-3.webp",
+   "pebble-4.webp",
+   "pebble-5.webp"
+  ],
+  "bank": [
+   "bank-0.webp",
+   "bank-1.webp",
+   "bank-2.webp",
+   "bank-3.webp",
+   "bank-4.webp",
+   "bank-5.webp",
+   "bank-6.webp",
+   "bank-7.webp"
+  ],
+  "reed": [
+   "reed-0.webp",
+   "reed-1.webp",
+   "reed-2.webp",
+   "reed-3.webp"
+  ],
+  "lotus": [
+   "lotus-0.webp",
+   "lotus-1.webp"
+  ]
+ },
+ "ground": {
+  "grass": "g-grass.webp",
+  "flower": "g-flower.webp",
+  "path": "g-path.webp",
+  "water": "g-water.webp"
+ },
+ "hero": "hero.webp",
+ "weights": {
+  "tree": [
+   3,
+   3,
+   3,
+   1,
+   1
+  ]
+ }
+}
