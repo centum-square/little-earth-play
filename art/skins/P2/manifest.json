@@ -124,6 +124,15 @@
    "meetbush-2.png",
    "meetbush-3.png"
   ],
+  "pz_block": [
+   "pz-block.png"
+  ],
+  "pz_cell": [
+   "pz-cell.png"
+  ],
+  "pz_bg": [
+   "pz-bg.png"
+  ],
   "hero_front": [
    "hero-front.png"
   ],
