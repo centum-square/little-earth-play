@@ -400,6 +400,20 @@
   "ui_wbtn": [
    "ui-wbtn.png"
   ],
+  "dome_cliff": [
+   "dome-cliff.png"
+  ],
+  "dome_valley": [
+   "dome-valley.png"
+  ],
+  "dome_cloud": [
+   "dome-cloud0.png",
+   "dome-cloud1.png",
+   "dome-cloud2.png"
+  ],
+  "dome_cabin": [
+   "dome-cabin.png"
+  ],
   "hero_front": [
    "hero-front.png"
   ],
