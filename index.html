@@ -483,25 +483,26 @@
   /* 디자인 스킨 공통 UI(11-10 사용자: AC1 하단 탭 + AC3 지역 카드 + 길 끝 이정표). 그림 조각을 9칸 나눠 붙임(border-image), 그림 한 점 = 1px */
   html.skui { --navH:calc(env(safe-area-inset-bottom) + 86px); } /* 나무판 하단 탭이 10px 더 높음 → 후원 버튼 · 메시지 · 카드 자리도 같이 올림 */
   html.skui #app.tabMode nav { background:none; border:0; border-style:solid; border-width:10px 20px; border-image:var(--ui2-bar) 10 20 fill / 10px 20px; border-radius:0 !important; box-shadow:0 4px 10px rgba(20,14,6,.35); padding:0 2px; gap:4px; image-rendering:pixelated; }
-  html.skui #app.tabMode nav button { border-radius:0; border-style:solid; border-width:8px; border-image:var(--ui2-tab) 8 fill / 8px; padding:0 0 1px; color:#5a3a1e; image-rendering:pixelated; }
+  html.skui #app.tabMode nav::after { content:''; position:absolute; inset:-6px -14px; pointer-events:none; background:var(--ui2-rivet) left 4px top 4px / 8px 9px no-repeat, var(--ui2-rivet) right 4px top 4px / 8px 9px no-repeat, var(--ui2-rivet) left 4px bottom 4px / 8px 9px no-repeat, var(--ui2-rivet) right 4px bottom 4px / 8px 9px no-repeat; image-rendering:pixelated; } /* 네 귀퉁이 리벳(시안 1) */
+  html.skui #app.tabMode nav button { border-radius:0; border-style:solid; border-width:8px; border-image:var(--ui2-tab) 8 fill / 8px; padding:0 0 1px; color:#3b2412; font-weight:800; font-size:13px; image-rendering:pixelated; }
   html.skui #app.tabMode nav button.on { border-image:var(--ui2-tabon) 8 fill / 8px; background:none; color:#2b1d16; }
   html.skui #app.tabMode nav button .dot { top:-4px; right:0; }
-  html.skui #hud .pill { background:none; border-style:solid; border-width:8px 14px; border-image:var(--ui2-pill) 8 14 fill / 8px 14px; border-radius:0; box-shadow:0 2px 0 rgba(20,14,6,.35); padding:0 2px; height:40px; color:#5a3a1e; image-rendering:pixelated; }
+  html.skui #hud .pill { background:none; border-style:solid; border-width:8px 14px; border-image:var(--ui2-pill) 8 14 fill / 8px 14px; border-radius:0; box-shadow:0 2px 0 rgba(20,14,6,.35); padding:0 2px; height:40px; color:#3b2412; font-weight:700; font-size:13px; image-rendering:pixelated; }
   html.skui #hud .pill b, html.skui #hud .lvbtn b { color:#2b1d16; }
   html.skui .fab { background:none; border-style:solid; border-width:12px; border-image:var(--ui2-ibtn) 12 fill / 12px; border-radius:0; box-shadow:0 2px 0 rgba(20,14,6,.35); image-rendering:pixelated; }
-  html.skui #s1.scened .rcard { background:none; border-style:solid; border-width:16px 13px 12px; border-image:var(--ui2-card) 16 13 12 fill / 16px 13px 12px; border-radius:0; box-shadow:0 4px 10px rgba(20,14,6,.35); padding:0 6px 4px; image-rendering:pixelated; color:#3b2a1e; }
-  html.skui #s1.scened .rcard .rbody h3 { margin-top:-2px; padding-bottom:4px; border-bottom:1px solid #6b4a2c; color:#2b1d16; } html.skui #s1.scened .rbody p { margin-top:6px; color:#4a3524; }
+  html.skui #s1.scened .rcard { background:none; border-style:solid; border-width:32px 26px 24px; border-image:var(--ui2-card) 16 13 12 fill / 32px 26px 24px; border-radius:0; box-shadow:0 4px 10px rgba(20,14,6,.35); padding:0 0 0; margin-top:-8px; /* 그림 한 점 = 2px(시안 2의 리벳 · 찢긴 테 크기) */ image-rendering:pixelated; color:#3b2a1e; }
+  html.skui #s1.scened .rcard .rbody h3 { margin-top:-14px; padding:0 0 5px 4px; border-bottom:2px solid #5a3a22; color:#2b1d16; font-size:20px; font-weight:800; } html.skui #s1.scened .rbody p { margin-top:7px; color:#2b1d16; font-size:12.5px; letter-spacing:-.3px; font-weight:500; line-height:1.55; } /* 시안 2처럼 굵고 진하게(11-10 대조) */
   html.skui #s1.scened .rdots { padding:10px 0 12px; }
-  html.skui #s1.scened .rcard .btn { background:none; border-style:solid; border-width:10px; border-image:var(--ui2-stamp) 10 fill / 10px; border-radius:0; box-shadow:none; color:#d8452e; font-weight:800; font-size:18px; image-rendering:pixelated; } html.skui #s1.scened .rcard .btn small { color:#8a4a32; opacity:1; font-size:12px; } /* 시안처럼 굵고 크게(11-10) */
+  html.skui #s1.scened .rcard .btn { background:none; border-style:solid; border-width:10px; border-image:var(--ui2-stamp) 10 fill / 10px; border-radius:0; box-shadow:none; color:#d23a26; font-weight:900; font-size:20px; letter-spacing:.5px; image-rendering:pixelated; } html.skui #s1.scened .rcard .btn small { color:#5a2a1a; opacity:1; font-size:12px; font-weight:600; display:flex; align-items:center; gap:8px; } html.skui #s1.scened .rcard .btn small::before, html.skui #s1.scened .rcard .btn small::after { content:''; width:34px; height:1px; background:#c0452e; } /* 시안처럼 굵게 + 부제 양옆 줄(11-10) */
   html.skui #s1.scened .rcard .btn:active:not(:disabled) { transform:translate(1px,1px); box-shadow:none; }
   /* 지역 이동 = 가로 길 양 끝 나무 이정표(app.ts가 top = 길 높이로). 팻말 위 글씨 = 옆 지역 이름 */
-  html.skui .rnav.sign { transform:translateY(-82%); gap:0; } html.skui .rnav.sign.prev { left:0; } html.skui .rnav.sign.next { right:0; }
-  html.skui .rnav.sign b { width:60px; height:57px; background:var(--ui2-signl) center/100% 100% no-repeat; border:0; box-shadow:none; color:transparent; font-size:0; image-rendering:pixelated; }
+  html.skui .rnav.sign { transform:translateY(calc(-100% + 6px)); gap:0; } /* 기둥 끝이 길 한가운데 서게(시안 1) */ html.skui .rnav.sign.prev { left:4px; } html.skui .rnav.sign.next { right:4px; }
+  html.skui .rnav.sign b { width:54px; height:51px; background:var(--ui2-signl) center/100% 100% no-repeat; border:0; box-shadow:none; color:transparent; font-size:0; image-rendering:pixelated; }
   html.skui .rnav.sign.next b { background-image:var(--ui2-signr); }
-  html.skui .rnav.sign span { position:absolute; top:10px; left:13px; right:5px; text-align:center; font-size:10px; color:#3b2412; text-shadow:none; font-weight:700; } html.skui .rnav.sign.next span { left:5px; right:13px; }
+  html.skui .rnav.sign span { position:absolute; top:7px; left:10px; right:3px; text-align:center; font-size:10.5px; letter-spacing:-.5px; white-space:nowrap; color:#2b1608; text-shadow:none; font-weight:800; font-family:inherit; } html.skui .rnav.sign.next span { left:3px; right:10px; }
   html.skui .rnav.sign:active b { transform:translateY(2px); box-shadow:none; }
 </style>
-  <script type="module" crossorigin src="./assets/index-B02zwVRK.js"></script>
+  <script type="module" crossorigin src="./assets/index-Ck9qWgIt.js"></script>
 </head>
 <body>
 <div id="app">
