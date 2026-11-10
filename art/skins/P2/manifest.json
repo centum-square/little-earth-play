@@ -417,6 +417,33 @@
   "dome_plateau_temperate": [
    "dome-plateau-temperate.png"
   ],
+  "ui2_bar": [
+   "ui2-bar.png"
+  ],
+  "ui2_pill": [
+   "ui2-pill.png"
+  ],
+  "ui2_card": [
+   "ui2-card.png"
+  ],
+  "ui2_stamp": [
+   "ui2-stamp.png"
+  ],
+  "ui2_tab": [
+   "ui2-tab.png"
+  ],
+  "ui2_tabon": [
+   "ui2-tabon.png"
+  ],
+  "ui2_ibtn": [
+   "ui2-ibtn.png"
+  ],
+  "ui2_signl": [
+   "ui2-signl.png"
+  ],
+  "ui2_signr": [
+   "ui2-signr.png"
+  ],
   "hero_front": [
    "hero-front.png"
   ],
