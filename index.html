@@ -525,11 +525,21 @@
   html.skui .btn:active:not(:disabled) { transform:translate(1px,1px); box-shadow:none; }
   html.skui .donate { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-chipon) 14 fill / 6px; border-radius:0 !important; box-shadow:0 3px 6px rgba(30,18,8,.35); color:#2b1d16; font-weight:900; padding:5px 14px; } /* 후원 = 주황 종이 태그 */
   html.skui #hubOv .hubTop { background:none; border-style:solid; border-width:7px; border-image:var(--ui5-title) 16 fill / 7px; margin:calc(env(safe-area-inset-top) + 8px) 10px 0; padding:4px 8px; min-height:46px; color:#2b1d16; } html.skui #hubOv .hubTop h2 { color:#2b1d16; font-weight:900; bottom:auto; top:50%; transform:translate(-50%,-50%); } html.skui #hubOv .hubTop .link { color:#2b1d16; font-weight:800; }
+  /* 관리동 안 = 한 장 그림(C안, 11-11): 그림이 화면을 덮고(cover), 방 버튼은 그림 위 %로 겹침. 복도·문·바닥 무늬·이모지 가구는 그림에 있어 숨김 */
+  #hubOv.art { background:#4f8a3a; container-type:size; } #hubOv.art .hubTop { position:absolute; left:0; right:0; top:0; z-index:4; }
+  #hubOv.art .hubWrap { position:absolute; inset:0; padding:0; display:block; }
+  #hubOv.art .hubPlan { position:absolute; left:50%; top:50%; width:max(100cqw, calc(100cqh * 852 / 1846)); aspect-ratio:852 / 1846; transform:translate(-50%,-50%); background:var(--ui5-hubplan) center / 100% 100% no-repeat; image-rendering:pixelated; }
+  #hubOv.art .hall, #hubOv.art .door, #hubOv.art .wall, #hubOv.art .deco:not(.npc) { display:none; }
+  #hubOv.art .room { background:none; border:0; border-radius:0; box-shadow:none; overflow:visible; }
+  #hubOv.art .room.locked { background:rgba(20,12,6,.55); } #hubOv.art .room.locked .lock { top:50%; opacity:.85; font-size:18px; }
+  #hubOv.art .rn { bottom:4px; }
+  #hubOv.art .npc { width:31px; height:52px; background:var(--ui5-hubgp) center bottom / 100% 100% no-repeat; image-rendering:pixelated; filter:drop-shadow(0 2px 0 rgba(0,0,0,.25)); }
+  #hubOv.art .npc.zz::after { content:'💤'; position:absolute; right:-14px; top:-6px; font-size:14px; }
   html.skui #hubOv .hubSay { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-slot) 14 fill / 6px; border-radius:0; padding:3px 6px; font-weight:700; }
   html.skui #s7, html.skui #s7 .chips { background-color:#f3d6a4; } /* 도감 바탕 = 크래프트지(시안 판 251·215·158을 시간대 빛과 섞어 살짝 낮춤), 시간대 빛은 그대로 */
   html.skui .snk .sb { color:#2b1d16; font-weight:800; font-size:12px; } html.skui .snk .sn { top:-1px; right:1px; color:#2b1d16; font-weight:900; font-size:12.5px; } /* 시안: 이름·개수 굵고 짙게 */
 </style>
-  <script type="module" crossorigin src="./assets/index-Cck-hIuu.js"></script>
+  <script type="module" crossorigin src="./assets/index-xqhS6mGI.js"></script>
 </head>
 <body>
 <div id="app">
