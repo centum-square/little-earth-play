@@ -474,6 +474,24 @@
   "ui3_signr": [
    "ui3-signr.png"
   ],
+  "ui5_win": [
+   "ui5-win.png"
+  ],
+  "ui5_title": [
+   "ui5-title.png"
+  ],
+  "ui5_close": [
+   "ui5-close.png"
+  ],
+  "ui5_slot": [
+   "ui5-slot.png"
+  ],
+  "ui5_chip": [
+   "ui5-chip.png"
+  ],
+  "ui5_chipon": [
+   "ui5-chipon.png"
+  ],
   "hero_front": [
    "hero-front.png"
   ],

@@ -487,9 +487,9 @@
   html.skui #app.tabMode nav button { border-radius:0; border-style:solid; border-width:11px; border-image:var(--ui3-tab) 24 fill / 11px; padding:0; color:#2b1d16; font-weight:800; font-size:14.5px; background:none; height:53px; margin:-11px 0; justify-content:center; gap:1px; } html.skui #app.tabMode nav .ico.em { font-size:24px; height:26px; } /* 시안: 아이콘 ≈24 · 글씨 ≈15 굵게 */
   html.skui #app.tabMode nav button.on { border-image:var(--ui3-tabon) 24 fill / 11px; background:none; color:#2b1d16; }
   html.skui #app.tabMode nav button .dot { top:-4px; right:0; }
-  html.skui #hud .pill { background:none; border-style:solid; border-width:14px 11px; border-image:var(--ui3-pill) 32 fill / 14px 11px; border-radius:0; box-shadow:none; padding:0; height:40px; color:#2b1d16; font-weight:700; font-size:13px; }
+  html.skui #hud .pill { background:none; border-style:solid; border-width:11px 13px; border-image:var(--ui3-pill) 24 30 fill / 11px 13px; border-radius:0; box-shadow:none; padding:0; height:40px; color:#2b1d16; font-weight:700; font-size:13px; }
   html.skui #hud .pill b, html.skui #hud .lvbtn b { color:#2b1d16; }
-  html.skui .fab { background:none; border-style:solid; border-width:13px; border-image:var(--ui3-ibtn) 30 fill / 13px; border-radius:0; box-shadow:none; width:38px; height:40px; } html.skui #hud .fabs { gap:3px; } html.skui #hud .fabs .fab { width:38px; height:40px; } /* 좁은 화면 규칙(36×36)이 덮어 알약 40과 높이가 달랐음(11-11) */
+  html.skui .fab { background:none; border-style:solid; border-width:13px; border-width:9px; border-image:var(--ui3-ibtn) 20 fill / 9px; border-radius:0; box-shadow:none; width:38px; height:40px; } html.skui #hud .fabs { gap:3px; } html.skui #hud .fabs .fab { width:38px; height:40px; } /* 좁은 화면 규칙(36×36)이 덮어 알약 40과 높이가 달랐음(11-11) */
   html.skui #s1.scened .rtrack { padding:0 21px; } html.skui #s1.scened .rcard { gap:6px; background:none; border-style:solid; border-width:17px 14px 15px; border-image:var(--ui3-card) 40 32 34 fill / 17px 14px 15px; border-radius:0; box-shadow:0 4px 10px rgba(20,14,6,.3); padding:0 6px 2px; color:#2b1d16; }
   html.skui #s1.scened .rcard .rbody h3 { margin-top:-4px; padding:0 0 3px 2px; line-height:1.2; border-bottom:2px solid #5a3a22; color:#2b1d16; font-size:20px; font-weight:800; } html.skui #s1.scened .rbody p { margin-top:7px; color:#2b1d16; font-size:12.5px; letter-spacing:-.3px; font-weight:500; line-height:1.55; }
   html.skui #s1.scened .rdots { padding:10px 0 12px; }
@@ -501,8 +501,20 @@
   html.skui .rnav.sign.next b { background-image:var(--ui3-signr); }
   html.skui .rnav.sign span { position:absolute; top:9px; left:11px; right:3px; text-align:center; font-size:10.5px; letter-spacing:-.5px; white-space:nowrap; color:#2b1608; text-shadow:none; font-weight:800; font-family:inherit; } html.skui .rnav.sign.next span { left:3px; right:11px; }
   html.skui .rnav.sign:active b { transform:translateY(2px); box-shadow:none; }
+
+  /* 공통 창·칸·태그 = A안 안장 가죽(ui5_*, 11-11). 조각은 시안 px라 화면 = 시안 × 0.44 */
+  html.skui .modal { background:none; border-style:solid; border-width:12px; border-image:var(--ui5-win) 28 fill / 12px; border-radius:0 !important; box-shadow:0 6px 16px rgba(30,18,8,.45); max-width:330px; }
+  html.skui .modal .mh { border-style:solid; border-width:7px; border-image:var(--ui5-title) 16 fill / 7px; min-height:46px; padding:0 2px 0 8px; margin-bottom:3px; }
+  html.skui .modal .mh h2 { font-size:19px; font-weight:900; color:#2b1d16; }
+  html.skui .modal .mh .x { width:30px; height:29px; border-style:solid; border-width:6px; border-image:var(--ui5-close) 12 fill / 6px; background:none; padding:0; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:900; color:#2b1d16; }
+  html.skui .modal .mb { padding:8px 8px 12px; }
+  html.skui .modal .fam { color:#2b1d16; font-weight:800; font-size:14px; }
+  html.skui .snk, html.skui .dexcard, html.skui .modal .card, html.skui .avs3 .av b, html.skui .ib { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-slot) 14 fill / 6px; border-radius:0 !important; box-shadow:none; }
+  html.skui .chip { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-chip) 14 fill / 6px; border-radius:0 !important; box-shadow:none; color:#2b1d16; font-weight:800; }
+  html.skui .chip.on { border-image-source:var(--ui5-chipon); }
+  html.skui .snk .sb { color:#2b1d16; font-weight:800; font-size:12px; } html.skui .snk .sn { top:-1px; right:1px; color:#2b1d16; font-weight:900; font-size:12.5px; } /* 시안: 이름·개수 굵고 짙게 */
 </style>
-  <script type="module" crossorigin src="./assets/index-Dp1tUO5D.js"></script>
+  <script type="module" crossorigin src="./assets/index-plZJ1WML.js"></script>
 </head>
 <body>
 <div id="app">
