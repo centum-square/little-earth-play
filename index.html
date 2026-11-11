@@ -508,13 +508,28 @@
   html.skui .modal .mh h2 { font-size:19px; font-weight:900; color:#2b1d16; }
   html.skui .modal .mh .x { width:30px; height:29px; border-style:solid; border-width:6px; border-image:var(--ui5-close) 12 fill / 6px; background:none; padding:0; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:900; color:#2b1d16; }
   html.skui .modal .mb { padding:8px 8px 12px; }
-  html.skui .modal .fam { color:#2b1d16; font-weight:800; font-size:14px; }
+  html.skui .fam { color:#2b1d16; font-weight:800; font-size:14px; } html.skui .fam .muted, html.skui .fam small { color:#6b4a2a; }
   html.skui .snk, html.skui .dexcard, html.skui .modal .card, html.skui .avs3 .av b, html.skui .ib { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-slot) 14 fill / 6px; border-radius:0 !important; box-shadow:none; }
   html.skui .chip { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-chip) 14 fill / 6px; border-radius:0 !important; box-shadow:none; color:#2b1d16; font-weight:800; }
   html.skui .chip.on { border-image-source:var(--ui5-chipon); }
+  html.skui .sheet { background:none; border-style:solid; border-width:12px; border-image:var(--ui5-win) 28 fill / 12px; border-radius:0 !important; box-shadow:0 6px 16px rgba(30,18,8,.45); } /* 시트(도감 상세 등)도 같은 가죽 창(11-11) */
+  html.skui .sheet .sx, html.skui #sheetBox:has(.dxw) .sx { top:4px; right:4px; width:30px; height:29px; border-style:solid; border-width:6px; border-image:var(--ui5-close) 12 fill / 6px; border-radius:0 !important; background:none; box-shadow:none; padding:0; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:900; color:#2b1d16; }
+  html.skui .dxhero { border-style:solid; border-width:6px; border-image:var(--ui5-slot) 14 / 6px; border-radius:0 !important; box-shadow:none; } /* 그림 칸 = 종이 칸 테두리만, 안 배경은 그대로 */
+  html.skui .dxb .cell, html.skui #sheetBox .guide, html.skui .dxb .row1 { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-slot) 14 fill / 6px; border-radius:0 !important; }
+  html.skui .dxb .cell:not(.good):not(.bad), html.skui #sheetBox .guide, html.skui .dxb .row1 { box-shadow:none; }
+  html.skui .dxb .cell.good, html.skui .dxb .cell.bad { padding-left:11px; position:relative; box-shadow:none; } html.skui .dxb .cell.good::before, html.skui .dxb .cell.bad::before { content:''; position:absolute; left:-1px; top:2px; bottom:2px; width:4px; background:var(--good); } html.skui .dxb .cell.bad::before { background:var(--bad); } /* 좋음·경계 띠: border-image fill이 inset 그림자를 덮어 가상 요소로 */
+  html.skui .dxb { background:none; }
+  html.skui .btn:not(.sec):not(.bad), html.skui .nextBtn { background:none; border-style:solid; border-width:11px; border-image:var(--ui3-stamp) 26 fill / 11px; border-radius:0 !important; box-shadow:none; color:#c8331f; font-weight:900; padding:2px 6px; } /* 주 버튼 = 빨간 도장(탐험 카드와 같은 조각, 11-11) */
+  html.skui .btn.sec { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-chip) 14 fill / 6px; border-radius:0 !important; box-shadow:none; color:#2b1d16; font-weight:800; padding:7px 6px; } /* 보조 버튼 = 종이 태그 */
+  html.skui .nextBtn { font-size:17px; min-height:48px; }
+  html.skui .btn:active:not(:disabled) { transform:translate(1px,1px); box-shadow:none; }
+  html.skui .donate { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-chipon) 14 fill / 6px; border-radius:0 !important; box-shadow:0 3px 6px rgba(30,18,8,.35); color:#2b1d16; font-weight:900; padding:5px 14px; } /* 후원 = 주황 종이 태그 */
+  html.skui #hubOv .hubTop { background:none; border-style:solid; border-width:7px; border-image:var(--ui5-title) 16 fill / 7px; margin:calc(env(safe-area-inset-top) + 8px) 10px 0; padding:4px 8px; min-height:46px; color:#2b1d16; } html.skui #hubOv .hubTop h2 { color:#2b1d16; font-weight:900; bottom:auto; top:50%; transform:translate(-50%,-50%); } html.skui #hubOv .hubTop .link { color:#2b1d16; font-weight:800; }
+  html.skui #hubOv .hubSay { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-slot) 14 fill / 6px; border-radius:0; padding:3px 6px; font-weight:700; }
+  html.skui #s7, html.skui #s7 .chips { background-color:#f3d6a4; } /* 도감 바탕 = 크래프트지(시안 판 251·215·158을 시간대 빛과 섞어 살짝 낮춤), 시간대 빛은 그대로 */
   html.skui .snk .sb { color:#2b1d16; font-weight:800; font-size:12px; } html.skui .snk .sn { top:-1px; right:1px; color:#2b1d16; font-weight:900; font-size:12.5px; } /* 시안: 이름·개수 굵고 짙게 */
 </style>
-  <script type="module" crossorigin src="./assets/index-plZJ1WML.js"></script>
+  <script type="module" crossorigin src="./assets/index-BKHVZ0u7.js"></script>
 </head>
 <body>
 <div id="app">
