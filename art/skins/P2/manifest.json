@@ -134,7 +134,7 @@
    "pz-cell3.png"
   ],
   "pz_bg": [
-   "pz-bg.png"
+   "pz-bg.webp"
   ],
   "pzi_acorn": [
    "pzi-acorn.png"
@@ -415,7 +415,7 @@
    "dome-cabin.png"
   ],
   "dome_plateau_temperate": [
-   "dome-plateau-temperate.png"
+   "dome-plateau-temperate.webp"
   ],
   "ui2_rivet": [
    "ui2-rivet.png"
@@ -448,25 +448,25 @@
    "ui2-signr.png"
   ],
   "ui3_bar": [
-   "ui3-bar.png"
+   "ui3-bar.webp"
   ],
   "ui3_tabon": [
-   "ui3-tabon.png"
+   "ui3-tabon.webp"
   ],
   "ui3_tab": [
-   "ui3-tab.png"
+   "ui3-tab.webp"
   ],
   "ui3_pill": [
-   "ui3-pill.png"
+   "ui3-pill.webp"
   ],
   "ui3_ibtn": [
    "ui3-ibtn.png"
   ],
   "ui3_card": [
-   "ui3-card.png"
+   "ui3-card.webp"
   ],
   "ui3_stamp": [
-   "ui3-stamp.png"
+   "ui3-stamp.webp"
   ],
   "ui3_signl": [
    "ui3-signl.png"
@@ -475,19 +475,22 @@
    "ui3-signr.png"
   ],
   "ui5_win": [
-   "ui5-win.png"
+   "ui5-win.webp"
   ],
   "ui5_panel": [
-   "ui5-panel.png"
+   "ui5-panel.webp"
   ],
   "ui5_title": [
-   "ui5-title.png"
+   "ui5-title.webp"
+  ],
+  "ui5_titlep": [
+   "ui5-titlep.webp"
   ],
   "ui5_close": [
    "ui5-close.png"
   ],
   "ui5_slot": [
-   "ui5-slot.png"
+   "ui5-slot.webp"
   ],
   "ui5_slotp": [
    "ui5-slotp.png"
@@ -505,10 +508,10 @@
    "ui5-chiponp.png"
   ],
   "ui5_btn": [
-   "ui5-btn.png"
+   "ui5-btn.webp"
   ],
   "ui5_hubplan": [
-   "ui5-hubplan.png"
+   "ui5-hubplan.webp"
   ],
   "ui5_hubgp": [
    "ui5-hubgp.png"
@@ -517,7 +520,7 @@
    "ui5-lock.png"
   ],
   "ui5_hubgpw": [
-   "ui5-hubgpw.png"
+   "ui5-hubgpw.webp"
   ],
   "hero_front": [
    "hero-front.png"

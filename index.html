@@ -504,7 +504,7 @@
 
   /* 공통 창·칸·태그 = A안 안장 가죽(ui5_*, 11-11). 조각은 시안 px라 화면 = 시안 × 0.44 */
   html.skui .modal { background:none; border-style:solid; border-width:11px; border-image:var(--ui3-bar) 26 fill / 11px; border-radius:0 !important; box-shadow:0 6px 16px rgba(30,18,8,.45); max-width:330px; } /* 시안 구조: 가죽 틀 위에 제목 띠·본문 판 두 장(11-11 "제목 영역 어색") */
-  html.skui .modal .mh { border-style:solid; border-width:7px; border-image:var(--ui5-title) 16 fill / 7px; min-height:46px; padding:0 3px 0 8px; margin-bottom:4px; flex-shrink:0; }
+  html.skui .modal .mh { border-style:solid; border-width:7px; border-image:var(--ui5-titlep) 16 fill / 7px; min-height:46px; padding:0 3px 0 8px; margin-bottom:4px; flex-shrink:0; }
   html.skui .modal .mh h2 { font-size:19px; font-weight:900; color:#2b1d16; }
   html.skui .modal .mh .x { width:30px; height:29px; border-style:solid; border-width:6px; border-image:var(--ui5-close) 12 fill / 6px; background:none; padding:0; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:900; color:#2b1d16; }
   html.skui .modal .mb { border-style:solid; border-width:3px; border-image:var(--ui5-panel) 6 fill / 3px; padding:9px 10px 12px; }
@@ -523,7 +523,7 @@
   html.skui .nextBtn { font-size:17px; min-height:48px; }
   html.skui .btn:active:not(:disabled) { transform:translate(1px,1px); box-shadow:none; }
   html.skui .donate { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-chipon) 14 fill / 6px; border-radius:0 !important; box-shadow:0 3px 6px rgba(30,18,8,.35); color:#2b1d16; font-weight:900; padding:5px 14px; } /* 후원 = 주황 종이 태그 */
-  html.skui #hubOv .hubTop { background:none; border-style:solid; border-width:7px; border-image:var(--ui5-title) 16 fill / 7px; margin:calc(env(safe-area-inset-top) + 8px) 10px 0; padding:4px 8px; min-height:46px; color:#2b1d16; } html.skui #hubOv .hubTop h2 { color:#2b1d16; font-weight:900; bottom:auto; top:50%; transform:translate(-50%,-50%); } html.skui #hubOv .hubTop .link { color:#2b1d16; font-weight:800; }
+  html.skui #hubOv .hubTop { background:none; border-style:solid; border-width:7px; border-image:var(--ui5-titlep) 16 fill / 7px; margin:calc(env(safe-area-inset-top) + 8px) 10px 0; padding:4px 8px; min-height:46px; color:#2b1d16; } html.skui #hubOv .hubTop h2 { color:#2b1d16; font-weight:900; bottom:auto; top:50%; transform:translate(-50%,-50%); } html.skui #hubOv .hubTop .link { color:#2b1d16; font-weight:800; }
   /* 관리동 안 = 한 장 그림(C안, 11-11): 그림이 화면을 덮고(cover), 방 버튼은 그림 위 %로 겹침. 복도·문·바닥 무늬·이모지 가구는 그림에 있어 숨김 */
   #hubOv.art { background:#4f8a3a; container-type:size; } #hubOv.art .hubTop { position:absolute; left:0; right:0; top:0; z-index:4; }
   #hubOv.art .hubWrap { position:absolute; inset:0; padding:0; display:block; }
@@ -559,8 +559,16 @@
   html.skui #s1.scened .rcard .btn { font-size:19px; min-height:52px; } html.skui #s1.scened .rcard .btn small { color:#ffe2b0; opacity:1; text-shadow:inherit; } html.skui #s1.scened .rcard .btn small::before, html.skui #s1.scened .rcard .btn small::after { background:#ffe2b0; opacity:.6; }
   html.skui #s6 .btn:not(.sec):not(.bad) { font-size:15px; padding-right:8px; white-space:nowrap; letter-spacing:0; }
   html.skui .btn:not(.sec):not(.bad):active, html.skui .nextBtn:active { transform:translateY(1px); filter:brightness(.95); }
+  #hubOv.art.wait .hubPlan { visibility:hidden; } /* 관리동 그림 받는 중 */
+  /* 시트 제목도 창과 같은 제목 띠(11-11 마무리 2): 띠를 안쪽 여백까지 끌어 붙이고 닫기는 띠 안 오른쪽 */
+  html.skui .sheet > .sh { margin:-14px -12px 8px; min-height:46px; box-sizing:border-box; display:flex; align-items:center; padding:0 40px 0 8px; border-style:solid; border-width:7px; border-image:var(--ui5-titlep) 16 fill / 7px; font-size:19px; font-weight:900; color:#2b1d16; line-height:1.2; }
+  html.skui .sheet:has(> .sh) > .sx { top:14px; right:13px; }
+  /* 결과 화면 숫자 줄 = 종이 판 위에(11-11 마무리 3) */
+  html.skui #s6 .res table { border-collapse:separate; border-spacing:0; border-style:solid; border-width:6px; border-image:var(--ui5-slotp) 14 fill / 6px; padding:4px 8px; margin-top:12px; background:none; }
+  html.skui #s6 .res table td { padding-top:3px; padding-bottom:3px; }
+  html.skui #s6 .res tr.coin td { border-top:1px solid rgba(59,36,18,.18); padding-top:6px; }
 </style>
-  <script type="module" crossorigin src="./assets/index-Cj2yP7-N.js"></script>
+  <script type="module" crossorigin src="./assets/index-BmoPyWAf.js"></script>
 </head>
 <body>
 <div id="app">
