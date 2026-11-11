@@ -519,7 +519,6 @@
   html.skui .dxb .cell:not(.good):not(.bad), html.skui #sheetBox .guide, html.skui .dxb .row1 { box-shadow:none; }
   html.skui .dxb .cell.good, html.skui .dxb .cell.bad { padding-left:11px; position:relative; box-shadow:none; } html.skui .dxb .cell.good::before, html.skui .dxb .cell.bad::before { content:''; position:absolute; left:-1px; top:2px; bottom:2px; width:4px; background:var(--good); } html.skui .dxb .cell.bad::before { background:var(--bad); } /* 좋음·경계 띠: border-image fill이 inset 그림자를 덮어 가상 요소로 */
   html.skui .dxb { background:none; }
-  html.skui .btn:not(.sec):not(.bad), html.skui .nextBtn { background:none; border-style:solid; border-width:11px; border-image:var(--ui3-stamp) 26 fill / 11px; border-radius:0 !important; box-shadow:none; color:#c8331f; font-weight:900; padding:2px 6px; } /* 주 버튼 = 빨간 도장(탐험 카드와 같은 조각, 11-11) */
   html.skui .btn.sec { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-chip) 14 fill / 6px; border-radius:0 !important; box-shadow:none; color:#2b1d16; font-weight:800; padding:7px 6px; } /* 보조 버튼 = 종이 태그 */
   html.skui .nextBtn { font-size:17px; min-height:48px; }
   html.skui .btn:active:not(:disabled) { transform:translate(1px,1px); box-shadow:none; }
@@ -552,8 +551,16 @@
   html.skui .xm-end { height:auto; padding:2px 8px; } html.skui .slotTag { padding:1px 8px; }
   html.skui #s3 .exui .endBtn { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-chip) 14 fill / 6px; color:#2b1d16; text-shadow:none; height:auto; padding:3px 10px !important; margin:0; font-weight:800; }
   html.skui .snk .sb { color:#2b1d16; font-weight:800; font-size:12px; } html.skui .snk .sn { top:-1px; right:1px; color:#2b1d16; font-weight:900; font-size:12.5px; } /* 시안: 이름·개수 굵고 짙게 */
+  /* 칸·태그 = 바느질선 뺀 판(11-11 "스티치 과함"), 주 버튼 = 가죽 짐표(btn/p3 시안, 조각 920×160 ×0.29) */
+  html.skui .snk, html.skui .dexcard, html.skui .modal .card, html.skui .avs3 .av b, html.skui .ib, html.skui .dxb .cell, html.skui #sheetBox .guide, html.skui .dxb .row1, html.skui #s3 .trail, html.skui #s4 .mrow, html.skui #s4 .guide, html.skui .dxhero, html.skui #hubOv .hubSay { border-image-source:var(--ui5-slotp); }
+  html.skui .chip, html.skui .btn.sec, html.skui .xm-end, html.skui .slotTag, html.skui #s3 .exui .endBtn { border-image-source:var(--ui5-chipp); }
+  html.skui .chip.on, html.skui .donate { border-image-source:var(--ui5-chiponp); }
+  html.skui .btn:not(.sec):not(.bad), html.skui .nextBtn, html.skui #s1.scened .rcard .btn { border-style:solid; border-width:6px 9px 10px 32px; border-image:var(--ui5-btn) 20 30 34 110 fill / 6px 9px 10px 32px; border-radius:0 !important; background:none; box-shadow:none; min-height:46px; height:auto; padding:2px 23px 2px 0; font-size:17px; color:#fff1d6; font-weight:900; letter-spacing:.5px; text-shadow:0 1px 0 #5a2406, 1px 0 0 #5a2406, -1px 0 0 #5a2406, 0 -1px 0 #5a2406; }
+  html.skui #s1.scened .rcard .btn { font-size:19px; min-height:52px; } html.skui #s1.scened .rcard .btn small { color:#ffe2b0; opacity:1; text-shadow:inherit; } html.skui #s1.scened .rcard .btn small::before, html.skui #s1.scened .rcard .btn small::after { background:#ffe2b0; opacity:.6; }
+  html.skui #s6 .btn:not(.sec):not(.bad) { font-size:15px; padding-right:8px; white-space:nowrap; letter-spacing:0; }
+  html.skui .btn:not(.sec):not(.bad):active, html.skui .nextBtn:active { transform:translateY(1px); filter:brightness(.95); }
 </style>
-  <script type="module" crossorigin src="./assets/index-DyQWjq40.js"></script>
+  <script type="module" crossorigin src="./assets/index-Cj2yP7-N.js"></script>
 </head>
 <body>
 <div id="app">

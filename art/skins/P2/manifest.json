@@ -489,11 +489,23 @@
   "ui5_slot": [
    "ui5-slot.png"
   ],
+  "ui5_slotp": [
+   "ui5-slotp.png"
+  ],
   "ui5_chip": [
    "ui5-chip.png"
   ],
+  "ui5_chipp": [
+   "ui5-chipp.png"
+  ],
   "ui5_chipon": [
    "ui5-chipon.png"
+  ],
+  "ui5_chiponp": [
+   "ui5-chiponp.png"
+  ],
+  "ui5_btn": [
+   "ui5-btn.png"
   ],
   "ui5_hubplan": [
    "ui5-hubplan.png"
