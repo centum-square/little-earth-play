@@ -534,15 +534,26 @@
   #hubOv.art .room.locked { background:rgba(20,12,6,.55); } #hubOv.art .room.locked .lock { top:50%; opacity:1; width:14px; height:18px; font-size:0; color:transparent; background:var(--ui5-lock) center / 100% 100% no-repeat; image-rendering:pixelated; filter:drop-shadow(0 1px 0 rgba(0,0,0,.4)); } /* 그림 자물쇠(시안 C, 11-11) */
   #hubOv.art .rn { bottom:4px; }
   #hubOv.art .npc { width:31px; height:52px; background:var(--ui5-hubgp) center bottom / 100% 100% no-repeat; image-rendering:pixelated; filter:drop-shadow(0 2px 0 rgba(0,0,0,.25)); }
-  #hubOv.art .npc { animation:none; } #hubOv.art .npc.left { transform:translate(-50%,-50%) scaleX(-1); } /* 둥둥 대신 걷기(hubWander) */
-  #hubOv.art .npc.walk { animation:npcStep .36s steps(2) infinite; } @keyframes npcStep { 50% { margin-top:-2px; } }
+  /* 할아버지 걷기 6프레임 띠(ui5_hubgpw, 11-11 "둥둥 떠다님"): 0 앞 서기 · 1·2 앞 걷기 · 3 옆 서기 · 4·5 옆 걷기(왼쪽을 봄, 오른쪽은 뒤집기) */
+  #hubOv.art .npc { animation:none; background-image:var(--ui5-hubgpw); background-size:600% 100%; background-position:0 0; }
+  #hubOv.art .npc.side { background-position:60% 0; } #hubOv.art .npc.right { transform:translate(-50%,-50%) scaleX(-1); }
+  #hubOv.art .npc.walk { animation:gpFront .5s infinite; } #hubOv.art .npc.walk.side { animation-name:gpSide; }
+  @keyframes gpFront { 0%, 49.9% { background-position:20% 0; } 50%, 100% { background-position:40% 0; } }
+  @keyframes gpSide { 0%, 49.9% { background-position:80% 0; } 50%, 100% { background-position:100% 0; } }
   #hubOv.art .rn { display:none; } /* 방 이름(거실 등) 글씨 빼기(11-11 사용자) */
   #hubOv.art .npc.zz::after { content:'💤'; position:absolute; right:-14px; top:-6px; font-size:14px; }
   html.skui #hubOv .hubSay { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-slot) 14 fill / 6px; border-radius:0; padding:3px 6px; font-weight:700; }
   html.skui #s7, html.skui #s7 .chips { background-color:#f3d6a4; } /* 도감 바탕 = 크래프트지(시안 판 251·215·158을 시간대 빛과 섞어 살짝 낮춤), 시간대 빛은 그대로 */
+  /* 탐험 흐름 화면(11-11 점검): 흔적 카드 = 종이 칸, 탐험 끝내기·시간대 표·망원경 = 종이 태그, 만남 칸 = 종이 칸(좋음·경계 띠는 가상 요소), 화면 바탕 = 크래프트지(시간대 빛 유지) */
+  html.skui .scr:not(.canvas) { background-color:#f3d6a4; } /* 캔버스 화면(돔·퍼즐)은 투명 유지 */
+  html.skui #s3 .trail, html.skui #s4 .mrow, html.skui #s4 .guide { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-slot) 14 fill / 6px; border-radius:0 !important; box-shadow:none; color:#2b1d16; }
+  html.skui #s4 .mrow.good, html.skui #s4 .mrow.bad { position:relative; } html.skui #s4 .mrow.good::before, html.skui #s4 .mrow.bad::before { content:''; position:absolute; left:-1px; top:2px; bottom:2px; width:4px; background:var(--good); } html.skui #s4 .mrow.bad::before { background:var(--bad); }
+  html.skui .xm-end, html.skui .slotTag { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-chip) 14 fill / 6px; border-radius:0 !important; box-shadow:none; color:#2b1d16; font-weight:800; text-shadow:none; }
+  html.skui .xm-end { height:auto; padding:2px 8px; } html.skui .slotTag { padding:1px 8px; }
+  html.skui #s3 .exui .endBtn { background:none; border-style:solid; border-width:6px; border-image:var(--ui5-chip) 14 fill / 6px; color:#2b1d16; text-shadow:none; height:auto; padding:3px 10px !important; margin:0; font-weight:800; }
   html.skui .snk .sb { color:#2b1d16; font-weight:800; font-size:12px; } html.skui .snk .sn { top:-1px; right:1px; color:#2b1d16; font-weight:900; font-size:12.5px; } /* 시안: 이름·개수 굵고 짙게 */
 </style>
-  <script type="module" crossorigin src="./assets/index-DlhnWy0s.js"></script>
+  <script type="module" crossorigin src="./assets/index-DyQWjq40.js"></script>
 </head>
 <body>
 <div id="app">
