@@ -113,7 +113,7 @@
   .blocker { position:fixed; inset:0; z-index:23; display:none; background:rgba(30,18,8,.28); } .blocker.show { display:block; }
   .letter .hdr .addr { color:#8a857a; font-size:11px; margin-left:4px; }
   .bubble.show { display:block; } .nextBtn { display:block; margin:10px 0 0 auto; padding:8px 18px; border:0; border-radius:8px; background:#2b2a27; color:#fff; font-size:13px; font-weight:600; } .nextBtn.wide { margin:14px 0 0; width:100%; padding:11px; }
-  .scr .ctl { position:absolute; left:16px; right:16px; bottom:calc(env(safe-area-inset-bottom) + 20px); display:flex; gap:8px; } .scr .ctl .btn { margin:0; } .scr .ctl .btn.sec { flex:0 0 auto; width:auto; padding:13px 16px; }
+  .scr .ctl { position:absolute; left:16px; right:16px; bottom:calc(env(safe-area-inset-bottom) + 20px); display:flex; gap:8px; } .scr .ctl .btn { margin:0; } .scr .ctl .btn.sec { flex:0 0 auto; width:auto; padding:13px 16px; } .scr .ctl .btn .cnt { display:inline-grid; place-items:center; min-width:20px; height:20px; margin-left:6px; padding:0 5px; border-radius:10px; background:#4a2a1a; color:#fff3e2; font-style:normal; font-size:12px; line-height:1; vertical-align:2px; } /* 지나치기 남은 수 배지(11-18 만남 문구: 쓴 수/한도 → 남은 수, 망원경 배지와 같은 셈법) */
   #s0 .cut { padding-bottom:110px; }
   #s0 .cut.mid { align-items:center; justify-content:center; text-align:center; padding-bottom:0; } #s0 .cut.mid .emoji { top:28%; } .bubble small { display:block; color:#777; font-size:11px; margin-top:6px; } .bubble .who { display:block; font-size:11px; color:#8a6d2b; margin-bottom:4px; } .bubble.grandpa { background:#f3ecd8; }
   #s0 .cut .emoji { position:absolute; top:40%; left:50%; transform:translate(-50%,-50%); font-size:72px; opacity:.9; }
@@ -152,7 +152,8 @@
   .rv .rank { font-size:15px !important; } .rvA .xpbar, .rvC .xpbar { height:24px !important; } .rvC .rcoin b { font-size:40px; }
   .rv .rcards { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:16px 0 10px; } .rv .rc { border:2px solid var(--ink); background:var(--panel); padding:10px 6px 8px; display:flex; flex-direction:column; align-items:center; gap:3px; min-width:0; } .rv .rc small { font-size:11px; color:var(--muted); } .rv .rc b { font-size:19px; line-height:1.2; color:var(--ink); } .rv .rc i { font-style:normal; font-size:11px; color:#c0392b; letter-spacing:-1px; } .rv .rc .xpbar { width:100%; height:10px !important; margin-top:4px; } .rv .rc #rankLv { margin:0; text-align:center; white-space:nowrap; } .rv .rc #rankLv .up { display:block; margin:2px 0 0; font-size:11px; }
   .picks { display:flex; flex-direction:column; gap:6px; max-height:52dvh; overflow:auto; } .pick { display:flex; align-items:center; gap:10px; text-align:left; padding:8px 10px; border-radius:10px; border:1px solid var(--line); background:var(--panel2); cursor:pointer; } .pick.on { border-color:var(--accent); } .pick .pe { font-size:26px; } .pick .pb { display:flex; flex-direction:column; font-size:13px; } .pick .hearts { color:var(--accent); font-size:11px; } .pick .muted { font-size:12px; }
-  .btn.chase { width:auto; display:inline-flex; flex-direction:column; align-items:center; align-self:center; padding:8px 22px; margin:4px auto 8px; } /* 쫓아가기 = 결과 표 바로 아래 가운데(2026-10-19) */ .btn.chase small { font-size:11px; opacity:.75; }
+  .btn.chase .cnt { display:inline-grid; place-items:center; min-width:20px; height:20px; margin-left:6px; padding:0 5px; border-radius:10px; background:#4a2a1a; color:#fff3e2; font-style:normal; font-size:12px; line-height:1; } /* 쫓아가기 남은 수 배지(11-18 결과 문구) */
+  .btn.chase { width:auto; display:inline-flex; flex-direction:row; align-items:center; align-self:center; padding:8px 22px; margin:4px auto 8px; } /* 쫓아가기 = 결과 표 바로 아래 가운데(2026-10-19) */ .btn.chase small { font-size:11px; opacity:.75; }
   .metb { background:none; border:0; padding:0 2px; font-size:20px; cursor:pointer; } .res .cluep { font-size:14px; line-height:1.6; color:var(--ink); word-break:keep-all; margin-top:4px; }
   .card.trailnote { align-items:flex-start; } .card.trailnote .met { margin-top:4px; font-size:18px; letter-spacing:2px; } .card.trailnote .met .muted { font-size:12px; letter-spacing:0; }
   .trail:active { border-color:var(--accent); } .trail .ic { font-size:34px; } .trail .nm { font-weight:600; margin-top:6px; font-size:13px; } .trail .ht { color:var(--muted); font-size:11px; margin-top:4px; line-height:1.4; } .trail .bait { color:var(--accent); font-size:11px; margin-top:4px; }
@@ -568,7 +569,7 @@
   html.skui #s6 .res table td { padding-top:3px; padding-bottom:3px; }
   html.skui #s6 .res tr.coin td { border-top:1px solid rgba(59,36,18,.18); padding-top:6px; }
 </style>
-  <script type="module" crossorigin src="./assets/index-CSjZvK92.js"></script>
+  <script type="module" crossorigin src="./assets/index-ttli7yNS.js"></script>
 </head>
 <body>
 <div id="app">
