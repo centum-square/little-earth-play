@@ -78,7 +78,28 @@
   ],
   "hero_front": [],
   "hero_back": [],
-  "hero_walk": []
+  "hero_walk": [],
+  "ui6_polaroid": [
+   "ui6-polaroid.webp"
+  ],
+  "ui6_exmap": [
+   "ui6-exmap.webp"
+  ],
+  "ui6_tile": [
+   "ui6-tile.webp"
+  ],
+  "ui6_badge": [
+   "ui6-badge.webp"
+  ],
+  "ui6_spy": [
+   "ui6-spy.webp"
+  ],
+  "ui6_bmain": [
+   "ui6-bmain.webp"
+  ],
+  "ui6_bsub": [
+   "ui6-bsub.webp"
+  ]
  },
  "weights": {
   "tree": [
@@ -97,5 +118,6 @@
    1.64
   ]
  },
- "hero": "hero-right.webp"
+ "hero": "hero-right.webp",
+ "font": "Jua"
 }
