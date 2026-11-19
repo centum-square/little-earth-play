@@ -76,9 +76,20 @@
    "hero-walk-l1.webp",
    "hero-walk-l2.webp"
   ],
-  "hero_front": [],
-  "hero_back": [],
-  "hero_walk": [],
+  "hero_front": [
+   "hero-front.webp"
+  ],
+  "hero_walk": [
+   "hero-walk-f1.webp",
+   "hero-walk-f2.webp"
+  ],
+  "hero_back": [
+   "hero-back.webp"
+  ],
+  "hero_walk_b": [
+   "hero-walk-b1.webp",
+   "hero-walk-b2.webp"
+  ],
   "ui6_polaroid": [
    "ui6-polaroid.webp"
   ],
@@ -116,6 +127,174 @@
   "black_bear": [
    "animal-black_bear.webp",
    1.64
+  ],
+  "euro_hedgehog": [
+   "animal-euro_hedgehog.webp",
+   0.55
+  ],
+  "otter": [
+   "animal-otter.webp",
+   0.82
+  ],
+  "varied_tit": [
+   "animal-varied_tit.webp",
+   0.55
+  ],
+  "fire_salamander": [
+   "animal-fire_salamander.webp",
+   0.55
+  ],
+  "raccoon_dog": [
+   "animal-raccoon_dog.webp",
+   0.82
+  ],
+  "amur_leopard": [
+   "animal-amur_leopard.webp",
+   0.82
+  ],
+  "amur_tiger": [
+   "animal-amur_tiger.webp",
+   1.3
+  ],
+  "black_woodpecker": [
+   "animal-black_woodpecker.webp",
+   0.55
+  ],
+  "blue_tit": [
+   "animal-blue_tit.webp",
+   0.55
+  ],
+  "brown_kiwi": [
+   "animal-brown_kiwi.webp",
+   0.55
+  ],
+  "chipmunk": [
+   "animal-chipmunk.webp",
+   0.55
+  ],
+  "eagle_owl": [
+   "animal-eagle_owl.webp",
+   0.82
+  ],
+  "euro_rabbit": [
+   "animal-euro_rabbit.webp",
+   0.55
+  ],
+  "european_hare": [
+   "animal-european_hare.webp",
+   0.55
+  ],
+  "fire_bellied_toad": [
+   "animal-fire_bellied_toad.webp",
+   0.55
+  ],
+  "fish_owl": [
+   "animal-fish_owl.webp",
+   0.82
+  ],
+  "flying_squirrel": [
+   "animal-flying_squirrel.webp",
+   0.55
+  ],
+  "giant_panda": [
+   "animal-giant_panda.webp",
+   1.3
+  ],
+  "gray_wolf": [
+   "animal-gray_wolf.webp",
+   0.82
+  ],
+  "green_pigeon": [
+   "animal-green_pigeon.webp",
+   0.55
+  ],
+  "hummingbird": [
+   "animal-hummingbird.webp",
+   0.55
+  ],
+  "kingfisher": [
+   "animal-kingfisher.webp",
+   0.55
+  ],
+  "koala": [
+   "animal-koala.webp",
+   0.82
+  ],
+  "least_weasel": [
+   "animal-least_weasel.webp",
+   0.55
+  ],
+  "leopard_cat": [
+   "animal-leopard_cat.webp",
+   0.82
+  ],
+  "long_eared_owl": [
+   "animal-long_eared_owl.webp",
+   0.55
+  ],
+  "long_tailed_tit": [
+   "animal-long_tailed_tit.webp",
+   0.55
+  ],
+  "lynx": [
+   "animal-lynx.webp",
+   0.82
+  ],
+  "marsh_tit": [
+   "animal-marsh_tit.webp",
+   0.55
+  ],
+  "marsican_bear": [
+   "animal-marsican_bear.webp",
+   1.3
+  ],
+  "marten": [
+   "animal-marten.webp",
+   0.82
+  ],
+  "nuthatch": [
+   "animal-nuthatch.webp",
+   0.55
+  ],
+  "quokka": [
+   "animal-quokka.webp",
+   0.82
+  ],
+  "red_deer": [
+   "animal-red_deer.webp",
+   1.3
+  ],
+  "red_panda": [
+   "animal-red_panda.webp",
+   0.82
+  ],
+  "red_squirrel": [
+   "animal-red_squirrel.webp",
+   0.55
+  ],
+  "roe_deer": [
+   "animal-roe_deer.webp",
+   0.82
+  ],
+  "star_nosed_mole": [
+   "animal-star_nosed_mole.webp",
+   0.55
+  ],
+  "tree_frog": [
+   "animal-tree_frog.webp",
+   0.55
+  ],
+  "volcano_rabbit": [
+   "animal-volcano_rabbit.webp",
+   0.55
+  ],
+  "water_deer": [
+   "animal-water_deer.webp",
+   0.82
+  ],
+  "woodpecker": [
+   "animal-woodpecker.webp",
+   0.55
   ]
  },
  "hero": "hero-right.webp",
