@@ -1,0 +1,101 @@
+{
+ "id": "G",
+ "name": "종이",
+ "base": "P2",
+ "pixel": false,
+ "cell": 64,
+ "ground": {
+  "grass": "g-grass.webp",
+  "path": "g-path.webp",
+  "water": "g-water.webp",
+  "flower": "g-flower.webp"
+ },
+ "sprites": {
+  "tree": [
+   "tree-0.webp",
+   "tree-1.webp",
+   "tree-2.webp"
+  ],
+  "pine": [
+   "pine-0.webp"
+  ],
+  "rock": [
+   "rock-0.webp"
+  ],
+  "small": [
+   "small-0.webp",
+   "small-1.webp"
+  ],
+  "bush": [
+   "bush-0.webp",
+   "bush-1.webp",
+   "bush-2.webp"
+  ],
+  "stump": [
+   "stump-0.webp",
+   "stump-1.webp"
+  ],
+  "tuft": [
+   "tuft-0.webp",
+   "tuft-1.webp"
+  ],
+  "flower": [
+   "flower-0.webp"
+  ],
+  "pebble": [
+   "pebble-0.webp"
+  ],
+  "misc": [
+   "misc-0.webp"
+  ],
+  "reed": [
+   "reed-0.webp"
+  ],
+  "meetbush": [
+   "meetbush-0.webp",
+   "meetbush-1.webp",
+   "meetbush-2.webp"
+  ],
+  "lily": [],
+  "lotus": [],
+  "foam": [],
+  "stone": [],
+  "bank": [],
+  "bridge": [],
+  "hero_right": [
+   "hero-right.webp"
+  ],
+  "hero_left": [
+   "hero-left.webp"
+  ],
+  "hero_walk_r": [
+   "hero-walk-r1.webp",
+   "hero-walk-r2.webp"
+  ],
+  "hero_walk_l": [
+   "hero-walk-l1.webp",
+   "hero-walk-l2.webp"
+  ],
+  "hero_front": [],
+  "hero_back": [],
+  "hero_walk": []
+ },
+ "weights": {
+  "tree": [
+   3,
+   3,
+   1
+  ]
+ },
+ "animals": {
+  "red_fox": [
+   "animal-red_fox.webp",
+   0.82
+  ],
+  "black_bear": [
+   "animal-black_bear.webp",
+   1.64
+  ]
+ },
+ "hero": "hero-right.webp"
+}
