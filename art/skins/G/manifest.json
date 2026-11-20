@@ -170,6 +170,295 @@
   ],
   "ui6_pnclose": [
    "ui6-pnclose.webp"
+  ],
+  "pz_bg": [
+   "pz-bg.webp"
+  ],
+  "pz_cell": [
+   "pz-cell-0.webp",
+   "pz-cell-1.webp"
+  ],
+  "pz_block": [
+   "pz-block.webp"
+  ],
+  "pzi_chain": [
+   "pzi-chain.webp"
+  ],
+  "pzi_leafpile": [
+   "pzi-leafpile.webp"
+  ],
+  "pzi_rock": [
+   "pzi-rock.webp"
+  ],
+  "pzi_log": [
+   "pzi-log.webp"
+  ],
+  "pzi_chest": [
+   "pzi-chest.webp"
+  ],
+  "pzg_hl": [
+   "pzg-hl.webp"
+  ],
+  "pzg_food": [
+   "pzg-food.webp"
+  ],
+  "pzg_scare": [
+   "pzg-scare.webp"
+  ],
+  "pzi_item:sweepR": [
+   "pzi-item-sweepR.webp"
+  ],
+  "pzi_item:sweepC": [
+   "pzi-item-sweepC.webp"
+  ],
+  "pzi_item:sweepB": [
+   "pzi-item-sweepB.webp"
+  ],
+  "pzi_item:fit": [
+   "pzi-item-fit.webp"
+  ],
+  "pzi_item:coin": [
+   "pzi-item-coin.webp"
+  ],
+  "pzg_round": [
+   "pzg-round.webp"
+  ],
+  "pzg_ibtn": [
+   "pzg-ibtn.webp"
+  ],
+  "pzg_pause": [
+   "pzg-pause.webp"
+  ],
+  "pzg_board": [
+   "pzg-board.webp"
+  ],
+  "pzg_tray": [
+   "pzg-tray.webp"
+  ],
+  "pzg_pill": [
+   "pzg-pill.webp"
+  ],
+  "pzg_hero": [
+   "pzg-hero.webp"
+  ],
+  "pzi_mouse": [
+   "pzi-mouse.webp"
+  ],
+  "pzi_earthworm": [
+   "pzi-earthworm.webp"
+  ],
+  "pzi_eagle_owl": [
+   "pzi-eagle_owl.webp"
+  ],
+  "pzi_car": [
+   "pzi-car.webp"
+  ],
+  "pzi_acorn": [
+   "pzi-acorn.webp"
+  ],
+  "pzi_pine_nut": [
+   "pzi-pine_nut.webp"
+  ],
+  "pzi_grasshopper": [
+   "pzi-grasshopper.webp"
+  ],
+  "pzi_bear": [
+   "pzi-bear.webp"
+  ],
+  "pzi_snake": [
+   "pzi-snake.webp"
+  ],
+  "pzi_rain": [
+   "pzi-rain.webp"
+  ],
+  "pzi_trap": [
+   "pzi-trap.webp"
+  ],
+  "pzi_landfill": [
+   "pzi-landfill.webp"
+  ],
+  "pzi_pesticide": [
+   "pzi-pesticide.webp"
+  ],
+  "pzi_ant": [
+   "pzi-ant.webp"
+  ],
+  "pzi_bamboo": [
+   "pzi-bamboo.webp"
+  ],
+  "pzi_berry": [
+   "pzi-berry.webp"
+  ],
+  "pzi_boar": [
+   "pzi-boar.webp"
+  ],
+  "pzi_bug": [
+   "pzi-bug.webp"
+  ],
+  "pzi_clover": [
+   "pzi-clover.webp"
+  ],
+  "pzi_crayfish": [
+   "pzi-crayfish.webp"
+  ],
+  "pzi_eucalyptus": [
+   "pzi-eucalyptus.webp"
+  ],
+  "pzi_fern": [
+   "pzi-fern.webp"
+  ],
+  "pzi_fish": [
+   "pzi-fish.webp"
+  ],
+  "pzi_fly": [
+   "pzi-fly.webp"
+  ],
+  "pzi_grain": [
+   "pzi-grain.webp"
+  ],
+  "pzi_grass": [
+   "pzi-grass.webp"
+  ],
+  "pzi_hazelnut": [
+   "pzi-hazelnut.webp"
+  ],
+  "pzi_honey": [
+   "pzi-honey.webp"
+  ],
+  "pzi_hornet": [
+   "pzi-hornet.webp"
+  ],
+  "pzi_larva": [
+   "pzi-larva.webp"
+  ],
+  "pzi_leaf": [
+   "pzi-leaf.webp"
+  ],
+  "pzi_millipede": [
+   "pzi-millipede.webp"
+  ],
+  "pzi_nectar": [
+   "pzi-nectar.webp"
+  ],
+  "pzi_salmon": [
+   "pzi-salmon.webp"
+  ],
+  "pzi_seed": [
+   "pzi-seed.webp"
+  ],
+  "pzi_sprout": [
+   "pzi-sprout.webp"
+  ],
+  "pzi_vole": [
+   "pzi-vole.webp"
+  ],
+  "pzi_bullfrog": [
+   "pzi-bullfrog.webp"
+  ],
+  "pzi_crow_bird": [
+   "pzi-crow_bird.webp"
+  ],
+  "pzi_cuckoo": [
+   "pzi-cuckoo.webp"
+  ],
+  "pzi_culling": [
+   "pzi-culling.webp"
+  ],
+  "pzi_disease": [
+   "pzi-disease.webp"
+  ],
+  "pzi_ditch": [
+   "pzi-ditch.webp"
+  ],
+  "pzi_dog": [
+   "pzi-dog.webp"
+  ],
+  "pzi_drought": [
+   "pzi-drought.webp"
+  ],
+  "pzi_eagle": [
+   "pzi-eagle.webp"
+  ],
+  "pzi_fox": [
+   "pzi-fox.webp"
+  ],
+  "pzi_flood": [
+   "pzi-flood.webp"
+  ],
+  "pzi_glass": [
+   "pzi-glass.webp"
+  ],
+  "pzi_hawk": [
+   "pzi-hawk.webp"
+  ],
+  "pzi_heron": [
+   "pzi-heron.webp"
+  ],
+  "pzi_ice": [
+   "pzi-ice.webp"
+  ],
+  "pzi_lean_year": [
+   "pzi-lean_year.webp"
+  ],
+  "pzi_leopard": [
+   "pzi-leopard.webp"
+  ],
+  "pzi_leopard_cat": [
+   "pzi-leopard_cat.webp"
+  ],
+  "pzi_logging": [
+   "pzi-logging.webp"
+  ],
+  "pzi_mantis": [
+   "pzi-mantis.webp"
+  ],
+  "pzi_marten": [
+   "pzi-marten.webp"
+  ],
+  "pzi_net": [
+   "pzi-net.webp"
+  ],
+  "pzi_owl": [
+   "pzi-owl.webp"
+  ],
+  "pzi_poaching": [
+   "pzi-poaching.webp"
+  ],
+  "pzi_pollution": [
+   "pzi-pollution.webp"
+  ],
+  "pzi_puma": [
+   "pzi-puma.webp"
+  ],
+  "pzi_riverwork": [
+   "pzi-riverwork.webp"
+  ],
+  "pzi_snow": [
+   "pzi-snow.webp"
+  ],
+  "pzi_stray_cat": [
+   "pzi-stray_cat.webp"
+  ],
+  "pzi_sun": [
+   "pzi-sun.webp"
+  ],
+  "pzi_thunder": [
+   "pzi-thunder.webp"
+  ],
+  "pzi_tiger": [
+   "pzi-tiger.webp"
+  ],
+  "pzi_weasel": [
+   "pzi-weasel.webp"
+  ],
+  "pzi_wildfire": [
+   "pzi-wildfire.webp"
+  ],
+  "pzi_wire": [
+   "pzi-wire.webp"
+  ],
+  "pzi_wolf": [
+   "pzi-wolf.webp"
   ]
  },
  "weights": {
