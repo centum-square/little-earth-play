@@ -490,6 +490,18 @@
   "gic_boots": [
    "gic-boots.webp"
   ],
+  "gic_crate": [
+   "gic-crate.webp"
+  ],
+  "gic_gilly": [
+   "gic-gilly.webp"
+  ],
+  "gic_compass": [
+   "gic-compass.webp"
+  ],
+  "gic_telescope": [
+   "gic-telescope.webp"
+  ],
   "pzg_leaf_rd": [
    "pzg-leaf-rd.webp"
   ]
