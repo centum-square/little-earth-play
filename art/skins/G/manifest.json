@@ -158,6 +158,18 @@
   ],
   "ui6_coin": [
    "ui6-coin.webp"
+  ],
+  "ui6_pntall": [
+   "ui6-pntall.webp"
+  ],
+  "ui6_pnconf": [
+   "ui6-pnconf.webp"
+  ],
+  "ui6_pnsheet": [
+   "ui6-pnsheet.webp"
+  ],
+  "ui6_pnclose": [
+   "ui6-pnclose.webp"
   ]
  },
  "weights": {
