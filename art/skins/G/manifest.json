@@ -56,10 +56,52 @@
    "meetbush-1.webp",
    "meetbush-2.webp"
   ],
-  "lily": [],
+  "hide_waterside": [
+   "z-hide-waterside-0.webp"
+  ],
+  "hide_old_trees": [
+   "z-hide-old-trees-0.webp"
+  ],
+  "hide_thicket": [
+   "z-hide-thicket-0.webp"
+  ],
+  "hide_meadow": [
+   "z-hide-meadow-0.webp"
+  ],
+  "hide_rocks": [
+   "z-hide-rocks-0.webp"
+  ],
+  "hide_deep_forest": [
+   "z-hide-deep-forest-0.webp"
+  ],
+  "hide_bamboo": [
+   "z-hide-bamboo-0.webp"
+  ],
+  "bamboo": [
+   "z-bamboo-0.webp",
+   "z-bamboo-1.webp"
+  ],
+  "oldtree": [
+   "z-oldtree-0.webp",
+   "z-oldtree-1.webp"
+  ],
+  "spruce": [
+   "z-spruce-0.webp"
+  ],
+  "boulder": [
+   "z-boulder-0.webp"
+  ],
+  "lily": [
+   "z-lily-0.webp"
+  ],
+  "stone": [
+   "z-stone-0.webp"
+  ],
+  "sasa": [
+   "z-sasa-0.webp"
+  ],
   "lotus": [],
   "foam": [],
-  "stone": [],
   "bank": [],
   "bridge": [],
   "hero_right": [
