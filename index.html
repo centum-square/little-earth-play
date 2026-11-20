@@ -592,14 +592,17 @@
   html.skx #s3 .exmeet { position:absolute; inset:0; z-index:12; display:flex; flex-direction:column; align-items:center; padding:calc(env(safe-area-inset-top) + 92px) 16px calc(env(safe-area-inset-bottom) + 16px); color:var(--skcream); font-family:var(--fsk2); } /* 사진 위 92(시안 E3) */
   html.skx #s3 .exmeet .dim { position:absolute; inset:0; background:linear-gradient(rgba(30,18,10,.38), rgba(30,18,10,.38) 45%, rgba(50,28,18,.72)); animation:exDim .35s ease-out both; } @keyframes exDim { from { opacity:0; } }
   html.skx #s3 .exmeet .flash { position:absolute; inset:0; z-index:9; background:#fff; opacity:0; pointer-events:none; } html.skx #s3 .exmeet .flash.on { animation:exFlash .45s ease-out; } @keyframes exFlash { 0% { opacity:.85; } 100% { opacity:0; } }
-  html.skx #s3 .exmeet .pcard { position:relative; z-index:1; flex:none; width:min(220px, 56vw, calc((100dvh - 470px) * 450 / 682)); aspect-ratio:450 / 682; margin:0; background:var(--ui6-polaroid) center/100% 100% no-repeat; filter:drop-shadow(0 6px 10px rgba(30,16,8,.4)); transform:rotate(-2deg); opacity:0; }
+  html.skx #s3 .exmeet .pcard { position:relative; z-index:1; flex:none; width:min(250px, 66vw, calc((100dvh - 440px) * 450 / 682)); /* 11-20: 220 · 56vw → 250 · 66vw(사진을 키움) */ aspect-ratio:450 / 682; margin:0; background:var(--ui6-polaroid) center/100% 100% no-repeat; filter:drop-shadow(0 6px 10px rgba(30,16,8,.4)); transform:rotate(-2deg); opacity:0; }
   html.skx #s3 .exmeet .pcard.drop { animation:exDrop .5s cubic-bezier(.2,1.4,.4,1) .12s both; } @keyframes exDrop { from { transform:translateY(40px) rotate(4deg) scale(.9); opacity:0; } to { transform:rotate(-2deg); opacity:1; } }
   html.skx #s3 .exmeet .pph { position:absolute; left:6%; right:6%; top:10%; height:61%; border-radius:2px; overflow:hidden; background:#6f8a45 center/cover no-repeat; display:flex; align-items:flex-end; justify-content:center; padding-bottom:8%; }
   html.skx #s3 .exmeet .pph > img, html.skx #s3 .exmeet .pph > .spr { max-width:86%; max-height:74%; width:auto; height:auto; transition:filter .5s; filter:drop-shadow(0 2px 2px rgba(40,24,10,.3)); }
   html.skx #s3 .exmeet .pph.sil > img, html.skx #s3 .exmeet .pph.sil > .spr { filter:brightness(0) opacity(.55); }
+  html.skx .pph.meadow { background-size:cover !important; background-position:50% 30% !important; } /* 폴라로이드 사진 = 퍼즐 노을 풀밭(지평선 · 해가 위쪽에, 11-20) */
+  html.skx .cap img.rlf { width:15px; height:15px; vertical-align:-2px; } /* 희귀도 잎 그림 */
+  html.skx #s3 .exmeet .flash.on.soft { animation-duration:.22s; opacity:0; } html.skx #s3 .exmeet .pcard.drop.quick { animation-duration:.3s; animation-delay:0s; } /* 이미 친구인 종 = 찰칵 짧게 */
   html.skx #s3 .exmeet .pph img.spr:not(.art) { image-rendering:pixelated; min-height:60%; }
   html.skx #s3 .exmeet .cap { position:absolute; left:8%; right:8%; top:74%; text-align:center; color:var(--skink); } html.skx #s3 .exmeet .cap b { display:block; font-weight:400; font-size:20px; line-height:1.25; } html.skx #s3 .exmeet .cap span { font-size:13px; color:var(--skink2); }
-  html.skx #s3 .exmeet .info { position:relative; z-index:1; width:100%; display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:45px; }
+  html.skx #s3 .exmeet .info { position:relative; z-index:1; width:100%; display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:auto; padding-top:28px; } /* 11-20: 사진 바로 아래(45) → 사진과 버튼 사이 가운데(남는 높이를 위아래로 반씩, 버튼 margin-top:auto와 나눔) */
   html.skx #s3 .exmeet .rows { display:flex; flex-direction:column; gap:6px; width:100%; }
   html.skx #s3 .exmeet .row { display:flex; gap:4px 8px; align-items:center; flex-wrap:wrap; background:rgba(40,22,12,.5); border-radius:12px; padding:7px 12px; font-size:14px; }
   html.skx #s3 .exmeet .row .k { font-size:12px; opacity:.8; min-width:72px; } html.skx #s3 .exmeet .row .v { white-space:nowrap; } html.skx #s3 .exmeet .row .steal { font-size:12px; opacity:.85; }
@@ -627,7 +630,7 @@
   /* G 결과(R3 줄임): 흐린 지도 바탕 · 폴라로이드(만남 사진과 같은 판) · 제목 · 코인 · Lv 막대 · [기록 보기] 토글 · 바닥 버튼. 치수 = prototype/explore-result R3s(사진 위 96 · 내용 458 · 간격 12) */
   html.skx #s6 .gres { position:absolute; inset:0; z-index:5; display:flex; flex-direction:column; align-items:center; padding:calc(env(safe-area-inset-top) + 96px) 12px calc(env(safe-area-inset-bottom) + 16px); color:var(--skcream); font-family:var(--fsk2); overflow:hidden; background:#3a2a1c; }
   html.skx #s6 .gbg { position:absolute; inset:-24px; background:#4a3a24 center/cover no-repeat; filter:blur(12px) saturate(.7) brightness(.55); } /* B1 숲 흐리게(11-18) */
-  html.skx #s6 .pcard { position:relative; z-index:1; flex:none; width:min(220px, 56vw, calc((100dvh - 450px) * 450 / 682)); aspect-ratio:450 / 682; background:var(--ui6-polaroid) center/100% 100% no-repeat; filter:drop-shadow(0 6px 10px rgba(30,16,8,.4)); transform:rotate(-2deg); cursor:pointer; color:var(--skink); }
+  html.skx #s6 .pcard { position:relative; z-index:1; flex:none; width:min(250px, 66vw, calc((100dvh - 420px) * 450 / 682)); /* 11-20: 사진을 키움(만남과 같은 크기) */ aspect-ratio:450 / 682; background:var(--ui6-polaroid) center/100% 100% no-repeat; filter:drop-shadow(0 6px 10px rgba(30,16,8,.4)); transform:rotate(-2deg); cursor:pointer; color:var(--skink); }
   html.skx #s6 .pph { position:absolute; left:6%; right:6%; top:10%; height:61%; border-radius:2px; overflow:hidden; background:#6f8a45 center/cover no-repeat; display:flex; align-items:flex-end; justify-content:center; padding-bottom:8%; }
   html.skx #s6 .pph > img, html.skx #s6 .pph > .spr { max-width:86%; max-height:74%; width:auto; height:auto; filter:drop-shadow(0 2px 2px rgba(40,24,10,.3)); } html.skx #s6 .pph img.spr:not(.art) { image-rendering:pixelated; min-height:60%; }
   html.skx #s6 .pcard.miss .pph { filter:grayscale(.6) brightness(.85); } html.skx #s6 .pcard.miss .pph > * { opacity:.35; }
@@ -698,7 +701,7 @@
   @media (prefers-reduced-motion: reduce) { html.skx .xm-mk { animation:none; } }
   @media (prefers-reduced-motion: reduce) { html.skx #s3 .exmeet .pcard.drop, html.skx #s3 .exmeet .flash.on, html.skx #s3 .exmeet .dim { animation:none; opacity:1; } html.skx #s3 .exmeet .flash.on { opacity:0; } }
 </style>
-  <script type="module" crossorigin src="./assets/index-DVVhcr3U.js"></script>
+  <script type="module" crossorigin src="./assets/index-T8PocQTi.js"></script>
 </head>
 <body>
 <div id="app">
