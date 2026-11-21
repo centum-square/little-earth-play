@@ -481,6 +481,222 @@
   "pzi_wolf": [
    "pzi-wolf.webp"
   ],
+  "dxi_paw_prints": [
+   "dxi-paw-prints.webp"
+  ],
+  "dxi_claw_marks": [
+   "dxi-claw-marks.webp"
+  ],
+  "dxi_burrow": [
+   "dxi-burrow.webp"
+  ],
+  "dxi_pellet_scat": [
+   "dxi-pellet-scat.webp"
+  ],
+  "dxi_birdsong": [
+   "dxi-birdsong.webp"
+  ],
+  "dxi_branch_nest": [
+   "dxi-branch-nest.webp"
+  ],
+  "dxi_gnawed": [
+   "dxi-gnawed.webp"
+  ],
+  "dxi_hoof_prints": [
+   "dxi-hoof-prints.webp"
+  ],
+  "dxi_howl": [
+   "dxi-howl.webp"
+  ],
+  "dxi_antler_rub": [
+   "dxi-antler-rub.webp"
+  ],
+  "dxi_bamboo_scat": [
+   "dxi-bamboo-scat.webp"
+  ],
+  "dxi_bank_burrow": [
+   "dxi-bank-burrow.webp"
+  ],
+  "dxi_bear_nest": [
+   "dxi-bear-nest.webp"
+  ],
+  "dxi_beast_call": [
+   "dxi-beast-call.webp"
+  ],
+  "dxi_bellow": [
+   "dxi-bellow.webp"
+  ],
+  "dxi_big_paw_prints": [
+   "dxi-big-paw-prints.webp"
+  ],
+  "dxi_branch_scat": [
+   "dxi-branch-scat.webp"
+  ],
+  "dxi_cone_anvil": [
+   "dxi-cone-anvil.webp"
+  ],
+  "dxi_cone_core": [
+   "dxi-cone-core.webp"
+  ],
+  "dxi_deer_call": [
+   "dxi-deer-call.webp"
+  ],
+  "dxi_drumming": [
+   "dxi-drumming.webp"
+  ],
+  "dxi_form": [
+   "dxi-form.webp"
+  ],
+  "dxi_frog_call": [
+   "dxi-frog-call.webp"
+  ],
+  "dxi_fruit_flock": [
+   "dxi-fruit-flock.webp"
+  ],
+  "dxi_insect_scat": [
+   "dxi-insect-scat.webp"
+  ],
+  "dxi_latrine": [
+   "dxi-latrine.webp"
+  ],
+  "dxi_molehill": [
+   "dxi-molehill.webp"
+  ],
+  "dxi_moss_nest": [
+   "dxi-moss-nest.webp"
+  ],
+  "dxi_mud_hole": [
+   "dxi-mud-hole.webp"
+  ],
+  "dxi_nectar_flower": [
+   "dxi-nectar-flower.webp"
+  ],
+  "dxi_night_call": [
+   "dxi-night-call.webp"
+  ],
+  "dxi_oval_hole": [
+   "dxi-oval-hole.webp"
+  ],
+  "dxi_owl_pellet": [
+   "dxi-owl-pellet.webp"
+  ],
+  "dxi_pecked_nuts": [
+   "dxi-pecked-nuts.webp"
+  ],
+  "dxi_prey_remains": [
+   "dxi-prey-remains.webp"
+  ],
+  "dxi_probe_holes": [
+   "dxi-probe-holes.webp"
+  ],
+  "dxi_river_tracks": [
+   "dxi-river-tracks.webp"
+  ],
+  "dxi_roar": [
+   "dxi-roar.webp"
+  ],
+  "dxi_roost_pellets": [
+   "dxi-roost-pellets.webp"
+  ],
+  "dxi_rub_tree": [
+   "dxi-rub-tree.webp"
+  ],
+  "dxi_runway": [
+   "dxi-runway.webp"
+  ],
+  "dxi_scrape": [
+   "dxi-scrape.webp"
+  ],
+  "dxi_seed_cache": [
+   "dxi-seed-cache.webp"
+  ],
+  "dxi_seedy_scat": [
+   "dxi-seedy-scat.webp"
+  ],
+  "dxi_spawn": [
+   "dxi-spawn.webp"
+  ],
+  "dxi_spraint": [
+   "dxi-spraint.webp"
+  ],
+  "dxi_stripped_bark": [
+   "dxi-stripped-bark.webp"
+  ],
+  "dxi_tree_hole": [
+   "dxi-tree-hole.webp"
+  ],
+  "dxi_twisted_scat": [
+   "dxi-twisted-scat.webp"
+  ],
+  "dxi_under_cover": [
+   "dxi-under-cover.webp"
+  ],
+  "dxi_warren": [
+   "dxi-warren.webp"
+  ],
+  "dxi_waterside": [
+   "dxi-waterside.webp"
+  ],
+  "dxi_whistle": [
+   "dxi-whistle.webp"
+  ],
+  "dxi_yellow_droppings": [
+   "dxi-yellow-droppings.webp"
+  ],
+  "dxi_fx_chase": [
+   "dxi-fx-chase.webp"
+  ],
+  "dxi_fx_sniff": [
+   "dxi-fx-sniff.webp"
+  ],
+  "dxi_fx_night_eye": [
+   "dxi-fx-night-eye.webp"
+  ],
+  "dxi_fx_forager": [
+   "dxi-fx-forager.webp"
+  ],
+  "dxi_fx_swift": [
+   "dxi-fx-swift.webp"
+  ],
+  "dxi_fx_kin": [
+   "dxi-fx-kin.webp"
+  ],
+  "dxi_fx_nose": [
+   "dxi-fx-nose.webp"
+  ],
+  "dxi_fx_spark": [
+   "dxi-fx-spark.webp"
+  ],
+  "dxi_fx_pouch": [
+   "dxi-fx-pouch.webp"
+  ],
+  "dxi_goal_region": [
+   "dxi-goal-region.webp"
+  ],
+  "dxi_goal_family": [
+   "dxi-goal-family.webp"
+  ],
+  "dxi_goal_world": [
+   "dxi-goal-world.webp"
+  ],
+  "dxi_goal_rare": [
+   "dxi-goal-rare.webp"
+  ],
+  "dxi_goal_heart3": [
+   "dxi-goal-heart3.webp"
+  ],
+  "dxi_goal_heart5": [
+   "dxi-goal-heart5.webp"
+  ],
+  "dxi_act_nocturnal": [
+   "dxi-act-nocturnal.webp"
+  ],
+  "dxi_act_diurnal": [
+   "dxi-act-diurnal.webp"
+  ],
+  "dxi_act_crepuscular": [
+   "dxi-act-crepuscular.webp"
+  ],
   "gic_snack_grass": [
    "gic-snack-grass.webp"
   ],
@@ -525,6 +741,18 @@
   ],
   "pzg_leaf_rd": [
    "pzg-leaf-rd.webp"
+  ],
+  "ui6_hubplan": [
+   "ui6-hubplan.webp"
+  ],
+  "ui6_hubgp": [
+   "ui6-hubgp.webp"
+  ],
+  "ui6_gpface": [
+   "ui6-gpface.webp"
+  ],
+  "ui6_hublock": [
+   "ui6-hublock.webp"
   ]
  },
  "weights": {

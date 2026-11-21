@@ -603,6 +603,8 @@
   html.skx #s3 .exmeet .pph.sil > img, html.skx #s3 .exmeet .pph.sil > .spr { filter:brightness(0) opacity(.55); }
   html.skx .pph.meadow { background-size:cover !important; background-position:50% 30% !important; } /* 폴라로이드 사진 = 퍼즐 노을 풀밭(지평선 · 해가 위쪽에, 11-20) */
   html.skx .cap img.rlf { width:15px; height:15px; vertical-align:-2px; } /* 희귀도 잎 그림 */
+  html.skx #sheetBox .dxname .meta img.rlf { width:15px; height:15px; vertical-align:-2px; } /* 도감 상세 희귀도 잎(11-21) */
+  .coinFly .gcoin { display:block; width:20px; height:20px; background:var(--ui6-coin) center/contain no-repeat; } /* G 날아가는 코인(11-21) */
   html.skx #s3 .exmeet .flash.on.soft { animation-duration:.22s; opacity:0; } html.skx #s3 .exmeet .pcard.drop.quick { animation-duration:.3s; animation-delay:0s; } /* 이미 친구인 종 = 찰칵 짧게 */
   html.skx #s3 .exmeet .pph img.spr:not(.art) { image-rendering:pixelated; min-height:60%; }
   html.skx #s3 .exmeet .cap { position:absolute; left:8%; right:8%; top:74%; text-align:center; color:var(--skink); } html.skx #s3 .exmeet .cap b { display:block; font-weight:400; font-size:20px; line-height:1.25; } html.skx #s3 .exmeet .cap span { font-size:13px; color:var(--skink2); }
@@ -783,6 +785,7 @@
   /* 탐험 목표 창 G(11-21 A안 점선 노트 줄): 판 = gwin(배낭과 같은 큰 창) · 줄 사이 점선 #d9bb8b(흔적 노트와 같음) · 아이콘 = 둥근 종이 36 · 막대 6px 테라코타 #d1704c · 받기 = 주 버튼 36 + G 코인 · 보상 = G 코인 + 수 */
   html.skx #modalBox.ggoal .lvl { font:400 13px var(--fsk2) !important; color:#8a6a52 !important; margin:14px 0 4px !important; padding:0 !important; border:0 !important; background:none !important; } html.skx #modalBox.ggoal .mb > .lvl:first-child { margin-top:2px !important; }
   html.skx #modalBox.ggoal .goal { gap:10px !important; align-items:center; padding:12px 0 !important; background:none !important; border:0 !important; border-bottom:1px dashed #d9bb8b !important; border-image:none !important; box-shadow:none !important; border-radius:0 !important; }
+  html.skx #modalBox.ggoal .goal .gi img.dxi { width:24px !important; height:24px !important; object-fit:contain; } html.skx #sheetBox:has(> .dxw) .row1 img.dxi { width:20px !important; height:20px !important; vertical-align:-5px; object-fit:contain; } html.skx #s7 .card.trailnote .em img.gic { width:26px !important; height:26px !important; object-fit:contain; } html.skx #sheetBox:has(> .res.hint) td.num img.gic { width:20px !important; height:20px !important; vertical-align:-5px; object-fit:contain; } /* 도감 아이콘 크기(11-21 r27) */
   html.skx #modalBox.ggoal .goal .gi { width:36px; height:36px; flex:0 0 36px; background:var(--ui6-round) center/contain no-repeat; display:flex; align-items:center; justify-content:center; font-size:18px; }
   html.skx #modalBox.ggoal .goal .gt b { font:400 14px/1.3 var(--fsk2) !important; color:#4a2a1a; } html.skx #modalBox.ggoal .goal .gt small { font:400 11.5px var(--fsk2) !important; color:#8a6a52 !important; }
   html.skx #modalBox.ggoal .goal .gbar { height:6px !important; margin:5px 0 3px !important; border:0 !important; border-radius:3px !important; background:rgba(90,48,26,.12) !important; box-shadow:none !important; overflow:hidden; } html.skx #modalBox.ggoal .goal .gbar i { background:#d1704c !important; border-radius:3px !important; box-shadow:none !important; }
@@ -802,8 +805,30 @@
   html.skx body:has(#app.playMode) .bubble .who { position:absolute; left:-6px; top:-36px; height:30px; margin:0; padding:0 12px 0 4px; border-radius:15px; background:#5a301a; display:flex; align-items:center; gap:6px; font-size:14px; color:#fff3e2; box-shadow:0 2px 4px rgba(30,16,8,.3); }
   @media (prefers-reduced-motion: reduce) { html.skx .xm-mk { animation:none; } }
   @media (prefers-reduced-motion: reduce) { html.skx #s3 .exmeet .pcard.drop, html.skx #s3 .exmeet .flash.on, html.skx #s3 .exmeet .dim { animation:none; opacity:1; } html.skx #s3 .exmeet .flash.on { opacity:0; } }
+  /* 관리동 G(11-21 r28): 평면도 1A(944×2045 = 375×812 비율, app.ts HUB_G) · 할아버지 A 6장 띠(P2 ui5_hubgpw와 같은 순서) · 머리 줄 2C(둥근 뒤로 40 + 가운데 갈색 이름표) ·
+     말풍선 3A(공통 판 + 이름표 = 탐험 흐름 할아버지 말풍선과 같은 모양) · 잠긴 방 4A(갈색 .5 + 놋쇠 자물쇠 22) · 서재 5A · 연구실 6A(큰 창 gwin + ghub) */
+  html.skx #hubOv.art.g { background:#7a8a3a; }
+  html.skx #hubOv.art.g .hubPlan { width:max(100cqw, calc(100cqh * 944 / 2045)); aspect-ratio:944 / 2045; background-image:var(--ui6-hubplan); image-rendering:auto; }
+  html.skx #hubOv.art.g .npc { width:34px; height:52px; background-image:var(--ui6-hubgp); image-rendering:auto; filter:drop-shadow(0 2px 2px rgba(30,16,8,.35)); }
+  html.skx #hubOv.art.g .room.locked { background:rgba(40,22,10,.5); }
+  html.skx #hubOv.art.g .room.locked .lock { width:22px; height:22px; background:var(--ui6-hublock) center/contain no-repeat; image-rendering:auto; filter:drop-shadow(0 2px 2px rgba(20,10,4,.45)); }
+  html.skx #hubOv .hubTop { border:0; border-image:none; background:none; margin:0; padding:calc(env(safe-area-inset-top) + 10px) 12px 0; min-height:44px; }
+  html.skx #hubOv .hubTop .link { width:40px; height:40px; padding:0; border:0; background:var(--ui6-round) center/contain no-repeat; font-size:0; color:transparent; filter:drop-shadow(0 3px 4px rgba(60,32,24,.3)); position:relative; }
+  html.skx #hubOv .hubTop .link::before { content:'‹'; position:absolute; inset:0; display:grid; place-items:center; padding-bottom:3px; font:400 26px/1 var(--fsk2); color:#5a301a; }
+  html.skx #hubOv .hubTop h2 { top:auto; bottom:4px; transform:translateX(-50%); height:32px; padding:0 14px; border-radius:16px; background:#5a301a; font:400 16px/32px var(--fsk2); color:#fff3e2; box-shadow:0 2px 4px rgba(30,16,8,.3); }
+  html.skx #hubOv .hubSay { width:66%; border-style:solid; border-width:15.6px 24px 24px; border-image:var(--ui6-pnconf) 34 54 54 fill / 15.6px 24px 24px stretch; background:none; border-radius:0; padding:10px 2px 0; font:400 14px/1.5 var(--fsk2); word-break:keep-all; color:#4a2a1a; filter:drop-shadow(0 6px 10px rgba(30,16,8,.35)); }
+  html.skx #hubOv .hubSay::after { border-width:9px; border-top-color:#f6e3c4; top:calc(100% + 19px); } /* 꼬리 = 판 아래 테 밖, 할아버지 쪽 */
+  html.skx #hubOv .hubSay .who { position:absolute; left:-12px; top:-38px; height:30px; padding:0 12px 0 4px; border-radius:15px; background:#5a301a; display:flex; align-items:center; gap:6px; font:400 14px/1 var(--fsk2); color:#fff3e2; box-shadow:0 2px 4px rgba(30,16,8,.3); }
+  .gpface { display:none; } /* 할아버지 얼굴(ui6_gpface): G 이름표에서만 */
+  html.skx :is(#hubOv, #modalBox.ghub, body:has(#app.playMode) .bubble) .gpface { display:inline-block; flex:none; width:22px; height:22px; border-radius:50%; background:#f6e3c4 var(--ui6-gpface) 50% 20% / cover no-repeat; }
+  html.skx #modalBox.ghub .gpemo { display:none; }
+  html.skx #modalBox.ghub table.stats { font:400 15px/1 var(--fsk2); border-collapse:collapse; margin:0; } /* 서재 5A = 흔적 노트 · 탐험 목표와 같은 점선 줄 */
+  html.skx #modalBox.ghub table.stats td { padding:14px 2px; border-bottom:1.5px dashed #d9bb8b; color:#4a2a1a; font-size:15px; } html.skx #modalBox.ghub table.stats tr:last-child td { border-bottom:0; } html.skx #modalBox.ghub table.stats td.num { color:#8a6a52; }
+  html.skx #modalBox.ghub .bpWrap .bp { border-radius:8px; box-shadow:0 2px 6px rgba(40,22,10,.3); } /* 연구실 6A = 청사진 그대로 */
+  html.skx #modalBox.ghub .labCap { font:400 14px/1.4 var(--fsk2); color:#4a2a1a; margin-top:12px; } html.skx #modalBox.ghub .labCap.muted { color:#8a6a52; font-size:13px; margin-top:6px; }
+  html.skx #modalBox.ghub .labSay { background:rgba(209,112,76,.09); border-radius:10px; font:400 14px/1.55 var(--fsk2); color:#4a2a1a; word-break:keep-all; } html.skx #modalBox.ghub .labSay b { display:flex; align-items:center; gap:6px; margin-bottom:6px; font:400 13px/1 var(--fsk2); color:#8a6a52; }
 </style>
-  <script type="module" crossorigin src="./assets/index-BXcO7sXQ.js"></script>
+  <script type="module" crossorigin src="./assets/index-B1dTNcrp.js"></script>
 </head>
 <body>
 <div id="app">
