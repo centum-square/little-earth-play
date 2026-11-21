@@ -820,6 +820,94 @@
   html.skx #hubOv .hubSay::after { border-width:9px; border-top-color:#f6e3c4; top:calc(100% + 19px); } /* 꼬리 = 판 아래 테 밖, 할아버지 쪽 */
   html.skx #hubOv .hubSay .who { position:absolute; left:-12px; top:-38px; height:30px; padding:0 12px 0 4px; border-radius:15px; background:#5a301a; display:flex; align-items:center; gap:6px; font:400 14px/1 var(--fsk2); color:#fff3e2; box-shadow:0 2px 4px rgba(30,16,8,.3); }
   .gpface { display:none; } /* 할아버지 얼굴(ui6_gpface): G 이름표에서만 */
+  /* 탭 공통 틀 G(11-21): 위 한 줄 B안 = 갈색 이름표(Lv · 코인, 관리동 머리 줄 #5a301a) + 갈색 타일 버튼 40(ui6_tile, 망원경 버튼과 같음) + r29 아이콘 24. 하단 탭 E2 = G 돔 컨셉(r2/raw-G-dome) 실측: 바 238×55 #f6d7b9 · 고른 칸 둥근 13 · 안쪽 8 · 선 아이콘 33 · 바닥 12, 색은 위 한 줄과 같은 #5a301a */
+  html.skx #hud .ghud { position:absolute; left:12px; right:12px; top:calc(env(safe-area-inset-top) + 12px); display:flex; align-items:center; gap:5px; font-family:var(--fsk2); }
+  html.skx #hud .ghud .sp { flex:1; min-width:0; }
+  html.skx #hud .ghud .gb, html.skx #hud .ghud .gl, html.skx #hud .ghud .gc { position:relative; box-sizing:border-box; flex:none; height:40px; margin:0; padding:0; border:0; display:flex; align-items:center; justify-content:center; }
+  html.skx #hud .ghud .gb { width:40px; background:var(--ui6-tile) center/contain no-repeat; filter:drop-shadow(0 3px 4px rgba(60,32,24,.3)); cursor:pointer; }
+  html.skx #hud .ghud .gb img { width:24px; height:24px; }
+  html.skx #hud .ghud .gl, html.skx #hud .ghud .gc { padding:0 12px; gap:5px; border-radius:20px; background:#5a301a; color:#fff3e2; font:400 15px/1 var(--fsk2); white-space:nowrap; box-shadow:0 2px 4px rgba(30,16,8,.3); }
+  html.skx #hud .ghud .gl { cursor:pointer; } html.skx #hud .ghud .gl b, html.skx #hud .ghud .gc b { font-weight:400; color:#fff3e2; }
+  html.skx #hud .ghud .gc.big { padding:0 8px; gap:4px; } /* 코인 6자리 이상: 가운데 빈칸 14px을 넘는 만큼 양옆 여백을 줄임 */
+  html.skx #hud .ghud .gc .gcoin { width:22px; height:22px; margin-left:-3px; background:var(--ui6-coin) center/contain no-repeat; }
+  html.skx #hud .ghud .dot { position:absolute; top:1px; right:1px; width:10px; height:10px; border-radius:50%; background:#d1704c; border:2px solid #fff3e2; box-sizing:border-box; }
+  html.skx #hud .ghud .gb:active, html.skx #hud .ghud .gl:active { transform:translateY(1px); }
+  html.skx { --navH:calc(env(safe-area-inset-bottom) + 71px); --navbar:#f6d7b9; --navink:#5a301a; } /* 바 55 + 바닥 12 + 4: 후원 버튼(navH + 8)이 탭과 12px */
+  html.skx #app.tabMode nav { box-sizing:border-box; width:238px; height:55px; padding:8px; gap:3px; bottom:calc(env(safe-area-inset-bottom) + 12px); border:0; border-image:none; border-radius:28px !important; background:var(--navbar); box-shadow:0 4px 10px rgba(40,28,36,.28); align-items:stretch; }
+  html.skx #app.tabMode nav button { box-sizing:border-box; flex:1 1 0; min-width:0; height:auto; margin:0; padding:0; border:0; border-image:none; border-radius:13px; background:none; color:var(--navink); font-size:0; justify-content:center; }
+  html.skx #app.tabMode nav button.on { border-image:none; background:var(--navink); color:var(--navbar); }
+  html.skx #app.tabMode nav .ico.em { height:auto; font-size:0; line-height:0; display:block; }
+  html.skx #app.tabMode nav .ico.em svg { width:33px; height:33px; display:block; } html.skx nav svg .hole { fill:var(--navbar); } html.skx nav button.on svg .hole { fill:var(--navink); }
+  /* 탭 창 G(11-21 A안 점선 노트 줄): 상점 gshop · 메일함 gmail · 프로필·설정 gset · Lv glv = 큰 창 gwin + 서재 · 탐험 목표와 같은 점선 #d9bb8b 줄. 아이콘 = 둥근 종이 36 + r29 icons2(gwi_*) 24 · 이름 Jua 15 · 설명 Jua 12 · 누르는 줄 › · 스위치 테라코타 */
+  html.skx #modalBox.gw .mb { padding-top:0; font-family:var(--fsk2); color:#4a2a1a; }
+  html.skx #modalBox.gw .card { display:flex; align-items:center; gap:12px; min-height:0; margin:0 !important; padding:12px 2px !important; border:0 !important; border-bottom:1.5px dashed #d9bb8b !important; border-image:none !important; border-radius:0 !important; background:none !important; box-shadow:none !important; opacity:1 !important; color:#4a2a1a; }
+  html.skx #modalBox.gw .card:last-child, html.skx #modalBox.gw .card:has(+ p), html.skx #modalBox.gw .card:has(+ .fam) { border-bottom:0 !important; }
+  html.skx #modalBox.gw .card .em { width:36px; height:36px; flex:0 0 36px; margin:0 !important; background:var(--ui6-round) center/contain no-repeat; display:flex; align-items:center; justify-content:center; font-size:19px !important; filter:none !important; opacity:1 !important; }
+  html.skx #modalBox.gw .card .em img.gwi { width:24px !important; height:24px !important; object-fit:contain; }
+  html.skx #modalBox.gw .card .body { flex:1; min-width:0; }
+  html.skx #modalBox.gw .card .name { font:400 15px/1.3 var(--fsk2) !important; color:#4a2a1a !important; display:flex; align-items:center; gap:6px; }
+  html.skx #modalBox.gw .card .sub { margin-top:2px; font:400 12px/1.4 var(--fsk2) !important; color:#8a6a52 !important; word-break:keep-all; }
+  html.skx #modalBox.gw .card > .muted { flex:none; font:400 13px var(--fsk2) !important; color:#a8896f !important; }
+  html.skx #modalBox.gw .card .dot { position:static !important; width:8px; height:8px; flex:0 0 8px; border-radius:50%; background:#d1704c !important; border:0 !important; }
+  html.skx #modalBox.gw .card.mail.read .name { color:#8a6a52 !important; }
+  html.skx #modalBox.gw .card.tap::after { content:'›'; margin-left:2px; font:400 22px/1 var(--fsk2); color:#b89676; }
+  html.skx #modalBox.gw .gco, html.skx .gco { display:inline-block; width:14px; height:14px; vertical-align:-2px; background:var(--ui6-coin) center/contain no-repeat; }
+  html.skx #modalBox.gw .avs3 { display:flex; gap:14px; justify-content:center; margin:2px 0 12px; }
+  html.skx #modalBox.gw .avs3 .av { padding:0; background:none !important; border:0 !important; box-shadow:none !important; display:flex; flex-direction:column; align-items:center; gap:5px; font:400 13px var(--fsk2) !important; color:#4a2a1a !important; }
+  html.skx #modalBox.gw .avs3 .av b { width:56px; height:56px; border:0 !important; border-radius:50% !important; background:var(--ui6-round) center/contain no-repeat !important; box-shadow:none !important; display:flex; align-items:center; justify-content:center; font-size:26px; color:#8a6a52; }
+  html.skx #modalBox.gw .avs3 .av.cur b { box-shadow:0 0 0 3px #d1704c !important; }
+  html.skx #modalBox.gw .ibs { display:flex; gap:6px; }
+  html.skx #modalBox.gw .ib { width:36px; height:36px; padding:0; border:0 !important; border-image:none !important; border-radius:0 !important; background:var(--ui6-round) center/contain no-repeat !important; box-shadow:none !important; font-size:16px; display:flex; align-items:center; justify-content:center; }
+  html.skx #modalBox.gw .ib img.gwi { width:22px !important; height:22px !important; object-fit:contain; }
+  html.skx #modalBox.gw .fam { margin:16px 0 2px !important; padding:0 !important; border:0 !important; background:none !important; } html.skx #modalBox.gw .fam span { padding:0 !important; background:none !important; font:400 13px var(--fsk2) !important; color:#8a6a52 !important; }
+  html.skx #modalBox.gw .card .sw { position:relative; width:46px; height:28px; flex:none; padding:0; border:0 !important; border-image:none !important; border-radius:14px !important; background:#e3cfae !important; box-shadow:inset 0 1px 2px rgba(90,48,26,.25) !important; }
+  html.skx #modalBox.gw .card .sw i { position:absolute; left:3px; top:3px; width:22px; height:22px; border:0 !important; border-radius:50% !important; background:#fff3e2 !important; box-shadow:0 1px 2px rgba(60,32,24,.35) !important; transition:left .15s; }
+  html.skx #modalBox.gw .card .sw.on { background:#d1704c !important; } html.skx #modalBox.gw .card .sw.on i { left:21px; }
+  html.skx #modalBox.gw .mb > p.muted { margin-top:14px !important; text-align:center; font:400 12px var(--fsk2) !important; color:#a8896f !important; }
+  html.skx #modalBox.gw .lvl { margin:16px 0 4px !important; padding:0 !important; border:0 !important; background:none !important; font:400 13px var(--fsk2) !important; color:#8a6a52 !important; } html.skx #modalBox.gw .lvl b { font-weight:400; color:#c0583a; }
+  html.skx #modalBox.gw .mb > .lvl:first-child { margin-top:6px !important; }
+  html.skx #modalBox.gw .lvx { position:relative; height:24px; margin:6px 0 0 !important; border:0 !important; border-image:none !important; border-radius:12px !important; background:rgba(90,48,26,.12) !important; box-shadow:none !important; overflow:hidden; }
+  html.skx #modalBox.gw .lvx i { position:absolute; left:0; top:0; bottom:0; border-radius:12px !important; background:#d1704c !important; box-shadow:none !important; }
+  html.skx #modalBox.gw .lvx span { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font:400 13px var(--fsk2) !important; color:#4a2a1a !important; text-shadow:0 0 3px #fbf6ec, 0 0 3px #fbf6ec; }
+  html.skx #modalBox.gw .lvr { display:flex; justify-content:space-between; align-items:center; gap:10px; margin:0 !important; padding:11px 2px !important; border:0 !important; border-bottom:1.5px dashed #d9bb8b !important; background:none !important; font:400 14px var(--fsk2) !important; color:#4a2a1a !important; }
+  html.skx #modalBox.gw .lvr:has(+ .lvl), html.skx #modalBox.gw .lvr:last-child { border-bottom:0 !important; } html.skx #modalBox.gw .lvr span:last-child { text-align:right; color:#8a6a52; }
+  html.skx #modalBox.gw .lvr.lvo { align-items:flex-start; } html.skx #modalBox.gw .lvr.lvo span:last-child { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:5px; }
+  html.skx #modalBox.gw .lvr.lvo i { display:inline-flex; align-items:center; gap:3px; padding:4px 8px; border:0 !important; border-radius:12px; background:rgba(90,48,26,.08); font:400 12px/1 var(--fsk2); font-style:normal; color:#4a2a1a; } html.skx #modalBox.gw .lvr.lvo i img.gic { width:16px !important; height:16px !important; object-fit:contain; }
+  html.skx #modalBox.gw .lvnext { margin:0 !important; padding:10px 12px !important; border:0 !important; border-image:none !important; border-radius:10px !important; background:rgba(209,112,76,.09) !important; box-shadow:none !important; display:flex; flex-direction:column; gap:6px; }
+  html.skx #modalBox.gw .lvnext span { padding:0 !important; border:0 !important; background:none !important; font:400 13px/1.45 var(--fsk2) !important; color:#4a2a1a !important; word-break:keep-all; }
+  /* 탭 시트 G(11-21 B안 둥근 아이보리, sheet() cls 'gsh'): 보상 받기 · 프로필 전환 · 이름 고치기 · 삭제 확인 · 의견 보내기. 판 = 도감 작은 흔적 창과 같은 둥근 16 #fbf6ec · 닫기 둥근 34 · 버튼 공통 박음질([삭제] = ui6_bbad #be5440) · 큰 아이콘 둥근 종이 72 · 아바타 둥근 종이 40 한 줄 */
+  html.skx #sheetOv:has(> .gsh) { background:rgba(20,12,6,.6); backdrop-filter:saturate(.7); }
+  html.skx #sheetBox.gsh { padding:20px 18px 18px; border:0; border-image:none; border-radius:16px !important; background:#fbf6ec; box-shadow:0 8px 24px rgba(30,16,8,.35); color:#4a2a1a; font-family:var(--fsk2); }
+  html.skx #sheetBox.gsh::before, html.skx #sheetBox.gsh::after { display:none !important; }
+  html.skx #sheetBox.gsh p { font:400 15px/1.55 var(--fsk2) !important; color:#4a2a1a !important; word-break:keep-all; }
+  html.skx #sheetBox.gsh h2 { margin:0 0 4px !important; font:400 18px/1.3 var(--fsk2) !important; color:#4a2a1a !important; }
+  html.skx #sheetBox.gsh > .sh { margin:0 0 6px !important; padding:0 40px 0 0 !important; min-height:0 !important; border:0 !important; border-image:none !important; background:none !important; font:400 19px/1.3 var(--fsk2) !important; }
+  html.skx #sheetBox.gsh .sx { position:absolute; right:10px; top:10px; width:34px; height:34px; padding:0; border:0 !important; border-image:none !important; border-radius:0 !important; background:var(--ui6-pnclose) center/contain no-repeat !important; box-shadow:none !important; color:transparent !important; font-size:0 !important; }
+  html.skx #sheetBox.gsh .sx::before, html.skx #sheetBox.gsh .sx::after { content:''; position:absolute; left:50%; top:50%; width:14px; height:2.5px; margin:-1.25px 0 0 -7px; border-radius:2px; background:#fff3e2; transform:rotate(45deg); } html.skx #sheetBox.gsh .sx::after { transform:rotate(-45deg); }
+  html.skx #sheetBox.gsh .row { gap:8px; margin-top:16px; }
+  html.skx #sheetBox.gsh .btn { flex:1 1 0; width:100%; height:46px; margin:0; padding:0; border-style:solid !important; border-width:0 23px !important; border-radius:0 !important; background:none !important; box-shadow:none !important; display:flex; align-items:center; justify-content:center; font:400 15px/1 var(--fsk2); filter:drop-shadow(0 3px 4px rgba(60,32,24,.25)); }
+  html.skx #sheetBox.gsh .btn:not(.sec) { border-image:var(--ui6-bmain) 0 50 fill / 0 23px stretch !important; color:#fff3e2 !important; }
+  html.skx #sheetBox.gsh .btn.sec { border-image:var(--ui6-bsub) 0 50 fill / 0 23px stretch !important; color:#5a301a !important; }
+  html.skx #sheetBox.gsh .btn.bad { border-image:var(--ui6-bbad) 0 50 fill / 0 23px stretch !important; }
+  html.skx #sheetBox.gsh .btn:disabled { opacity:.55; }
+  html.skx #sheetBox.gsh .res { text-align:center; }
+  html.skx #sheetBox.gsh .res .em { width:72px; height:72px; margin:4px auto 8px; background:var(--ui6-round) center/contain no-repeat; display:flex; align-items:center; justify-content:center; font-size:34px; }
+  html.skx #sheetBox.gsh .res .em img { width:46px !important; height:46px !important; object-fit:contain; }
+  html.skx #sheetBox.gsh .res p { margin:2px 0 0; font-size:14px !important; color:#8a6a52 !important; }
+  html.skx #sheetBox.gsh .res table { width:100%; margin:12px 0 14px; border-collapse:collapse; border-top:1.5px dashed #d9bb8b; border-bottom:1.5px dashed #d9bb8b; }
+  html.skx #sheetBox.gsh .res td { padding:10px 2px !important; border:0 !important; background:none !important; text-align:left; font:400 14px var(--fsk2) !important; color:#8a6a52 !important; } html.skx #sheetBox.gsh .res td.num { text-align:right; font-size:16px !important; color:#4a2a1a !important; }
+  html.skx #sheetBox.gsh .res td .gco { width:16px; height:16px; }
+  html.skx #sheetBox.gsh input.nick { width:100%; height:46px; margin-top:10px; padding:0 14px; border:1.5px solid #e3cfae !important; border-radius:12px !important; background:#fff9ef !important; box-shadow:inset 0 1px 2px rgba(90,48,26,.12) !important; font:400 17px var(--fsk2) !important; color:#4a2a1a !important; }
+  html.skx #sheetBox.gsh .avatars { display:flex; flex-wrap:nowrap; gap:6px; justify-content:center; margin:14px 0 16px; }
+  html.skx #sheetBox.gsh .avatars button { flex:none; width:40px; height:40px; padding:0; border:0 !important; border-image:none !important; border-radius:50% !important; background:var(--ui6-round) center/contain no-repeat !important; box-shadow:none !important; display:flex; align-items:center; justify-content:center; font-size:24px; }
+  html.skx #sheetBox.gsh .avatars button.on { box-shadow:0 0 0 3px #d1704c !important; } html.skx #sheetBox.gsh .avatars button img { width:30px !important; height:30px !important; }
+  html.skx #sheetBox.gsh .err { min-height:0; font:400 12px var(--fsk2); color:#be5440; }
+  html.skx #sheetBox.gsh .card { display:flex; align-items:center; gap:12px; margin:0 !important; padding:12px 2px !important; border:0 !important; border-bottom:1.5px dashed #d9bb8b !important; border-image:none !important; border-radius:0 !important; background:none !important; box-shadow:none !important; }
+  html.skx #sheetBox.gsh .card:last-child { border-bottom:0 !important; }
+  html.skx #sheetBox.gsh .card .em { width:36px; height:36px; flex:0 0 36px; margin:0 !important; background:var(--ui6-round) center/contain no-repeat; display:flex; align-items:center; justify-content:center; font-size:19px; }
+  html.skx #sheetBox.gsh .card .body { flex:1; min-width:0; } html.skx #sheetBox.gsh .card .name { font:400 15px/1.3 var(--fsk2) !important; color:#4a2a1a !important; } html.skx #sheetBox.gsh .card .sub { margin-top:2px; font:400 12px/1.4 var(--fsk2) !important; color:#8a6a52 !important; }
+  html.skx #sheetBox.gsh .card.tap::after { content:'›'; margin-left:2px; font:400 22px/1 var(--fsk2); color:#b89676; }
+  html.skx #app.tabMode nav button .dot { top:3px; right:auto; left:calc(50% + 10px); width:9px; height:9px; border-radius:50%; background:#d1704c; border:1.5px solid var(--navbar); box-sizing:border-box; }
   html.skx :is(#hubOv, #modalBox.ghub, body:has(#app.playMode) .bubble) .gpface { display:inline-block; flex:none; width:22px; height:22px; border-radius:50%; background:#f6e3c4 var(--ui6-gpface) 50% 20% / cover no-repeat; }
   html.skx #modalBox.ghub .gpemo { display:none; }
   html.skx #modalBox.ghub table.stats { font:400 15px/1 var(--fsk2); border-collapse:collapse; margin:0; } /* 서재 5A = 흔적 노트 · 탐험 목표와 같은 점선 줄 */
@@ -828,7 +916,7 @@
   html.skx #modalBox.ghub .labCap { font:400 14px/1.4 var(--fsk2); color:#4a2a1a; margin-top:12px; } html.skx #modalBox.ghub .labCap.muted { color:#8a6a52; font-size:13px; margin-top:6px; }
   html.skx #modalBox.ghub .labSay { background:rgba(209,112,76,.09); border-radius:10px; font:400 14px/1.55 var(--fsk2); color:#4a2a1a; word-break:keep-all; } html.skx #modalBox.ghub .labSay b { display:flex; align-items:center; gap:6px; margin-bottom:6px; font:400 13px/1 var(--fsk2); color:#8a6a52; }
 </style>
-  <script type="module" crossorigin src="./assets/index-B1dTNcrp.js"></script>
+  <script type="module" crossorigin src="./assets/index-DvBYrb7B.js"></script>
 </head>
 <body>
 <div id="app">

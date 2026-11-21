@@ -226,6 +226,9 @@
   "pzg_scare": [
    "pzg-scare.webp"
   ],
+  "ui6_bbad": [
+   "ui6-bbad.webp"
+  ],
   "pzi_item:sweepR": [
    "pzi-item-sweepR.webp"
   ],
@@ -696,6 +699,48 @@
   ],
   "dxi_act_crepuscular": [
    "dxi-act-crepuscular.webp"
+  ],
+  "ghud_mail": [
+   "ghud-mail.webp"
+  ],
+  "ghud_bag": [
+   "ghud-bag.webp"
+  ],
+  "ghud_shop": [
+   "ghud-shop.webp"
+  ],
+  "ghud_gear": [
+   "ghud-gear.webp"
+  ],
+  "gwi_coins": [
+   "gwi-coins.webp"
+  ],
+  "gwi_starter": [
+   "gwi-starter.webp"
+  ],
+  "gwi_items": [
+   "gwi-items.webp"
+  ],
+  "gwi_pass": [
+   "gwi-pass.webp"
+  ],
+  "gwi_support": [
+   "gwi-support.webp"
+  ],
+  "gwi_letter": [
+   "gwi-letter.webp"
+  ],
+  "gwi_opened": [
+   "gwi-opened.webp"
+  ],
+  "gwi_gift": [
+   "gwi-gift.webp"
+  ],
+  "gwi_edit": [
+   "gwi-edit.webp"
+  ],
+  "gwi_trash": [
+   "gwi-trash.webp"
   ],
   "gic_snack_grass": [
    "gic-snack-grass.webp"
