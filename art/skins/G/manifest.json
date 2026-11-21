@@ -986,5 +986,29 @@
   ]
  },
  "hero": "hero-right.webp",
+ "isle": {
+  "ground": "isle-ground.webp",
+  "props": [
+   "isle-p0.webp",
+   "isle-p1.webp",
+   "isle-p2.webp",
+   "isle-p3.webp",
+   "isle-p4.webp",
+   "isle-p5.webp",
+   "isle-p6.webp",
+   "isle-p7.webp",
+   "isle-p8.webp",
+   "isle-p9.webp",
+   "isle-p10.webp",
+   "isle-p11.webp",
+   "isle-p12.webp",
+   "isle-p13.webp",
+   "isle-p14.webp"
+  ],
+  "walk": "isle-walk.png",
+  "sea": "#7da6ce",
+  "w": 1536,
+  "h": 1024
+ },
  "font": "Jua"
 }
